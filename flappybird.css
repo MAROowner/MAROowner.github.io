@@ -3,7 +3,8 @@ body {
 }
 
 #board {
-	background-color: skyblue;
+	background-image: url("Image/flappybirdbg.png");
+	background-repeat: no-repeat;
 	width: 100vw;
 	height: 100vh;
 }
