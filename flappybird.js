@@ -1,6 +1,6 @@
 let board;
-let boardWidth = 360;
-let boardHeight = 640;
+let boardWidth = 380;
+let boardHeight = 590;
 let context;
 
 window.onload = function () {
