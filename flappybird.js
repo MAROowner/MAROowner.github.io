@@ -27,7 +27,7 @@ window.onload = function () {
 	bird.y = birdY;
 
 	birdImg = new Image();
-	birdImg.src = "Image/flappybird.png";
+	birdImg.src = "Image/Image/flappybird.png";
 	birdImg.onload = function(){
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 	}
