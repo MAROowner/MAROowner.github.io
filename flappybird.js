@@ -1,6 +1,10 @@
+let tg = window.Telegram.WebApp;
+let userName;
+
 let board = document.getElementById("board");
 let boardWidth = 420;
 let boardHeight = 700;
+let textValue;
 let context;
 
 let birdWidth = 34;
@@ -39,22 +43,25 @@ window.onload = function () {
 	board.height = boardHeight;
 	board.width = boardWidth;
 
+	userName = tg.initDataUnsafe.first_name + " " + tg.initDataUnsafe.last_name;
+	textValue = userName;
+
 	birdX = boardWidth / 8;
 	birdY = boardHeight / 2;
 	bird.x = birdX;
 	bird.y = birdY;
 
 	birdImg = new Image();
-	birdImg.src = "Image/Image/flappybird.png";
+	birdImg.src = "Image/flappybird.png";
 	birdImg.onload = function () {
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 	}
 
 	topPipeImg = new Image();
-	topPipeImg.src = "Image/Image/toppipe.png"
+	topPipeImg.src = "Image/toppipe.png"
 
 	bottomPipeImg = new Image();
-	bottomPipeImg.src = "Image/Image/bottompipe.png"
+	bottomPipeImg.src = "Image/bottompipe.png"
 
 	requestAnimationFrame(update);
 	setInterval(placePipes, 1000);
@@ -62,13 +69,12 @@ window.onload = function () {
 }
 
 function update(timestamp) {
-
 	if (!lastTime) {
 		lastTime = timestamp;
 	}
 	const deltaTime = (timestamp - lastTime) / 10;
 	lastTime = timestamp;
-	
+
 	requestAnimationFrame(update);
 
 	if (gameOver) {
@@ -108,8 +114,10 @@ function update(timestamp) {
 	context.fillText(score, 5, 45);
 
 	if (gameOver) {
-		context.fillText("GAME OVER", 5, 90);
+		textValue = "GAME OVER"
 	}
+
+	context.fillText(textValue, 5, 90);
 }
 
 function placePipes() {
@@ -150,6 +158,7 @@ function moveBird() {
 		pipeArray = [];
 		score = 0;
 		gameOver = false;
+		textValue = userName;
 	}
 }
 
