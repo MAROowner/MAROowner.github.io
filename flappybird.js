@@ -52,16 +52,16 @@ window.onload = function () {
 	bird.y = birdY;
 
 	birdImg = new Image();
-	birdImg.src = "Image/flappybird.png";
+	birdImg.src = "Image/Image/flappybird.png";
 	birdImg.onload = function () {
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 	}
 
 	topPipeImg = new Image();
-	topPipeImg.src = "Image/toppipe.png"
+	topPipeImg.src = "Image/Image/toppipe.png"
 
 	bottomPipeImg = new Image();
-	bottomPipeImg.src = "Image/bottompipe.png"
+	bottomPipeImg.src = "Image/Image/bottompipe.png"
 
 	requestAnimationFrame(update);
 	setInterval(placePipes, 1000);
