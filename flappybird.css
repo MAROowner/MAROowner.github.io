@@ -4,4 +4,5 @@ body {
 
 #board {
 	background-image: url("Image/Image/flappybirdbg.png");
+	background-size: cover;
 }
