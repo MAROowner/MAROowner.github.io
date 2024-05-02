@@ -1,6 +1,6 @@
 let board = document.getElementById("board");
-let boardWidth = 380;
-let boardHeight = 590;
+let boardWidth = 420;
+let boardHeight = 650;
 let context;
 
 let birdWidth = 34;
