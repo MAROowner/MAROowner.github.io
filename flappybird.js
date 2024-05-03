@@ -2,6 +2,9 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 let userName;
 
+let screenWidth = window.innerWidth;
+let screenHeight = window.innerHeight;
+
 let board = document.getElementById("board");
 let boardWidth = 420;
 let boardHeight = 700;
@@ -32,7 +35,7 @@ let bottomPipeImg;
 
 let velocityX = -2;
 let velocityY = 0;
-let gravity = 0.2;
+let gravity = screenHeight * 0.0003;
 
 let gameOver = false;
 let score = 0;
@@ -48,7 +51,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
@@ -160,7 +163,7 @@ function placePipes() {
 }
 
 function moveBird() {
-	velocityY = -6;
+	velocityY = -screenHeight * 0.01;
 
 	if (gameOver) {
 		bird.y = birdY;
