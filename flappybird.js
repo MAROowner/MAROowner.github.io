@@ -43,7 +43,7 @@ window.onload = function () {
 	board.height = boardHeight;
 	board.width = boardWidth;
 
-	userName = tg.initDataUnsafe.first_name + " " + tg.initDataUnsafe.last_name;
+	userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
 	textValue = userName;
 
 	birdX = boardWidth / 8;
@@ -153,13 +153,13 @@ function placePipes() {
 function moveBird() {
 	velocityY = -6;
 
-	if (gameOver) {
+	/*if (gameOver) {
 		bird.y = birdY;
 		pipeArray = [];
 		score = 0;
 		gameOver = false;
 		textValue = userName;
-	}
+	}*/
 }
 
 function detectCollision(a, b) {
