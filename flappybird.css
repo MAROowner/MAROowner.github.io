@@ -5,5 +5,6 @@ body {
 
 #board {
 	background-image: url("Image/Image/flappybirdbg.png");
+	background-position-y: center;
 	background-size: cover;
 }
