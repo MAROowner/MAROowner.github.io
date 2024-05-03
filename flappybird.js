@@ -41,6 +41,8 @@ let lastTime = 0;
 
 window.onload = function () {
 	context = board.getContext("2d");
+	//boardHeight = board.height;
+	//boardWidth = board.width;
 	board.height = boardHeight;
 	board.width = boardWidth;
 
