@@ -153,13 +153,13 @@ function placePipes() {
 function moveBird() {
 	velocityY = -6;
 
-	/*if (gameOver) {
+	if (gameOver) {
 		bird.y = birdY;
 		pipeArray = [];
 		score = 0;
 		gameOver = false;
 		textValue = userName;
-	}*/
+	}
 }
 
 function detectCollision(a, b) {
