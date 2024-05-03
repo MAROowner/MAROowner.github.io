@@ -7,7 +7,7 @@ let screenHeight = window.innerHeight;
 
 let board = document.getElementById("board");
 let boardWidth = 420;
-let boardHeight = 700;
+let boardHeight = 750;
 let textValue;
 let context;
 
@@ -54,7 +54,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
