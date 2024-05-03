@@ -23,7 +23,7 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: 6, // Збільшено для однакового стрибка на різних пристроях
+	jumpForce: jumpForce: 1920 / screenHeight * 2, // Збільшено для однакового стрибка на різних пристроях
 	gravity: 0.2 // Збільшено для однакового падіння на різних пристроях
 }
 
