@@ -1,9 +1,9 @@
 body {
 	margin: 0px;
+	overflow: hidden;
 }
 
 #board {
 	background-image: url("Image/Image/flappybirdbg.png");
 	background-size: cover;
-	overflow: hidden;
 }
