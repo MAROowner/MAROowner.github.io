@@ -21,7 +21,10 @@ let bird = {
 	x: 0,
 	y: 0,
 	width: birdWidth,
-	height: birdHeight
+	height: birdHeight,
+	velocityY: 0,
+	jumpForce: 6, // Збільшено для однакового стрибка на різних пристроях
+	gravity: 0.2 // Збільшено для однакового падіння на різних пристроях
 }
 
 let pipeArray = [];
@@ -35,7 +38,7 @@ let bottomPipeImg;
 
 let velocityX = -2;
 let velocityY = 0;
-let gravity = screenHeight * 0.0003;
+//let gravity = screenHeight * 0.0003;
 
 let gameOver = false;
 let score = 0;
@@ -51,7 +54,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
@@ -94,8 +97,8 @@ function update(timestamp) {
 	}
 	context.clearRect(0, 0, board.width, board.height);
 
-	velocityY += gravity * deltaTime;
-	bird.y += velocityY;
+	bird.velocityY += bird.gravity * deltaTime;
+	bird.y += bird.velocityY;
 	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
 	if (bird.y > board.height) {
@@ -163,7 +166,7 @@ function placePipes() {
 }
 
 function moveBird() {
-	velocityY = -screenHeight * 0.01;
+	bird.velocityY = -bird.jumpForce;
 
 	if (gameOver) {
 		bird.y = birdY;
