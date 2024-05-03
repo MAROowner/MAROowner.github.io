@@ -1,5 +1,4 @@
 let tg = window.Telegram.WebApp;
-
 let userName;
 
 let board = document.getElementById("board");
@@ -43,14 +42,16 @@ window.onload = function () {
 	context = board.getContext("2d");
 	board.height = boardHeight;
 	board.width = boardWidth;
+
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
 	}
 	textValue = userName;
+	tg.expand();
 
 	birdX = boardWidth / 8;
 	birdY = boardHeight / 2;
