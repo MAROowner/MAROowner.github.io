@@ -24,7 +24,7 @@ let bird = {
 	height: birdHeight,
 	velocityY: 0,
 	jumpForce: 1920 / screenHeight * 2, // Збільшено для однакового стрибка на різних пристроях
-	gravity: 0.2 // Збільшено для однакового падіння на різних пристроях
+	gravity: 1920 / screenHeight / 10 // Збільшено для однакового падіння на різних пристроях
 }
 
 let pipeArray = [];
