@@ -80,7 +80,8 @@ window.onload = function () {
 
 	requestAnimationFrame(update);
 	setInterval(placePipes, 1000);
-	document.addEventListener("click", moveBird);
+	document.addEventListener("mousedown", moveBird);
+	document.addEventListener("touchstart", moveBird);
 }
 
 function update(timestamp) {
