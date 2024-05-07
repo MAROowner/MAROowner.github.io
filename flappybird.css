@@ -2,8 +2,30 @@ body {
 	margin: 0px;
 	overflow: hidden;
 	position: relative;
+}
+
+.game-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	height: 100vh;
+	/* Висота на весь екран */
+}
+
+#board {
+	flex-shrink: 0;
 	background-image: url("Image/Image/flappybirdbg.png");
 	background-position-y: center;
 	background-size: cover;
 	position: absolute;
+}
+
+.button-container {
+	position: absolute;
+	top: 10px;
+	/* Можна змінити згідно з вашими потребами */
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
