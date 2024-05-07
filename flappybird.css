@@ -5,12 +5,11 @@ body {
 }
 
 .game-container {
+	width: 420px;
+	height: 750px;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	position: relative;
 	height: 100vh;
-	/* Висота на весь екран */
 }
 
 #board {
@@ -21,11 +20,48 @@ body {
 	position: absolute;
 }
 
+.start-header{
+	z-index: 100;
+	width: 100%;
+}
+
+.start-header img {
+	padding-top: 20px;
+	display: block;
+	width: 170px;
+	margin: auto;
+	text-align: center;
+}
+
 .button-container {
 	position: absolute;
-	top: 10px;
-	/* Можна змінити згідно з вашими потребами */
+	top: 65vh;
+	left: 50%;
+	transform: translateX(-50%);
+	align-items: center;
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
+}
+
+.button-container button{
+	border: none;
+	background: none;
+}
+
+.main-button img{
+	width: 150px;
+	height: 75px;
+}
+
+.other-buttons{
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.second-button img{
+	width: 100px;
+	height: 50px;
+	margin: 0px 30px;
 }
