@@ -29,7 +29,8 @@ body {
 	padding-top: 20px;
 	display: block;
 	width: 170px;
-	margin: auto;
+	margin-left: 50vw;
+	transform: translateX(-50%);
 	text-align: center;
 }
 
