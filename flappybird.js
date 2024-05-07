@@ -35,26 +35,36 @@ let pipeY = 0;
 
 let topPipeImg;
 let bottomPipeImg;
+let topBgImg;
+let bottomBgImg;
 
 let velocityX = -2;
 let velocityY = 0;
 //let gravity = screenHeight * 0.0003;
 
-let gameOver = false;
+let gameOver = true;
 let score = 0;
 
 let lastTime = 0;
 
 window.onload = function () {
 	context = board.getContext("2d");
-	//boardHeight = board.height;
-	//boardWidth = board.width;
+	context = board.getContext("2d");
+
+	bottomBgImg = new Image();
+	bottomBgImg.src = "Image/Image/BottomBackground@4x.png";
+	topBgImg = new Image();
+	topBgImg.src = "Image/Image/MainBackground@4x.png";
+
 	board.height = boardHeight;
 	board.width = boardWidth;
 
+	let mainButton = document.querySelector('.main-button');
+	mainButton.addEventListener('click', restartGame);
+
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
@@ -80,7 +90,10 @@ window.onload = function () {
 
 	requestAnimationFrame(update);
 	setInterval(placePipes, 1000);
-	document.addEventListener("touchstart", moveBird);
+	if (gameOver) {
+		document.addEventListener("mousedown", moveBird);
+		document.addEventListener("touchstart", moveBird);
+	}
 }
 
 function update(timestamp) {
@@ -90,18 +103,24 @@ function update(timestamp) {
 	const deltaTime = (timestamp - lastTime) / 10;
 	lastTime = timestamp;
 
+	context.clearRect(0, 0, board.width, board.height);
+	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 	requestAnimationFrame(update);
-
+	drawStartInterface();
 	if (gameOver) {
+		bird.x = birdX;
+		bird.y = birdY;
 		return;
 	}
-	context.clearRect(0, 0, board.width, board.height);
 
+	context.clearRect(0, 0, board.width, board.height);
 	bird.velocityY += bird.gravity * deltaTime;
 	bird.y += bird.velocityY;
 	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
 	if (bird.y > board.height) {
+		bird.velocityY = 0;
+		document.querySelector('.button-container').style.display = 'flex';
 		gameOver = true;
 	}
 
@@ -116,6 +135,8 @@ function update(timestamp) {
 		}
 
 		if (detectCollision(bird, pipe)) {
+			bird.velocityY = 0;
+			document.querySelector('.button-container').style.display = 'flex';
 			gameOver = true;
 		}
 	}
@@ -123,14 +144,18 @@ function update(timestamp) {
 	while (pipeArray.length > 0 && pipeArray[0].x < -pipeWidth) {
 		pipeArray.shift();
 	}
+	
+	drawPlayInterface();
+}
 
+function drawStartInterface() {
+	context.drawImage(topBgImg, 0, 0, board.width, boardHeight);
+}
+
+function drawPlayInterface(){
 	context.fillStyle = "white";
 	context.font = "45px sans-serif";
 	context.fillText(score, 5, 45);
-
-	if (gameOver) {
-		textValue = "GAME OVER"
-	}
 
 	context.fillText(textValue, 5, 90);
 }
@@ -167,14 +192,6 @@ function placePipes() {
 
 function moveBird() {
 	bird.velocityY = -bird.jumpForce;
-
-	if (gameOver) {
-		bird.y = birdY;
-		pipeArray = [];
-		score = 0;
-		gameOver = false;
-		textValue = userName;
-	}
 }
 
 function detectCollision(a, b) {
@@ -182,4 +199,13 @@ function detectCollision(a, b) {
 		a.x + a.width > b.x &&
 		a.y < b.y + b.height &&
 		a.y + a.height > b.y;
+}
+
+function restartGame() {
+	bird.y = birdY;
+	pipeArray = [];
+	score = 0;
+	gameOver = false;
+	textValue = userName;
+	document.querySelector('.button-container').style.display = 'none';
 }
