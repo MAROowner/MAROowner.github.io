@@ -120,6 +120,7 @@ function update(timestamp) {
 	if (bird.y > board.height) {
 		bird.velocityY = 0;
 		document.querySelector('.button-container').style.display = 'flex';
+		document.querySelector('.start-header').style.display = 'block';
 		gameOver = true;
 	}
 
@@ -136,6 +137,7 @@ function update(timestamp) {
 		if (detectCollision(bird, pipe)) {
 			bird.velocityY = 0;
 			document.querySelector('.button-container').style.display = 'flex';
+			document.querySelector('.start-header').style.display = 'block';
 			gameOver = true;
 		}
 	}
@@ -143,7 +145,7 @@ function update(timestamp) {
 	while (pipeArray.length > 0 && pipeArray[0].x < -pipeWidth) {
 		pipeArray.shift();
 	}
-	
+
 	drawPlayInterface();
 }
 
@@ -151,7 +153,7 @@ function drawStartInterface() {
 	context.drawImage(topBgImg, 0, 0, board.width, boardHeight);
 }
 
-function drawPlayInterface(){
+function drawPlayInterface() {
 	context.fillStyle = "white";
 	context.font = "45px sans-serif";
 	context.fillText(score, 5, 45);
@@ -207,4 +209,5 @@ function restartGame() {
 	gameOver = false;
 	textValue = userName;
 	document.querySelector('.button-container').style.display = 'none';
+	document.querySelector('.start-header').style.display = 'none';
 }
