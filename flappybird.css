@@ -36,7 +36,7 @@ body {
 
 .button-container {
 	position: absolute;
-	top: 65vh;
+	top: 70vh;
 	left: 50vw;
 	transform: translateX(-50%);
 	align-items: center;
