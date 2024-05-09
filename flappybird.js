@@ -72,7 +72,7 @@ window.onload = function () {
 	textValue = userName;
 
 	birdX = boardWidth / 8;
-	birdY = boardHeight / 2;
+	birdY = boardHeight / 3;
 	bird.x = birdX;
 	bird.y = birdY;
 
