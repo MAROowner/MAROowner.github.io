@@ -43,7 +43,10 @@ let velocityY = 0;
 //let gravity = screenHeight * 0.0003;
 
 let gameOver = true;
+let totalScore = 0;
 let score = 0;
+let pointerText = document.getElementById("pointer-text");
+let allPointerText = document.getElementById("all-point_text");
 
 let lastTime = 0;
 
@@ -91,8 +94,12 @@ window.onload = function () {
 	requestAnimationFrame(update);
 	setInterval(placePipes, 1000);
 	if (gameOver) {
+		document.addEventListener("mousedown", moveBird);
 		document.addEventListener("touchstart", moveBird);
 	}
+	totalScore += score;
+	allPointerText.textContent = totalScore;
+	pointerText.textContent = score;
 }
 
 function update(timestamp) {
@@ -120,7 +127,10 @@ function update(timestamp) {
 	if (bird.y > board.height) {
 		bird.velocityY = 0;
 		document.querySelector('.button-container').style.display = 'flex';
-		document.querySelector('.start-header').style.display = 'block';
+		document.querySelector('.start-screen').style.display = 'block';
+		totalScore += score;
+		allPointerText.textContent = totalScore;
+		pointerText.textContent = score;
 		gameOver = true;
 	}
 
@@ -137,7 +147,10 @@ function update(timestamp) {
 		if (detectCollision(bird, pipe)) {
 			bird.velocityY = 0;
 			document.querySelector('.button-container').style.display = 'flex';
-			document.querySelector('.start-header').style.display = 'block';
+			document.querySelector('.start-screen').style.display = 'block';
+			totalScore += score;
+			allPointerText.textContent = totalScore;
+			pointerText.textContent = score;
 			gameOver = true;
 		}
 	}
@@ -209,5 +222,5 @@ function restartGame() {
 	gameOver = false;
 	textValue = userName;
 	document.querySelector('.button-container').style.display = 'none';
-	document.querySelector('.start-header').style.display = 'none';
+	document.querySelector('.start-screen').style.display = 'none';
 }
