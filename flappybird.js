@@ -50,6 +50,8 @@ let allPointerText = document.getElementById("all-point_text");
 
 let lastTime = 0;
 
+
+
 window.onload = function () {
 	context = board.getContext("2d");
 	context = board.getContext("2d");
@@ -99,6 +101,7 @@ window.onload = function () {
 	totalScore += score;
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
+	loadScore();
 }
 
 function update(timestamp) {
@@ -127,6 +130,7 @@ function update(timestamp) {
 		bird.velocityY = 0;
 		document.querySelector('.button-container').style.display = 'flex';
 		document.querySelector('.start-screen').style.display = 'block';
+		saveScore();
 		totalScore += score;
 		allPointerText.textContent = totalScore;
 		pointerText.textContent = score;
@@ -149,6 +153,7 @@ function update(timestamp) {
 			document.querySelector('.start-screen').style.display = 'block';
 			totalScore += score;
 			allPointerText.textContent = totalScore;
+			saveScore();
 			pointerText.textContent = score;
 			gameOver = true;
 		}
@@ -159,6 +164,12 @@ function update(timestamp) {
 	}
 
 	drawPlayInterface();
+}
+
+function loadScore() {
+	const savedScore = localStorage.getItem('totalScore');
+	totalScore = savedScore ? parseInt(savedScore, 10) : 0;
+	allPointerText.textContent = totalScore;
 }
 
 function drawStartInterface() {
@@ -222,4 +233,8 @@ function restartGame() {
 	textValue = userName;
 	document.querySelector('.button-container').style.display = 'none';
 	document.querySelector('.start-screen').style.display = 'none';
+}
+
+function saveScore() {
+	localStorage.setItem('totalScore', totalScore.toString());
 }
