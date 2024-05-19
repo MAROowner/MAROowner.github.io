@@ -23,8 +23,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: 1920 / screenHeight * 2, // Збільшено для однакового стрибка на різних пристроях
-	gravity: 1920 / screenHeight / 10 // Збільшено для однакового падіння на різних пристроях
+	jumpForce: 1920 / screenHeight * 2,
+	gravity: 1920 / screenHeight / 10
 }
 
 let pipeArray = [];
@@ -96,12 +96,14 @@ window.onload = function () {
 	requestAnimationFrame(update);
 	setInterval(placePipes, 1000);
 	if (gameOver) {
+		document.addEventListener("mousedown", moveBird);
 		document.addEventListener("touchstart", moveBird);
 	}
 	totalScore += score;
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
 	loadScore();
+	dbManage();
 }
 
 function update(timestamp) {
@@ -237,4 +239,21 @@ function restartGame() {
 
 function saveScore() {
 	localStorage.setItem('totalScore', totalScore.toString());
+}
+
+function dbManage() {
+	let points = 123124;
+	let name = 'Doy Johnson'
+	var xhr = new XMLHttpRequest();
+
+	xhr.open("POST", "db_connect.php", true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log(xhr.responseText);
+		}
+	};
+
+	xhr.send("points=" + points + "&name=" + name);
 }
