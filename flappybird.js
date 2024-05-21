@@ -23,8 +23,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: 1920 / screenHeight * 2,
-	gravity: 1920 / screenHeight / 10
+	jumpForce: 10,
+	gravity: 0.4
 }
 
 let pipeArray = [];
