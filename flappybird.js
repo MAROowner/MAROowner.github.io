@@ -170,7 +170,7 @@ function loadScore() {
 }
 
 function drawStartInterface() {
-	context.drawImage(topBgImg, 0, 0, board.width, boardHeight);
+	context.drawImage(topBgImg, 0, 0, board.width, board.height);
 }
 
 function drawPlayInterface() {
@@ -212,7 +212,7 @@ function placePipes() {
 }
 
 function moveBird() {
-	bird.velocityY -= bird.jumpForce;
+	bird.velocityY = -bird.jumpForce;
 }
 
 function detectCollision(a, b) {
