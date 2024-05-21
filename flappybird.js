@@ -96,7 +96,6 @@ window.onload = function () {
 	requestAnimationFrame(update);
 	setInterval(placePipes, 1000);
 	if (gameOver) {
-		document.addEventListener("mousedown", moveBird);
 		document.addEventListener("touchstart", moveBird);
 	}
 	totalScore += score;
