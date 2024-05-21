@@ -24,7 +24,7 @@ let bird = {
 	height: birdHeight,
 	velocityY: 0,
 	jumpForce: 10,
-	gravity: 0.4
+	gravity: 40
 }
 
 let pipeArray = [];
@@ -38,9 +38,8 @@ let bottomPipeImg;
 let topBgImg;
 let bottomBgImg;
 
-let velocityX = -2;
+let velocityX = -3;
 let velocityY = 0;
-//let gravity = screenHeight * 0.0003;
 
 let gameOver = true;
 let totalScore = 0;
@@ -50,10 +49,7 @@ let allPointerText = document.getElementById("all-point_text");
 
 let lastTime = 0;
 
-
-
 window.onload = function () {
-	context = board.getContext("2d");
 	context = board.getContext("2d");
 
 	bottomBgImg = new Image();
@@ -69,7 +65,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
@@ -94,7 +90,7 @@ window.onload = function () {
 	bottomPipeImg.src = "Image/Image/bottompipe.png"
 
 	requestAnimationFrame(update);
-	setInterval(placePipes, 1000);
+	setInterval(placePipes, 1100);
 	if (gameOver) {
 		document.addEventListener("touchstart", moveBird);
 	}
@@ -109,7 +105,7 @@ function update(timestamp) {
 	if (!lastTime) {
 		lastTime = timestamp;
 	}
-	const deltaTime = (timestamp - lastTime) / 10;
+	const deltaTime = (timestamp - lastTime) / 1000;  // перетворюємо в секунди
 	lastTime = timestamp;
 
 	context.clearRect(0, 0, board.width, board.height);
@@ -140,7 +136,7 @@ function update(timestamp) {
 
 	for (let i = 0; i < pipeArray.length; i++) {
 		let pipe = pipeArray[i];
-		pipe.x += velocityX * deltaTime;
+		pipe.x += velocityX * deltaTime * 60;  // нормалізація швидкості труб під 60 кадрів в секунду
 		context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
 		if (!pipe.passed && bird.x > pipe.x + pipe.width) {
