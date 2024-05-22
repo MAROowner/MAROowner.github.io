@@ -23,8 +23,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: 8,
-	gravity: 30
+	jumpForce: screenHeight * 0.015,
+	gravity: screenHeight * 0.05
 }
 
 let pipeArray = [];
@@ -65,7 +65,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
