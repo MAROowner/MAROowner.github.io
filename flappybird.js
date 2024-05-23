@@ -6,13 +6,15 @@ let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
 
 let board = document.getElementById("board");
-let boardWidth = 420;
-let boardHeight = 750;
+let boardWidth =screenWidth;
+let boardHeight = screenHeight;
 let textValue;
 let context;
+let gridSquareY = screenHeight / 20;
+let gridSquareX = gridSquareY * 1.41;
 
-let birdWidth = 48;
-let birdHeight = 34;
+let birdWidth = gridSquareX;
+let birdHeight = gridSquareY;
 
 let birdX;
 let birdY;
@@ -23,8 +25,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: screenHeight * 0.015,
-	gravity: screenHeight * 0.05
+	jumpForce: gridSquareY / 3,
+	gravity: gridSquareY 
 }
 
 let pipeArray = [];
@@ -65,7 +67,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
