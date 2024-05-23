@@ -2,11 +2,20 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 let userName;
 
-// Визначення щільності пікселів (PPI) екрана
-const PPI = window.devicePixelRatio * 96; // 96 - стандартне значення PPI для екранів
+const BASE_WIDTH = 800;
+const BASE_HEIGHT = 600;
 
-// Перетворення міліметрів в пікселі
-const mmToPx = (mm) => mm * PPI / 25.4; // 25.4 мм в одному дюймі
+const currentWidth = window.innerWidth;
+const currentHeight = window.innerHeight;
+
+const scaleX = currentWidth / BASE_WIDTH;
+const scaleY = currentHeight / BASE_HEIGHT;
+
+const scale = Math.min(scaleX, scaleY);
+
+function scaleValue(value) {
+	return value * scale;
+}
 
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
@@ -16,10 +25,8 @@ let boardWidth = screenWidth;
 let boardHeight = screenHeight;
 let textValue;
 let context;
-//let gridSquareY = screenHeight / 20;
-//let gridSquareX = gridSquareY * 1.41;
-let gridSquareY = mmToPx(5);
-let gridSquareX = gridSquareY * 1.41;
+let gridSquareY = scaleValue(80);
+let gridSquareX = scaleValue(240);
 
 let birdWidth = 48;
 let birdHeight = 38;
@@ -33,8 +40,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: 10,
-	gravity: 30
+	jumpForce: gridSquareY / 3,
+	gravity: gridSquareY
 }
 
 let pipeArray = [];
@@ -75,7 +82,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
 	}
 	catch (_) {
 		userName = "";
@@ -197,7 +204,7 @@ function placePipes() {
 	}
 
 	let randomPipeY = pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2);
-	let openingSpace = 200;
+	let openingSpace = scaleValue(400);
 
 	let topPipe = {
 		img: topPipeImg,
