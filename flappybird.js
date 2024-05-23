@@ -2,19 +2,27 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 let userName;
 
+// Визначення щільності пікселів (PPI) екрана
+const PPI = window.devicePixelRatio * 96; // 96 - стандартне значення PPI для екранів
+
+// Перетворення міліметрів в пікселі
+const mmToPx = (mm) => mm * PPI / 25.4; // 25.4 мм в одному дюймі
+
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
 
 let board = document.getElementById("board");
-let boardWidth =screenWidth;
+let boardWidth = screenWidth;
 let boardHeight = screenHeight;
 let textValue;
 let context;
-let gridSquareY = screenHeight / 20;
+//let gridSquareY = screenHeight / 20;
+//let gridSquareX = gridSquareY * 1.41;
+let gridSquareY = mmToPx(5);
 let gridSquareX = gridSquareY * 1.41;
 
-let birdWidth = gridSquareX;
-let birdHeight = gridSquareY;
+let birdWidth = 48;
+let birdHeight = 38;
 
 let birdX;
 let birdY;
@@ -25,8 +33,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: gridSquareY / 3,
-	gravity: gridSquareY 
+	jumpForce: 10,
+	gravity: 30
 }
 
 let pipeArray = [];
@@ -107,7 +115,7 @@ function update(timestamp) {
 	if (!lastTime) {
 		lastTime = timestamp;
 	}
-	const deltaTime = (timestamp - lastTime) / 1000;  // перетворюємо в секунди
+	const deltaTime = (timestamp - lastTime) / 1000;
 	lastTime = timestamp;
 
 	context.clearRect(0, 0, board.width, board.height);
@@ -138,7 +146,7 @@ function update(timestamp) {
 
 	for (let i = 0; i < pipeArray.length; i++) {
 		let pipe = pipeArray[i];
-		pipe.x += velocityX * deltaTime * 60;  // нормалізація швидкості труб під 60 кадрів в секунду
+		pipe.x += velocityX * deltaTime * 60;
 		context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
 		if (!pipe.passed && bird.x > pipe.x + pipe.width) {
@@ -189,7 +197,7 @@ function placePipes() {
 	}
 
 	let randomPipeY = pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2);
-	let openingSpace = board.height / 4;
+	let openingSpace = 200;
 
 	let topPipe = {
 		img: topPipeImg,
