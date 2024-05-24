@@ -2,20 +2,9 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 let userName;
 
-const BASE_WIDTH = 800;
-const BASE_HEIGHT = 600;
-
-const currentWidth = window.innerWidth;
-const currentHeight = window.innerHeight;
-
-const scaleX = currentWidth / BASE_WIDTH;
-const scaleY = currentHeight / BASE_HEIGHT;
-
-const scale = Math.min(scaleX, scaleY);
-
-function scaleValue(value) {
-	return value * scale;
-}
+const FPS = 60;
+const frameDuration = 1000 / FPS;
+let lastTime = 0;
 
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
@@ -25,8 +14,8 @@ let boardWidth = screenWidth;
 let boardHeight = screenHeight;
 let textValue;
 let context;
-let gridSquareY = scaleValue(80);
-let gridSquareX = scaleValue(240);
+let gridSquareY = 30;
+let gridSquareX = 90;
 
 let birdWidth = 48;
 let birdHeight = 38;
@@ -42,7 +31,7 @@ let bird = {
 	velocityY: 0,
 	jumpForce: gridSquareY / 3,
 	gravity: gridSquareY
-}
+};
 
 let pipeArray = [];
 let pipeWidth = 64;
@@ -64,8 +53,6 @@ let score = 0;
 let pointerText = document.getElementById("pointer-text");
 let allPointerText = document.getElementById("all-point_text");
 
-let lastTime = 0;
-
 window.onload = function () {
 	context = board.getContext("2d");
 
@@ -82,9 +69,8 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
-	}
-	catch (_) {
+		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+	} catch (_) {
 		userName = "";
 	}
 	textValue = userName;
@@ -98,48 +84,59 @@ window.onload = function () {
 	birdImg.src = "Image/Image/flappybird.png";
 	birdImg.onload = function () {
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
-	}
+	};
 
 	topPipeImg = new Image();
-	topPipeImg.src = "Image/Image/toppipe.png"
+	topPipeImg.src = "Image/Image/toppipe.png";
 
 	bottomPipeImg = new Image();
-	bottomPipeImg.src = "Image/Image/bottompipe.png"
+	bottomPipeImg.src = "Image/Image/bottompipe.png";
 
-	requestAnimationFrame(update);
+	requestAnimationFrame(gameLoop);
 	setInterval(placePipes, 1100);
-	if (gameOver) {
-		document.addEventListener("touchstart", moveBird);
-	}
+
+	document.addEventListener("touchstart", moveBird);
+
 	totalScore += score;
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
 	loadScore();
 	dbManage();
+};
+
+function gameLoop(currentTime) {
+	// Розрахуй час, що минув з останнього кадру
+	const deltaTime = currentTime - lastTime;
+
+	// Якщо минуло достатньо часу для нового кадру
+	if (deltaTime >= frameDuration) {
+		// Онови час останнього кадру
+		lastTime = currentTime - (deltaTime % frameDuration);
+
+		// Онови стан гри з урахуванням фіксованого deltaTime
+		update(frameDuration / 1000);
+	}
+
+	// Запусти наступний кадр
+	requestAnimationFrame(gameLoop);
 }
 
-function update(timestamp) {
-	if (!lastTime) {
-		lastTime = timestamp;
-	}
-	const deltaTime = (timestamp - lastTime) / 1000;
-	lastTime = timestamp;
-
-	context.clearRect(0, 0, board.width, board.height);
-	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
-	requestAnimationFrame(update);
-	drawStartInterface();
+function update(deltaTime) {
 	if (gameOver) {
-		bird.x = birdX;
-		bird.y = birdY;
+		context.clearRect(0, 0, board.width, board.height);
+		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+		drawStartInterface();
 		return;
 	}
 
 	context.clearRect(0, 0, board.width, board.height);
+
+	// Онови стан пташки
 	bird.velocityY += bird.gravity * deltaTime;
 	bird.y += bird.velocityY;
 	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
+	// Перевірка чи пташка не виходить за межі
 	if (bird.y > board.height) {
 		bird.velocityY = 0;
 		document.querySelector('.button-container').style.display = 'flex';
@@ -149,8 +146,10 @@ function update(timestamp) {
 		allPointerText.textContent = totalScore;
 		pointerText.textContent = score;
 		gameOver = true;
+		return;
 	}
 
+	// Онови труби
 	for (let i = 0; i < pipeArray.length; i++) {
 		let pipe = pipeArray[i];
 		pipe.x += velocityX * deltaTime * 60;
@@ -170,9 +169,11 @@ function update(timestamp) {
 			saveScore();
 			pointerText.textContent = score;
 			gameOver = true;
+			return;
 		}
 	}
 
+	// Видали труби, які вийшли за межі екрану
 	while (pipeArray.length > 0 && pipeArray[0].x < -pipeWidth) {
 		pipeArray.shift();
 	}
@@ -194,7 +195,6 @@ function drawPlayInterface() {
 	context.fillStyle = "white";
 	context.font = "45px sans-serif";
 	context.fillText(score, 5, 45);
-
 	context.fillText(textValue, 5, 90);
 }
 
@@ -204,7 +204,7 @@ function placePipes() {
 	}
 
 	let randomPipeY = pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2);
-	let openingSpace = scaleValue(400);
+	let openingSpace = 200;
 
 	let topPipe = {
 		img: topPipeImg,
@@ -213,7 +213,7 @@ function placePipes() {
 		width: pipeWidth,
 		height: pipeHeight,
 		passed: false
-	}
+	};
 	pipeArray.push(topPipe);
 
 	let bottomPipe = {
@@ -223,13 +223,14 @@ function placePipes() {
 		width: pipeWidth,
 		height: pipeHeight,
 		passed: false
-	}
+	};
 	pipeArray.push(bottomPipe);
-
 }
 
 function moveBird() {
-	bird.velocityY = -bird.jumpForce;
+	if (!gameOver) {
+		bird.velocityY = -bird.jumpForce;
+	}
 }
 
 function detectCollision(a, b) {
@@ -255,7 +256,7 @@ function saveScore() {
 
 function dbManage() {
 	let points = 123124;
-	let name = 'Doy Johnson'
+	let name = 'Doy Johnson';
 	var xhr = new XMLHttpRequest();
 
 	xhr.open("POST", "db_connect.php", true);
@@ -269,3 +270,6 @@ function dbManage() {
 
 	xhr.send("points=" + points + "&name=" + name);
 }
+
+requestAnimationFrame(gameLoop);
+
