@@ -2,7 +2,7 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 let userName;
 
-const FPS = 60;
+const FPS = 120;
 const frameDuration = 1000 / FPS;
 let lastTime = 0;
 
