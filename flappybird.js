@@ -2,7 +2,7 @@ let tg = window.Telegram.WebApp;
 tg.expand();
 let userName;
 
-const FPS = 120;
+const FPS = 60;
 const frameDuration = 1000 / FPS;
 let lastTime = 0;
 
@@ -28,8 +28,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: gridSquareY / 3,
-	gravity: gridSquareY
+	jumpForce: gridSquareY / 6,
+	gravity: gridSquareY / 2
 };
 
 let pipeArray = [];
