@@ -68,7 +68,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
 	} catch (_) {
 		userName = "";
 	}
