@@ -29,7 +29,7 @@ let bird = {
 	height: birdHeight,
 	velocityY: 0,
 	jumpForce: gridSquareY / (FPS * 2),
-	gravity: gridSquareY / FPS
+	gravity: gridSquareY / (FPS / 1.3)
 };
 
 let pipeArray = [];
@@ -68,7 +68,7 @@ window.onload = function () {
 
 	try {
 		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + ", " + tg.initDataUnsafe.user.last_name;
+		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
 	} catch (_) {
 		userName = "";
 	}
@@ -174,7 +174,7 @@ function update(deltaTime) {
 		}
 	}
 	
-	if (pipeArray.length == 0 || pipeArray[pipeArray.length - 1].x <= pipeX - 200) {
+	if (pipeArray.length == 0 || pipeArray[pipeArray.length - 1].x <= pipeX - 250) {
 		placePipes();
 	}
 
@@ -209,7 +209,7 @@ function placePipes() {
 	}
 
 	let randomPipeY = pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2);
-	let openingSpace = 200;
+	let openingSpace = 170;
 
 	let topPipe = {
 		img: topPipeImg,
@@ -268,12 +268,12 @@ function dbManage() {
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
 	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4 && xhr.status === 200) {
-			console.log(xhr.responseText);
-		}
+		 if (xhr.readyState === 4 && xhr.status === 200) {
+			  console.log(xhr.responseText);
+		 }
 	};
 
-	xhr.send("points=" + points + "&name=" + name);
+	//xhr.send("points=" + points + "&name=" + encodeURIComponent(name));
 }
 
 requestAnimationFrame(gameLoop);
