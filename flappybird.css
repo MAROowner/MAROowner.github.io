@@ -45,6 +45,14 @@ body {
 	white-space: nowrap;
 }
 
+.energy-text {
+	transform: translateX(-80%);
+	font-size: 4vh;
+	color: white;
+	white-space: nowrap;
+}
+
+
 .point-text {
 	z-index: 10;
 	padding-top: 10px;
