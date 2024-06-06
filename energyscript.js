@@ -1,4 +1,4 @@
-let energyCount = 10;
+var energyCount = 10;
 let maxEnergyCount = 10;
 let timeToReset = 600;
 let inactiveTime;
@@ -6,12 +6,17 @@ let lastActiveTime;
 let lastCharging;
 let chargeTime;
 let peaceChargeTime;
-let energyText = document.getElementById("energy-text");
+var energyText = document.getElementById("energy-text");
 
 document.addEventListener('DOMContentLoaded', function () {
-	energyCount = parseInt(localStorage.getItem('energyCount'), 10) || 10;
+	var storedValue = localStorage.getItem('energyCount');
+	energyCount = storedValue !== null ? parseInt(storedValue, 10) : 10;
+	if (isNaN(energyCount)) {
+		energyCount = 10;
+	}
+
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
-	timeToReset = parseInt(localStorage.getItem('timeToReset'), 10) || 600;
+	timeToReset = parseInt(localStorage.getItem('timeToReset'), 10) || 600
 	maxEnergyCount = parseInt(localStorage.getItem('maxEnergyCount'), 10) || 10;
 
 	inactiveTime = Math.floor((Date.now() - lastActiveTime) / 1000);
@@ -24,13 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		peaceChargeTime = inactiveTime;
 	}
 
-	console.log(energyCount);
 	energyText.textContent = energyCount;
 	lastCharging = Date.now();
-	requestAnimationFrame(update);
+	updateGame();
 });
 
-function update() {
+function updateGame() {
 	chargeTime = Math.floor((Date.now() - lastCharging) / 1000) + peaceChargeTime;
 
 	if (chargeTime >= timeToReset) {
@@ -41,8 +45,7 @@ function update() {
 		lastCharging = Date.now();
 		peaceChargeTime = 0;
 	}
-
-	requestAnimationFrame(update);
+	requestAnimationFrame(updateGame);
 }
 
 function exit() {
