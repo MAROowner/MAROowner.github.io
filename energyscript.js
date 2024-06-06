@@ -1,6 +1,6 @@
 var energyCount = 10;
-let maxEnergyCount = 10;
-let timeToReset = 600;
+var maxEnergyCount = 10;
+var timeToReset = 600;
 let inactiveTime;
 let lastActiveTime;
 let lastCharging;
@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	maxEnergyCount = parseInt(localStorage.getItem('maxEnergyCount'), 10) || 10;
 
 	inactiveTime = Math.floor((Date.now() - lastActiveTime) / 1000);
+
+	console.log(inactiveTime);
 
 	if (inactiveTime >= timeToReset) {
 		energyCount += Math.floor(inactiveTime / timeToReset);
