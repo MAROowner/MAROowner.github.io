@@ -47,10 +47,10 @@ let velocityX = -8 / FPS;
 let velocityY = 0;
 
 let gameOver = true;
-let totalScore = 0;
+var totalScore = 0;
 let score = 0;
 let pointerText = document.getElementById("pointer-text");
-let allPointerText = document.getElementById("all-point_text");
+var allPointerText = document.getElementById("all-point_text");
 
 window.onload = function () {
 	context = board.getContext("2d");
@@ -64,7 +64,9 @@ window.onload = function () {
 	board.width = boardWidth;
 
 	let mainButton = document.querySelector('.main-button');
+	let shopButton = document.querySelector('.second-button_1');
 	mainButton.addEventListener('click', restartGame);
+	shopButton.addEventListener('click', openShop);
 
 	try {
 		tg.initDataUnsafe.user.id;
@@ -190,6 +192,16 @@ function loadScore() {
 	const savedScore = localStorage.getItem('totalScore');
 	totalScore = savedScore ? parseInt(savedScore, 10) : 0;
 	allPointerText.textContent = totalScore;
+}
+
+function openShop(){
+	document.querySelector('.button-container').style.display = 'none';
+	document.querySelector('.shop').style.display = 'block';
+}
+
+function closeShop(){
+	document.querySelector('.button-container').style.display = 'flex';
+	document.querySelector('.shop').style.display = 'none';
 }
 
 function drawStartInterface() {
