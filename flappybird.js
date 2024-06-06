@@ -173,7 +173,7 @@ function update(deltaTime) {
 			return;
 		}
 	}
-	
+
 	if (pipeArray.length == 0 || pipeArray[pipeArray.length - 1].x <= pipeX - 250) {
 		placePipes();
 	}
@@ -246,13 +246,18 @@ function detectCollision(a, b) {
 }
 
 function restartGame() {
-	bird.y = birdY;
-	pipeArray = [];
-	score = 0;
-	gameOver = false;
-	textValue = userName;
-	document.querySelector('.button-container').style.display = 'none';
-	document.querySelector('.start-screen').style.display = 'none';
+	if (typeof energyCount !== 'undefined' && energyCount > 0) {
+		energyCount -= 1;
+		energyText.textContent = energyCount;
+		localStorage.setItem('energyCount', energyCount);
+		bird.y = birdY;
+		pipeArray = [];
+		score = 0;
+		gameOver = false;
+		textValue = userName;
+		document.querySelector('.button-container').style.display = 'none';
+		document.querySelector('.start-screen').style.display = 'none';
+	}
 }
 
 function saveScore() {
@@ -268,9 +273,9 @@ function dbManage() {
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
 	xhr.onreadystatechange = function () {
-		 if (xhr.readyState === 4 && xhr.status === 200) {
-			  console.log(xhr.responseText);
-		 }
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			console.log(xhr.responseText);
+		}
 	};
 
 	//xhr.send("points=" + points + "&name=" + encodeURIComponent(name));
