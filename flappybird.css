@@ -52,7 +52,6 @@ body {
 	white-space: nowrap;
 }
 
-
 .point-text {
 	z-index: 10;
 	padding-top: 10px;
@@ -94,8 +93,37 @@ body {
 	justify-content: space-between;
 }
 
-.second-button img {
+.second-button_1 img,
+.second-button_2 img {
 	width: 100px;
 	height: 50px;
 	margin: 0px 30px;
+}
+
+.shop{
+	position: absolute;
+	display: none;
+	bottom: 50px;
+	z-index: 10;
+}
+
+.name-text,
+.price-text{
+	color: #fff;
+	font-size: 25px;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.buy-button{
+	background: none;
+	border: none;
+	width: 100vw;
+}
+
+.buy-button img{
+	width: 150px;
+	height: 75px;
+	text-align: center;
+	padding-bottom: 25px;
 }
