@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="flappybird.css">
 	<script src="energyscript.js" defer></script>
+	<script src="shopscript.js" defer></script>
 	<script src="flappybird.js" defer></script>
 	<title>Flappy Bird</title>
 </head>
@@ -18,10 +19,10 @@
 				<img src="Image/Image/PlayButton.png" alt="Play">
 			</button>
 			<div class="other-buttons">
-				<button class="second-button">
+				<button class="second-button_1">
 					<img src="Image/Image/Button.png" alt="1">
 				</button>
-				<button class="second-button">
+				<button class="second-button_2">
 					<img src="Image/Image/Button.png" alt="2">
 				</button>
 			</div>
@@ -33,6 +34,31 @@
 				<div class="energy-text" id="energy-text">0</div>
 			</div>
 			<div class="point-text" id="pointer-text">100</div>
+		</div>
+		<div class="shop">
+			<div class="shop-block">
+				<div class="max-energy">
+					<div class="name-text">Max energy</div>
+					<div class="price-text" id="energy-price_text"></div>
+					<button class="buy-button" id="max-energy_button">
+						<img src="Image/Image/Button.png" alt="energy">
+					</button>
+				</div>
+				<div class="charge-speed">
+					<div class="name-text">Charge speed</div>
+					<div class="price-text" id="charge-price_text"></div>
+					<button class="buy-button" id="charge-speed_button">
+						<img src="Image/Image/Button.png" alt="charge">
+					</button>
+				</div>
+				<div class="multi-earn">
+					<div class="name-text">Multi earn</div>
+					<div class="price-text" id="earn-price_text"></div>
+					<button class="buy-button" id="multi-earn_button">
+						<img src="Image/Image/Button.png" alt="earn">
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 
