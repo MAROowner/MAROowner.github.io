@@ -47,6 +47,7 @@ let velocityX = -8 / FPS;
 let velocityY = 0;
 
 let gameOver = true;
+var multiEarn;
 var totalScore = 0;
 let score = 0;
 let pointerText = document.getElementById("pointer-text");
@@ -65,8 +66,10 @@ window.onload = function () {
 
 	let mainButton = document.querySelector('.main-button');
 	let shopButton = document.querySelector('.second-button_1');
+	let exitButton = document.querySelector('.exit-button');
 	mainButton.addEventListener('click', restartGame);
 	shopButton.addEventListener('click', openShop);
+	exitButton.addEventListener('click', closeShop);
 
 	try {
 		tg.initDataUnsafe.user.id;
@@ -158,7 +161,7 @@ function update(deltaTime) {
 		context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
 		if (!pipe.passed && bird.x > pipe.x + pipe.width) {
-			score += 0.5;
+			score += multiEarn / 2;
 			pipe.passed = true;
 		}
 
