@@ -50,12 +50,12 @@ function updateGame() {
 	requestAnimationFrame(updateGame);
 }
 
-function exit() {
+window.addEventListener('beforeunload', function(event) {
 	lastActiveTime = Date.now();
 	localStorage.setItem('energyCount', energyCount);
 	localStorage.setItem('lastActiveTime', lastActiveTime);
 	localStorage.setItem('timeToReset', timeToReset);
 	localStorage.setItem('maxEnergyCount', maxEnergyCount);
-}
-
-window.addEventListener('beforeunload', exit);
+	
+	event.returnValue = 'Ви впевнені, що хочете закрити додаток?';
+});
