@@ -1,6 +1,6 @@
-let maxEnergyCountPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 144000, 100500];
-let chargeSpeedPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 144000, 100500];
-let multiEarnPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 144000, 100500];
+let maxEnergyCountPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
+let chargeSpeedPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
+let multiEarnPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
 
 let maxEnergyCountValue = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 let chargeSpeedValue = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6, 5, 4];
@@ -34,16 +34,30 @@ document.addEventListener('DOMContentLoaded', function () {
 	chargeSpeedText.textContent = chargeSpeedPrice[chargeSpeedLvl];
 	multiEarnText.textContent = multiEarnPrice[multiEarnLvl];
 
+	if (maxEnergyCountLvl == 9) {
+		maxEnergyCountText.textContent = 'Max';
+	}
+	if (chargeSpeedLvl == 9) {
+		chargeSpeedText.textContent = 'Max';
+	}
+	if (multiEarnLvl == 9) {
+		multiEarnText.textContent = 'Max';
+	}
+
 	maxEnergyCount = maxEnergyCountValue[maxEnergyCountLvl];
-	chargeSpeed = chargeSpeedValue[chargeSpeedLvl];
+	timeToReset = chargeSpeedValue[chargeSpeedLvl];
 	multiEarn = multiEarnValue[multiEarnLvl];
+
+	console.log(maxEnergyCountLvl);
+	console.log(chargeSpeedLvl);
+	console.log(multiEarnLvl);
 });
 
-function buyMaxEnergy(){
-	if(totalScore >= maxEnergyCountPrice[maxEnergyCountLvl]){
+function buyMaxEnergy() {
+	if (totalScore >= maxEnergyCountPrice[maxEnergyCountLvl] && maxEnergyCountLvl != 9) {
 		totalScore -= maxEnergyCountPrice[maxEnergyCountLvl];
 		maxEnergyCountLvl++;
-	
+
 		maxEnergyCountText.textContent = maxEnergyCountPrice[maxEnergyCountLvl];
 		maxEnergyCount = maxEnergyCountValue[maxEnergyCountLvl];
 
@@ -53,13 +67,13 @@ function buyMaxEnergy(){
 	}
 }
 
-function buyChargeSpeed(){
-	if(totalScore >= chargeSpeedPrice[chargeSpeedLvl]){
+function buyChargeSpeed() {
+	if (totalScore >= chargeSpeedPrice[chargeSpeedLvl] && chargeSpeedLvl != 9) {
 		totalScore -= chargeSpeedPrice[chargeSpeedLvl];
 		chargeSpeedLvl++;
-	
+
 		chargeSpeedText.textContent = chargeSpeedPrice[chargeSpeedLvl];
-		chargeSpeed = chargeSpeedValue[chargeSpeedLvl];
+		timeToReset = chargeSpeedValue[chargeSpeedLvl];
 
 		allPointerText.textContent = totalScore;
 		localStorage.setItem('totalScore', totalScore.toString());
@@ -67,11 +81,11 @@ function buyChargeSpeed(){
 	}
 }
 
-function buyMultiEarn(){
-	if(totalScore >= multiEarnPrice[multiEarnLvl]){
+function buyMultiEarn() {
+	if (totalScore >= multiEarnPrice[multiEarnLvl] && multiEarnLvl != 9) {
 		totalScore -= multiEarnPrice[multiEarnLvl];
 		multiEarnLvl++;
-	
+
 		multiEarnText.textContent = multiEarnPrice[multiEarnLvl];
 		multiEarn = multiEarnValue[multiEarnLvl];
 
@@ -80,4 +94,6 @@ function buyMultiEarn(){
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 }
+
+
 
