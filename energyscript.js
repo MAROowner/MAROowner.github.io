@@ -1,4 +1,3 @@
-let tg = window.Telegram.WebApp;
 var energyCount = 10;
 var maxEnergyCount = 10;
 var timeToReset = 10;
