@@ -1,7 +1,22 @@
 var tg = window.Telegram.WebApp;
 tg.expand();
 tg.setHeaderColor('#000');
-tg.setupClosingBehavior({ need_confirmation: true });
+
+if (tg.web_app_setup_closing_behavior) {
+	// Увімкнення підтвердження закриття
+	tg.web_app_setup_closing_behavior({ need_confirmation: true });
+	
+	// Обробник події для підтвердження закриття
+	window.addEventListener('beforeunload', function(event) {
+		 // Це лише для додаткового попередження користувача, реальне підтвердження виконується Telegram WebApp
+		 event.preventDefault();
+		 event.returnValue = '';
+	});
+
+	console.log('Підтвердження закриття увімкнено');
+} else {
+	console.log('Метод web_app_setup_closing_behavior недоступний');
+}
 let userName;
 
 const FPS = 60;
