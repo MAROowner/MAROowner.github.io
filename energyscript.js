@@ -1,3 +1,4 @@
+var telegram = window.Telegram.WebApp;
 var energyCount = 10;
 var maxEnergyCount = 10;
 var timeToReset = 10;
@@ -56,7 +57,7 @@ function handleAppClose() {
 	localStorage.setItem('energyCount', energyCount);
 }
 
-tg.onEvent('viewportChanged', function() {
+telegram.onEvent('viewportChanged', function() {
 	if (document.hidden) {
 		 handleAppClose();
 	}
