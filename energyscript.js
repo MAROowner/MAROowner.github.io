@@ -2,63 +2,60 @@ var telegram = window.Telegram.WebApp;
 var energyCount = 10;
 var maxEnergyCount = 10;
 var timeToReset = 10;
-let inactiveTime;
 let lastActiveTime;
-let lastCharging;
-let chargeTime;
-let peaceChargeTime;
+let timer = 0;
+let lastFrameTime = Date.now();
 var energyText = document.getElementById("energy-text");
+
+
+document.addEventListener("touchstart", updateLastActivity);
 
 document.addEventListener('DOMContentLoaded', function () {
 	var storedValue = localStorage.getItem('energyCount');
-	energyCount = storedValue !== null ? parseInt(storedValue, 10) : 10;
+	energyCount = storedValue !== null ? parseInt(storedValue, 10) : maxEnergyCount;
 	if (isNaN(energyCount)) {
-		energyCount = 10;
+		energyCount = maxEnergyCount;
 	}
+
 
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
 	timeToReset = parseInt(localStorage.getItem('timeToReset'), 10) || 10;
 	maxEnergyCount = parseInt(localStorage.getItem('maxEnergyCount'), 10) || 10;
 
-	inactiveTime = Math.floor((Date.now() - lastActiveTime) / 1000);
-
-	console.log(inactiveTime);
-
-	if (inactiveTime >= timeToReset) {
-		energyCount += Math.floor(inactiveTime / timeToReset);
-		energyCount = Math.min(energyCount, maxEnergyCount);
-		peaceChargeTime = inactiveTime - Math.floor(inactiveTime / timeToReset) * timeToReset;
-	} else {
-		peaceChargeTime = inactiveTime;
-	}
-
+	timer += Date.now() - lastActiveTime;
 	energyText.textContent = energyCount;
-	lastCharging = Date.now();
 	updateGame();
 });
 
 function updateGame() {
-	chargeTime = Math.floor((Date.now() - lastCharging) / 1000) + peaceChargeTime;
+	timer += Date.now() - lastFrameTime;
 
-	if (chargeTime >= timeToReset) {
+	if (Math.floor(timer / 1000) >= timeToReset) {
 		if (energyCount < maxEnergyCount) {
-			energyCount++;
-			energyText.textContent = energyCount;
+			let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
+
+			if(energyCount + addingChargeCount < maxEnergyCount){
+				energyCount += addingChargeCount;
+				timer -= (addingChargeCount * timeToReset) * 1000;
+			}else{
+				energyCount = maxEnergyCount;
+				timer = 0;
+			}
+
+			localStorage.setItem('energyCount', energyCount);
+		}else{
+			timer = 0;
 		}
-		lastCharging = Date.now();
-		peaceChargeTime = 0;
+
+		updateLastActivity();
+		energyText.textContent = energyCount;
 	}
+
+	lastFrameTime = Date.now();
 	requestAnimationFrame(updateGame);
 }
 
-function handleAppClose() {
-	console.log('Додаток закривається');
-	energyCount = maxEnergyCount;
-	localStorage.setItem('energyCount', energyCount);
+function updateLastActivity() {
+	lastActiveTime = Date.now();
+	localStorage.setItem('lastActiveTime', lastActiveTime);
 }
-
-telegram.onEvent('viewportChanged', function() {
-	if (document.hidden) {
-		 handleAppClose();
-	}
-});
