@@ -1,3 +1,4 @@
+let tg = window.Telegram.WebApp;
 var energyCount = 10;
 var maxEnergyCount = 10;
 var timeToReset = 10;
@@ -50,12 +51,14 @@ function updateGame() {
 	requestAnimationFrame(updateGame);
 }
 
-window.addEventListener('beforeunload', function(event) {
-	lastActiveTime = Date.now();
+function handleAppClose() {
+	console.log('Додаток закривається');
+	energyCount = maxEnergyCount;
 	localStorage.setItem('energyCount', energyCount);
-	localStorage.setItem('lastActiveTime', lastActiveTime);
-	localStorage.setItem('timeToReset', timeToReset);
-	localStorage.setItem('maxEnergyCount', maxEnergyCount);
-	
-	event.returnValue = 'Ви впевнені, що хочете закрити додаток?';
+}
+
+tg.onEvent('viewportChanged', function() {
+	if (document.hidden) {
+		 handleAppClose();
+	}
 });
