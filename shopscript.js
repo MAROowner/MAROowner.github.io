@@ -3,7 +3,7 @@ let chargeSpeedPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
 let multiEarnPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
 
 let maxEnergyCountValue = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-let chargeSpeedValue = [10, 9.5, 9, 8.5, 8, 7.5, 7, 6, 5, 4];
+let chargeSpeedValue = [30, 27.5, 25, 22.5, 20, 17.5, 15, 12,5, 10, 5];
 let multiEarnValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 let maxEnergyCountLvl;
@@ -64,6 +64,7 @@ function buyMaxEnergy() {
 		allPointerText.textContent = totalScore;
 		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('maxEnergyCountLvl', maxEnergyCountLvl);
+		localStorage.setItem('maxEnergyCount', maxEnergyCount);
 	}
 }
 
@@ -78,6 +79,7 @@ function buyChargeSpeed() {
 		allPointerText.textContent = totalScore;
 		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('chargeSpeedLvl', chargeSpeedLvl);
+		localStorage.setItem('timeToReset', timeToReset);
 	}
 }
 
@@ -94,6 +96,3 @@ function buyMultiEarn() {
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 }
-
-
-
