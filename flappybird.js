@@ -1,5 +1,6 @@
 let tg = window.Telegram.WebApp;
 tg.expand();
+tg.setHeaderColor('#000');
 let userName;
 
 const FPS = 60;
