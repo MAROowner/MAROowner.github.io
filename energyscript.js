@@ -7,9 +7,6 @@ let timer = 0;
 let lastFrameTime = Date.now();
 var energyText = document.getElementById("energy-text");
 
-
-document.addEventListener("touchstart", updateLastActivity);
-
 document.addEventListener('DOMContentLoaded', function () {
 	var storedValue = localStorage.getItem('energyCount');
 	energyCount = storedValue !== null ? parseInt(storedValue, 10) : maxEnergyCount;
@@ -19,8 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
-	timeToReset = parseInt(localStorage.getItem('timeToReset'), 10) || 10;
-	maxEnergyCount = parseInt(localStorage.getItem('maxEnergyCount'), 10) || 10;
 
 	timer += Date.now() - lastActiveTime;
 	energyText.textContent = energyCount;
@@ -29,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function updateGame() {
 	timer += Date.now() - lastFrameTime;
+	
+	console.log(Math.floor(timer / 1000));
 
 	if (Math.floor(timer / 1000) >= timeToReset) {
 		if (energyCount < maxEnergyCount) {
