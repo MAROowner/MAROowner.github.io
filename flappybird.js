@@ -308,7 +308,7 @@ function addRecord(userName, points) {
 	data.append('name', userName);
 	data.append('points', points);
 
-	fetch('C:\Project\Flappy Bird\db_connect.php', {
+	fetch('db_connect.php', {
 		 method: 'POST',
 		 body: data
 	})
