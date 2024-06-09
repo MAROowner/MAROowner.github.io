@@ -54,6 +54,10 @@ let score = 0;
 let pointerText = document.getElementById("pointer-text");
 var allPointerText = document.getElementById("all-point_text");
 
+
+let name = 'Doy Johnson';
+let points = 123124;
+
 window.onload = function () {
 	context = board.getContext("2d");
 
@@ -107,7 +111,7 @@ window.onload = function () {
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
 	loadScore();
-	dbManage();
+	addRecord('Vesfix I Love You', 162);
 };
 
 function gameLoop(currentTime) {
@@ -280,7 +284,7 @@ function saveScore() {
 	localStorage.setItem('totalScore', totalScore.toString());
 }
 
-function dbManage() {
+/*function dbManage() {
 	let points = 123124;
 	let name = 'Doy Johnson';
 	var xhr = new XMLHttpRequest();
@@ -295,6 +299,29 @@ function dbManage() {
 	};
 
 	//xhr.send("points=" + points + "&name=" + encodeURIComponent(name));
+}*/
+
+function addRecord(userName, points) {
+	console.log(userName);
+	console.log(points);
+	const data = new FormData();
+	data.append('name', userName);
+	data.append('points', points);
+
+	fetch('C:\Project\Flappy Bird\db_connect.php', {
+		 method: 'POST',
+		 body: data
+	})
+	.then(response => response.json())
+	.then(result => {
+		 console.log(result.message);
+		 if (result.success) {
+			  console.log('Новий запис успішно додано до бази даних');
+		 } else {
+			  console.log('Помилка:', result.message);
+		 }
+	})
+	.catch(error => console.error('Error:', error));
 }
 
 requestAnimationFrame(gameLoop);
