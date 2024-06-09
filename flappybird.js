@@ -308,7 +308,7 @@ function addRecord(userName, points) {
 	data.append('name', userName);
 	data.append('points', points);
 
-	fetch('db_connect.php', {
+	fetch('https://flappybirdproject-fb32e033fcc0.herokuapp.com/db_connect.php', {
 		 method: 'POST',
 		 body: data
 	})
