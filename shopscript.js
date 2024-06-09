@@ -2,8 +2,8 @@ let maxEnergyCountPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
 let chargeSpeedPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
 let multiEarnPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
 
-let maxEnergyCountValue = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-let chargeSpeedValue = [30, 27.5, 25, 22.5, 20, 17.5, 15, 12,5, 10, 5];
+let maxEnergyCountValue = [10, 12, 14, 16, 18, 20, 22, 24, 27, 30];
+let chargeSpeedValue = [1800, 1680, 1560, 1440, 1320, 1200, 1080, 960, 780, 600];
 let multiEarnValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 let maxEnergyCountLvl;
@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (multiEarnLvl == 9) {
 		multiEarnText.textContent = 'Max';
 	}
+
+	/*timeToReset = parseInt(localStorage.getItem('timeToReset'), 10) || 10;
+	maxEnergyCount = parseInt(localStorage.getItem('maxEnergyCount'), 10) || 10;*/
 
 	maxEnergyCount = maxEnergyCountValue[maxEnergyCountLvl];
 	timeToReset = chargeSpeedValue[chargeSpeedLvl];
@@ -96,3 +99,4 @@ function buyMultiEarn() {
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 }
+
