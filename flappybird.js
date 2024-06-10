@@ -63,8 +63,8 @@ window.onload = function () {
 
 	bottomBgImg = new Image();
 	bottomBgImg.src = "Image/Image/BottomBackground@4x.png";
-	topBgImg = new Image();
-	topBgImg.src = "Image/Image/MainBackground@4x.png";
+	//topBgImg = new Image();
+	//topBgImg.src = "Image/Image/MainBackground@4x.png";
 
 	board.height = boardHeight;
 	board.width = boardWidth;
@@ -73,7 +73,7 @@ window.onload = function () {
 	let shopButton = document.querySelector('.second-button_1');
 	let exitButton = document.querySelector('.exit-button');
 	mainButton.addEventListener('click', restartGame);
-	shopButton.addEventListener('click', openShop);
+	//shopButton.addEventListener('click', openShop);
 	exitButton.addEventListener('click', closeShop);
 
 	try {
@@ -213,7 +213,7 @@ function closeShop() {
 }
 
 function drawStartInterface() {
-	context.drawImage(topBgImg, 0, 0, board.width, board.height);
+	//context.drawImage(topBgImg, 0, 0, board.width, board.height);
 }
 
 function drawPlayInterface() {
@@ -268,7 +268,7 @@ function detectCollision(a, b) {
 function restartGame() {
 	if (typeof energyCount !== 'undefined' && energyCount > 0) {
 		energyCount -= 1;
-		energyText.textContent = energyCount;
+		energyText.textContent = energyCount + '/' + maxEnergyCount;
 		localStorage.setItem('energyCount', energyCount);
 		bird.y = birdY;
 		pipeArray = [];
@@ -312,16 +312,27 @@ function addRecord(userName, points) {
 		 method: 'POST',
 		 body: data
 	})
-	.then(response => response.json())
-	.then(result => {
-		 console.log(result.message);
-		 if (result.success) {
-			  console.log('Новий запис успішно додано до бази даних');
-		 } else {
-			  console.log('Помилка:', result.message);
+	.then(response => {
+		 if (!response.ok) {
+			  throw new Error('Network response was not ok ' + response.statusText);
+		 }
+		 return response.text(); // Замість response.json(), використаємо response.text() для отримання сирого тексту
+	})
+	.then(text => {
+		 try {
+			  const result = JSON.parse(text); // Пробуємо розпарсити текст як JSON
+			  console.log(result.message);
+			  if (result.success) {
+					console.log('Новий запис успішно додано до бази даних');
+			  } else {
+					console.log('Помилка:', result.message);
+			  }
+		 } catch (error) {
+			  console.error('JSON parse error:', error);
+			  console.log('Response text was:', text); // Додамо вивід сирого тексту для діагностики
 		 }
 	})
-	.catch(error => console.error('Error:', error));
+	.catch(error => console.error('Fetch error:', error));
 }
 
 requestAnimationFrame(gameLoop);
