@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
 
 	timer += Date.now() - lastActiveTime;
-	energyText.textContent = energyCount;
+	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	updateGame();
 });
 
@@ -45,7 +45,7 @@ function updateGame() {
 		}
 
 		updateLastActivity();
-		energyText.textContent = energyCount;
+		energyText.textContent = energyCount + '/' + maxEnergyCount;
 	}
 
 	lastFrameTime = Date.now();
