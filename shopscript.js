@@ -65,6 +65,7 @@ function buyMaxEnergy() {
 		maxEnergyCount = maxEnergyCountValue[maxEnergyCountLvl];
 
 		allPointerText.textContent = totalScore;
+		energyText.textContent = energyCount + '/' + maxEnergyCount;
 		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('maxEnergyCountLvl', maxEnergyCountLvl);
 		localStorage.setItem('maxEnergyCount', maxEnergyCount);
