@@ -2,7 +2,9 @@ body {
 	margin: 0px;
 	overflow: hidden;
 	position: relative;
+	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 
 .game-container {
 	width: 420px;
@@ -26,21 +28,47 @@ body {
 	height: 5vh;
 	display: flex;
 	align-items: center;
+	justify-content: space-around;
 	padding-top: 3vh;
 	position: relative;
 }
 
-.start-header img {
-	display: block;
-	width: 170px;
-	margin-left: 50vw;
-	transform: translateX(-50%);
+.regim{
+	width: calc(95vw/2.5);
 }
 
-.all-point_text {
+.regim img {
+	display: block;
+	width: 100%;
+	/*margin-left: 50vw;
+	transform: translateX(-50%);*/
+}
+
+.total-balance,
+.energy-balance{
+	border: #000 1px solid;
+	border-radius: 10px;
+	width: calc((95vw/3) - 7vw);
+	height: calc(((95vw/3) - 5vw) * 0.3);
+	display: flex;
+	align-items: center;
+}
+
+.balance-text{
+	height: 80%;
+	margin: 0px 5px;
+}
+
+.more-info_button{
+	height: 50%;
+	margin-left: auto;
+	margin-right: 5px;
+}
+
+/*.all-point_text {
 	position: absolute;
 	font-size: 4vh;
-	color: white;
+	color: black;
 	margin-left: 15px;
 	white-space: nowrap;
 }
@@ -48,15 +76,15 @@ body {
 .energy-text {
 	transform: translateX(-80%);
 	font-size: 4vh;
-	color: white;
+	color: black;
 	white-space: nowrap;
-}
+}*/
 
 .point-text {
 	z-index: 10;
-	padding-top: 10px;
+	padding-top: 20px;
 	font-size: 6vh;
-	color: white;
+	color: black;
 	font-weight: 600;
 	text-align: center;
 	white-space: nowrap;
@@ -67,13 +95,13 @@ body {
 
 .button-container {
 	position: absolute;
-	top: 70vh;
+	bottom: 2.5vh;
 	left: 50vw;
 	transform: translateX(-50%);
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 5vh;
 	z-index: 2;
 }
 
@@ -91,6 +119,10 @@ body {
 	margin-top: 20px;
 	display: flex;
 	justify-content: space-between;
+}
+
+.other-buttons img{
+	width: calc(100vw - 5vw);
 }
 
 .second-button_1 img,
