@@ -118,9 +118,10 @@ body {
 .other-buttons {
 	margin-top: 20px;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	width: 95vw;
 	height: 10vh;
+	align-items: center;
 	background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
@@ -129,8 +130,42 @@ body {
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-.other-buttons img{
-	width: calc(100vw - 5vw);
+.shop-tab,
+.referral-tab,
+.roadmap-tab{
+	height: 80%;
+	width: calc(90%/3);
+	position: relative;
+	text-align: center;
+	align-items: center;
+}
+
+.shop-tab img,
+.referral-tab img,
+.roadmap-tab img{
+	height: 55%;
+	opacity: 50%;
+}
+
+.tab-text{
+	color: white;
+	text-align: center;
+	width: 100%;
+	opacity: 50%;
+}
+
+
+.referral-tab::before,
+.roadmap-tab::before{
+	content: "";
+   position: absolute;
+   left: -1.5vw;
+   top: 50%;
+   transform: translateY(-50%);
+   width: 0.5px;
+   height: 100%;
+   background-color: white;
+	opacity: 50%;
 }
 
 .second-button_1 img,
