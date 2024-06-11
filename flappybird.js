@@ -197,6 +197,7 @@ function openShop() {
 backButton.onClick(function() {
 	document.querySelector('.main-button').style.display = 'flex';
 	document.querySelector('.shop').style.display = 'none';
+	backButton.hide();
 });
 
 function drawPlayInterface() {
