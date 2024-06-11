@@ -1,6 +1,6 @@
 var tg = window.Telegram.WebApp;
 tg.expand();
-tg.setHeaderColor('#000');
+tg.setHeaderColor('#62C4DA');
 let userName;
 
 const FPS = 60;
@@ -198,7 +198,6 @@ backButton.onClick(function() {
 	document.querySelector('.main-button').style.display = 'flex';
 	document.querySelector('.shop').style.display = 'none';
 	backButton.hide();
-    	Telegram.WebApp.MainButton.show();
 });
 
 function drawPlayInterface() {
