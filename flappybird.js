@@ -198,6 +198,7 @@ backButton.onClick(function() {
 	document.querySelector('.main-button').style.display = 'flex';
 	document.querySelector('.shop').style.display = 'none';
 	backButton.hide();
+    	Telegram.WebApp.MainButton.show();
 });
 
 function drawPlayInterface() {
