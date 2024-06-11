@@ -1,6 +1,6 @@
 var tg = window.Telegram.WebApp;
 tg.expand();
-tg.setHeaderColor('#62C4DA');
+tg.setHeaderColor('#000');
 let userName;
 
 const FPS = 60;
@@ -53,6 +53,7 @@ var totalScore = 0;
 let score = 0;
 let pointerText = document.getElementById("pointer-text");
 var allPointerText = document.getElementById("all-point_text");
+let backButton = Telegram.WebApp.BackButton;
 
 
 let name = 'Doy Johnson';
@@ -63,18 +64,14 @@ window.onload = function () {
 
 	bottomBgImg = new Image();
 	bottomBgImg.src = "Image/Image/BottomBackground@4x.png";
-	//topBgImg = new Image();
-	//topBgImg.src = "Image/Image/MainBackground@4x.png";
 
 	board.height = boardHeight;
 	board.width = boardWidth;
 
 	let mainButton = document.querySelector('.main-button');
-	let shopButton = document.querySelector('.second-button_1');
-	let exitButton = document.querySelector('.exit-button');
+	let shopButton = document.querySelector('.shop-tab');
 	mainButton.addEventListener('click', restartGame);
-	//shopButton.addEventListener('click', openShop);
-	exitButton.addEventListener('click', closeShop);
+	shopButton.addEventListener('click', openShop);
 
 	try {
 		tg.initDataUnsafe.user.id;
@@ -102,7 +99,6 @@ window.onload = function () {
 	bottomPipeImg.src = "Image/Image/bottompipe.png";
 
 	requestAnimationFrame(gameLoop);
-	//setInterval(placePipes, 1100);
 	placePipes();
 
 	document.addEventListener("touchstart", moveBird);
@@ -115,19 +111,14 @@ window.onload = function () {
 };
 
 function gameLoop(currentTime) {
-	// Розрахуй час, що минув з останнього кадру
 	const deltaTime = currentTime - lastTime;
 
-	// Якщо минуло достатньо часу для нового кадру
 	if (deltaTime >= frameDuration) {
-		// Онови час останнього кадру
 		lastTime = currentTime - (deltaTime % frameDuration);
 
-		// Онови стан гри з урахуванням фіксованого deltaTime
 		update(frameDuration / 1000);
 	}
 
-	// Запусти наступний кадр
 	requestAnimationFrame(gameLoop);
 }
 
@@ -135,18 +126,15 @@ function update(deltaTime) {
 	if (gameOver) {
 		context.clearRect(0, 0, board.width, board.height);
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
-		drawStartInterface();
 		return;
 	}
 
 	context.clearRect(0, 0, board.width, board.height);
 
-	// Онови стан пташки
 	bird.velocityY += bird.gravity * deltaTime;
 	bird.y += bird.velocityY;
 	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 
-	// Перевірка чи пташка не виходить за межі
 	if (bird.y > board.height) {
 		bird.velocityY = 0;
 		document.querySelector('.button-container').style.display = 'flex';
@@ -159,7 +147,6 @@ function update(deltaTime) {
 		return;
 	}
 
-	// Онови труби
 	for (let i = 0; i < pipeArray.length; i++) {
 		let pipe = pipeArray[i];
 		pipe.x += velocityX * deltaTime * 1000;
@@ -188,7 +175,6 @@ function update(deltaTime) {
 		placePipes();
 	}
 
-	// Видали труби, які вийшли за межі екрану
 	while (pipeArray.length > 0 && pipeArray[0].x < -pipeWidth) {
 		pipeArray.shift();
 	}
@@ -203,18 +189,15 @@ function loadScore() {
 }
 
 function openShop() {
-	document.querySelector('.button-container').style.display = 'none';
+	document.querySelector('.main-button').style.display = 'none';
 	document.querySelector('.shop').style.display = 'block';
+	backButton.show();
 }
 
-function closeShop() {
-	document.querySelector('.button-container').style.display = 'flex';
+backButton.onClick(function() {
+	document.querySelector('.main-button').style.display = 'flex';
 	document.querySelector('.shop').style.display = 'none';
-}
-
-function drawStartInterface() {
-	//context.drawImage(topBgImg, 0, 0, board.width, board.height);
-}
+});
 
 function drawPlayInterface() {
 	context.fillStyle = "white";
@@ -329,7 +312,7 @@ function addRecord(userName, points) {
 			  }
 		 } catch (error) {
 			  console.error('JSON parse error:', error);
-			  console.log('Response text was:', text); // Додамо вивід сирого тексту для діагностики
+			  console.log('Response text was:', text);
 		 }
 	})
 	.catch(error => console.error('Fetch error:', error));
