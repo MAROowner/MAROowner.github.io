@@ -46,7 +46,7 @@ body {
 
 .total-balance,
 .energy-balance{
-	border: #000 1px solid;
+	border: #000 1.5px solid;
 	border-radius: 10px;
 	width: calc((95vw/3) - 7vw);
 	height: calc(((95vw/3) - 5vw) * 0.3);
@@ -119,6 +119,14 @@ body {
 	margin-top: 20px;
 	display: flex;
 	justify-content: space-between;
+	width: 95vw;
+	height: 10vh;
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .other-buttons img{
