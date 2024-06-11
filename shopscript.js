@@ -14,15 +14,19 @@ let maxEnergyCountText = document.getElementById("energy-price_text");
 let chargeSpeedText = document.getElementById("charge-price_text");
 let multiEarnText = document.getElementById("earn-price_text");
 
-let maxEnergyCountBtn = document.getElementById("max-energy_button");
+let maxEnergyCountInfoText = document.getElementById("energy-info_text");
+let chargeSpeedInfoText = document.getElementById("charge-info_text");
+let multiEarnInfoText = document.getElementById("earn-info_text");
+
+/*let maxEnergyCountBtn = document.getElementById("max-energy_button");
 let chargeSpeedBtn = document.getElementById("charge-speed_button");
-let multiEarnBtn = document.getElementById("multi-earn_button");
+let multiEarnBtn = document.getElementById("multi-earn_button");*/
 
 
 
-maxEnergyCountBtn.addEventListener('click', buyMaxEnergy);
+/*maxEnergyCountBtn.addEventListener('click', buyMaxEnergy);
 chargeSpeedBtn.addEventListener('click', buyChargeSpeed);
-multiEarnBtn.addEventListener('click', buyMultiEarn);
+multiEarnBtn.addEventListener('click', buyMultiEarn);*/
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -51,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	timeToReset = chargeSpeedValue[chargeSpeedLvl];
 	multiEarn = multiEarnValue[multiEarnLvl];
 
-	console.log(maxEnergyCountLvl);
-	console.log(chargeSpeedLvl);
-	console.log(multiEarnLvl);
+	maxEnergyCountInfoText.textContent = maxEnergyCountLvl + " Lvl" + " • " + maxEnergyCount;
+	chargeSpeedInfoText.textContent = chargeSpeedLvl + " Lvl" + " • " + Math.floor(timeToReset/60);
+	multiEarnInfoText.textContent = multiEarnLvl + " Lvl" + " • " + multiEarn;
 });
 
 function buyMaxEnergy() {
