@@ -104,4 +104,3 @@ function buyMultiEarn() {
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 }
-
