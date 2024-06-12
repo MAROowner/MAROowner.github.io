@@ -204,12 +204,15 @@ function closeShop() {
 	backButton.hide();
 }
 
-backButton.onClick(function () {
-	closeShop();
-
+function hideAllTabs(){
 	buttons.forEach(button => {
 		button.classList.remove("toggled-style");
 	});
+}
+
+backButton.onClick(function () {
+	closeShop();
+	hideAllTabs();
 });
 
 function drawPlayInterface() {
