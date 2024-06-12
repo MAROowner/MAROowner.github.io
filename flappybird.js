@@ -53,11 +53,16 @@ var totalScore = 0;
 let score = 0;
 let pointerText = document.getElementById("pointer-text");
 var allPointerText = document.getElementById("all-point_text");
+let shop = document.getElementById("shop");
 let backButton = Telegram.WebApp.BackButton;
 
 
 let name = 'Doy Johnson';
 let points = 123124;
+
+document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
+document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
+document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndShop);
 
 window.onload = function () {
 	context = board.getContext("2d");
@@ -69,9 +74,7 @@ window.onload = function () {
 	board.width = boardWidth;
 
 	let mainButton = document.querySelector('.main-button');
-	let shopButton = document.querySelector('.shop-tab');
 	mainButton.addEventListener('click', restartGame);
-	shopButton.addEventListener('click', openShop);
 
 	try {
 		tg.initDataUnsafe.user.id;
@@ -194,10 +197,14 @@ function openShop() {
 	backButton.show();
 }
 
-backButton.onClick(function() {
+function closeShop(){
 	document.querySelector('.main-button').style.display = 'flex';
 	document.querySelector('.shop').style.display = 'none';
 	backButton.hide();
+}
+
+backButton.onClick(function() {
+	closeShop();
 });
 
 function drawPlayInterface() {
@@ -264,26 +271,31 @@ function restartGame() {
 	}
 }
 
+function toggleStyleAndShop(event) {
+	let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab");
+	
+	buttons.forEach(button => {
+		 if (button !== event.currentTarget) {
+			  button.classList.remove("toggled-style");
+		 }
+	});
+
+	event.currentTarget.classList.toggle("toggled-style");
+
+	if (event.currentTarget.id === "shop-tab") {
+		 if (shop.style.display === "none") {
+			  openShop();
+		 } else {
+			  closeShop();
+		 }
+	} else {
+		 closeShop();
+	}
+}
+
 function saveScore() {
 	localStorage.setItem('totalScore', totalScore.toString());
 }
-
-/*function dbManage() {
-	let points = 123124;
-	let name = 'Doy Johnson';
-	var xhr = new XMLHttpRequest();
-
-	xhr.open("POST", "db_connect.php", true);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4 && xhr.status === 200) {
-			console.log(xhr.responseText);
-		}
-	};
-
-	//xhr.send("points=" + points + "&name=" + encodeURIComponent(name));
-}*/
 
 function addRecord(userName, points) {
 	console.log(userName);
@@ -300,11 +312,11 @@ function addRecord(userName, points) {
 		 if (!response.ok) {
 			  throw new Error('Network response was not ok ' + response.statusText);
 		 }
-		 return response.text(); // Замість response.json(), використаємо response.text() для отримання сирого тексту
+		 return response.text();
 	})
 	.then(text => {
 		 try {
-			  const result = JSON.parse(text); // Пробуємо розпарсити текст як JSON
+			  const result = JSON.parse(text); 
 			  console.log(result.message);
 			  if (result.success) {
 					console.log('Новий запис успішно додано до бази даних');
