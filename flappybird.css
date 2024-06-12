@@ -2,7 +2,7 @@ body {
 	margin: 0px;
 	overflow: hidden;
 	position: relative;
-	font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 
@@ -33,7 +33,7 @@ body {
 	position: relative;
 }
 
-.regim{
+.regim {
 	width: calc(95vw/2.5);
 }
 
@@ -45,7 +45,7 @@ body {
 }
 
 .total-balance,
-.energy-balance{
+.energy-balance {
 	border: #000 1.5px solid;
 	border-radius: 10px;
 	width: calc((95vw/3) - 7vw);
@@ -54,12 +54,12 @@ body {
 	align-items: center;
 }
 
-.balance-text{
+.balance-text {
 	height: 80%;
 	margin-left: 5px;
 }
 
-.more-info_button{
+.more-info_button {
 	height: 50%;
 	margin-left: auto;
 	margin-right: 5px;
@@ -118,11 +118,11 @@ body {
 .shop-tab,
 .referral-tab,
 .roadmap-tab {
-    height: 80%;
-    width: calc(90% / 3);
-    position: relative;
-    text-align: center;
-    align-items: center;
+	height: 80%;
+	width: calc(90% / 3);
+	position: relative;
+	text-align: center;
+	align-items: center;
 }
 
 .toggled-style {
@@ -135,13 +135,13 @@ body {
 
 .shop-tab img,
 .referral-tab img,
-.roadmap-tab img{
+.roadmap-tab img {
 	height: 55%;
 	margin-bottom: 2px;
 	opacity: 50%;
 }
 
-.tab-text{
+.tab-text {
 	color: white;
 	text-align: center;
 	width: 100%;
@@ -150,15 +150,15 @@ body {
 
 
 .referral-tab::before,
-.roadmap-tab::before{
+.roadmap-tab::before {
 	content: "";
-   position: absolute;
-   left: -1.5vw;
-   top: 50%;
-   transform: translateY(-50%);
-   width: 0.5px;
-   height: 100%;
-   background-color: white;
+	position: absolute;
+	left: -1.5vw;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 0.5px;
+	height: 100%;
+	background-color: white;
 	opacity: 50%;
 }
 
@@ -169,7 +169,7 @@ body {
 	margin: 0px 30px;
 }
 
-.shop{
+.shop {
 	position: absolute;
 	height: 80vh;
 	width: 100vw;
@@ -177,18 +177,18 @@ body {
 	z-index: 10;
 }
 
-.exit-button{
+.exit-button {
 	position: absolute;
 	background: none;
 	border: none;
 }
 
-.exit-button img{
+.exit-button img {
 	width: 50px;
 	height: 25px;
 }
 
-.shop-block{
+.shop-block {
 	position: absolute;
 	width: calc(95vw - 10px);
 	max-height: calc(70vh - 10px);
@@ -208,12 +208,14 @@ body {
 	overflow-y: auto;
 }
 
-.product{
+.product {
 	display: flex;
 	margin-bottom: 10px;
+	background: none;
+	border: none;
 }
 
-.product-icon{
+.product-icon {
 	height: calc((100vw - 60px)/3);
 	width: calc((100vw - 60px)/3);
 	max-height: calc((50vh- 100px)/3);
@@ -227,7 +229,7 @@ body {
 	border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.product-icon img{
+.product-icon img {
 	height: calc((100vw - 120px)/4);
 	max-height: calc((50vh- 60px)/4);
 	opacity: 50%;
@@ -235,22 +237,22 @@ body {
 }
 
 @media (min-height: 1000px) {
-	.shop-block{
+	.shop-block {
 		width: calc(95vw - 20px);
 		padding: 20px 20px 0px 20px;
 	}
 
-	.product-icon{
+	.product-icon {
 		margin-bottom: 20px;
 	}
 
-	.product-icon img{
+	.product-icon img {
 		height: calc((80vw - 120px)/4);
 		margin-top: calc((((100vw - 60px)/3) - ((80vw - 120px)/4))/2);
 	}
 }
 
-.product-name{
+.product-name {
 	color: #fff;
 	font-size: 25px;
 	margin-top: 10px;
@@ -258,23 +260,23 @@ body {
 	opacity: 50%;
 }
 
-.price-text{
+.price-text {
 	color: #fff;
 	font-size: 25px;
 	opacity: 50%;
 }
 
-.product-desc{
+.product-desc {
 	width: 50%;
 }
 
-.product-info{
+.product-info {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.product-info_text{
+.product-info_text {
 	color: #fff;
 	opacity: 50%;
 }
