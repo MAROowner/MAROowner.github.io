@@ -59,6 +59,7 @@ let backButton = Telegram.WebApp.BackButton;
 
 let name = 'Doy Johnson';
 let points = 123124;
+let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab");
 
 document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
@@ -197,14 +198,18 @@ function openShop() {
 	backButton.show();
 }
 
-function closeShop(){
+function closeShop() {
 	document.querySelector('.main-button').style.display = 'flex';
 	document.querySelector('.shop').style.display = 'none';
 	backButton.hide();
 }
 
-backButton.onClick(function() {
+backButton.onClick(function () {
 	closeShop();
+
+	buttons.forEach(button => {
+		button.classList.remove("toggled-style");
+	});
 });
 
 function drawPlayInterface() {
@@ -272,24 +277,23 @@ function restartGame() {
 }
 
 function toggleStyleAndShop(event) {
-	let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab");
-	
+
 	buttons.forEach(button => {
-		 if (button !== event.currentTarget) {
-			  button.classList.remove("toggled-style");
-		 }
+		if (button !== event.currentTarget) {
+			button.classList.remove("toggled-style");
+		}
 	});
 
 	event.currentTarget.classList.toggle("toggled-style");
 
 	if (event.currentTarget.id === "shop-tab") {
-		 if (shop.style.display === "none") {
-			  openShop();
-		 } else {
-			  closeShop();
-		 }
+		if (shop.style.display === "none") {
+			openShop();
+		} else {
+			closeShop();
+		}
 	} else {
-		 closeShop();
+		closeShop();
 	}
 }
 
@@ -305,30 +309,30 @@ function addRecord(userName, points) {
 	data.append('points', points);
 
 	fetch('https://flappybirdproject-fb32e033fcc0.herokuapp.com/db_connect.php', {
-		 method: 'POST',
-		 body: data
+		method: 'POST',
+		body: data
 	})
-	.then(response => {
-		 if (!response.ok) {
-			  throw new Error('Network response was not ok ' + response.statusText);
-		 }
-		 return response.text();
-	})
-	.then(text => {
-		 try {
-			  const result = JSON.parse(text); 
-			  console.log(result.message);
-			  if (result.success) {
+		.then(response => {
+			if (!response.ok) {
+				throw new Error('Network response was not ok ' + response.statusText);
+			}
+			return response.text();
+		})
+		.then(text => {
+			try {
+				const result = JSON.parse(text);
+				console.log(result.message);
+				if (result.success) {
 					console.log('Новий запис успішно додано до бази даних');
-			  } else {
+				} else {
 					console.log('Помилка:', result.message);
-			  }
-		 } catch (error) {
-			  console.error('JSON parse error:', error);
-			  console.log('Response text was:', text);
-		 }
-	})
-	.catch(error => console.error('Fetch error:', error));
+				}
+			} catch (error) {
+				console.error('JSON parse error:', error);
+				console.log('Response text was:', text);
+			}
+		})
+		.catch(error => console.error('Fetch error:', error));
 }
 
 requestAnimationFrame(gameLoop);
