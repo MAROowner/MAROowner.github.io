@@ -117,18 +117,27 @@ body {
 
 .shop-tab,
 .referral-tab,
-.roadmap-tab{
-	height: 80%;
-	width: calc(90%/3);
-	position: relative;
-	text-align: center;
-	align-items: center;
+.roadmap-tab {
+    height: 80%;
+    width: calc(90% / 3);
+    position: relative;
+    text-align: center;
+    align-items: center;
+}
+
+.toggled-style {
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)) !important;
+	backdrop-filter: blur(20px) !important;
+	-webkit-backdrop-filter: blur(20px) !important;
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.18) !important;
 }
 
 .shop-tab img,
 .referral-tab img,
 .roadmap-tab img{
 	height: 55%;
+	margin-bottom: 2px;
 	opacity: 50%;
 }
 
@@ -162,8 +171,7 @@ body {
 
 .shop{
 	position: absolute;
-	display: none;
-	height: 60vh;
+	height: 80vh;
 	width: 100vw;
 	bottom: 15vh;
 	z-index: 10;
@@ -181,15 +189,17 @@ body {
 }
 
 .shop-block{
+	position: absolute;
 	width: calc(95vw - 10px);
-	height: calc(50vh - 20px);
+	max-height: calc(70vh - 10px);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	margin: auto;
-	margin-top: 10vh;
+	left: 50%;
+	bottom: 0px;
+	transform: translateX(-50%);
 	padding: 10px 0px 10px 10px;
-	background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	border-radius: 20px;
@@ -218,10 +228,10 @@ body {
 }
 
 .product-icon img{
-	height: calc((100vw - 120px)/3);
-	max-height: calc((50vh- 60px)/3);
+	height: calc((100vw - 120px)/4);
+	max-height: calc((50vh- 60px)/4);
 	opacity: 50%;
-	margin-top: calc((((100vw - 60px)/3) - ((100vw - 120px)/3))/2);
+	margin-top: calc((((100vw - 60px)/3) - ((100vw - 120px)/4))/2);
 }
 
 @media (min-height: 1000px) {
@@ -235,8 +245,8 @@ body {
 	}
 
 	.product-icon img{
-		height: calc((80vw - 120px)/3);
-		margin-top: calc((((100vw - 60px)/3) - ((80vw - 120px)/3))/2);
+		height: calc((80vw - 120px)/4);
+		margin-top: calc((((100vw - 60px)/3) - ((80vw - 120px)/4))/2);
 	}
 }
 
