@@ -18,15 +18,15 @@ let maxEnergyCountInfoText = document.getElementById("energy-info_text");
 let chargeSpeedInfoText = document.getElementById("charge-info_text");
 let multiEarnInfoText = document.getElementById("earn-info_text");
 
-/*let maxEnergyCountBtn = document.getElementById("max-energy_button");
-let chargeSpeedBtn = document.getElementById("charge-speed_button");
-let multiEarnBtn = document.getElementById("multi-earn_button");*/
+let maxEnergyCountBtn = document.getElementById("energy-product");
+let chargeSpeedBtn = document.getElementById("charge-product");
+let multiEarnBtn = document.getElementById("earn-product");
 
 
 
-/*maxEnergyCountBtn.addEventListener('click', buyMaxEnergy);
+maxEnergyCountBtn.addEventListener('click', buyMaxEnergy);
 chargeSpeedBtn.addEventListener('click', buyChargeSpeed);
-multiEarnBtn.addEventListener('click', buyMultiEarn);*/
+multiEarnBtn.addEventListener('click', buyMultiEarn);
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -70,6 +70,8 @@ function buyMaxEnergy() {
 
 		allPointerText.textContent = totalScore;
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
+		maxEnergyCountInfoText.textContent = maxEnergyCountLvl + " Lvl" + " • " + maxEnergyCount;
+		hideAllTabs();
 		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('maxEnergyCountLvl', maxEnergyCountLvl);
 		localStorage.setItem('maxEnergyCount', maxEnergyCount);
@@ -85,6 +87,8 @@ function buyChargeSpeed() {
 		timeToReset = chargeSpeedValue[chargeSpeedLvl];
 
 		allPointerText.textContent = totalScore;
+		chargeSpeedInfoText.textContent = chargeSpeedLvl + " Lvl" + " • " + Math.floor(timeToReset/60);
+		hideAllTabs();
 		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('chargeSpeedLvl', chargeSpeedLvl);
 		localStorage.setItem('timeToReset', timeToReset);
@@ -100,7 +104,10 @@ function buyMultiEarn() {
 		multiEarn = multiEarnValue[multiEarnLvl];
 
 		allPointerText.textContent = totalScore;
+		multiEarnInfoText.textContent = multiEarnLvl + " Lvl" + " • " + multiEarn;
+		hideAllTabs();
 		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 }
+
