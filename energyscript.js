@@ -24,8 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function updateGame() {
 	timer += Date.now() - lastFrameTime;
-	
-	console.log(Math.floor(timer / 1000));
 
 	if (Math.floor(timer / 1000) >= timeToReset) {
 		if (energyCount < maxEnergyCount) {
