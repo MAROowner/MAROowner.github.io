@@ -23,10 +23,17 @@ let chargeSpeedBtn = document.getElementById("charge-product");
 let multiEarnBtn = document.getElementById("earn-product");
 
 
+maxEnergyCountBtn.addEventListener('click', function() {
+	buyConfirm(buyMaxEnergy);
+});
 
-maxEnergyCountBtn.addEventListener('click', buyMaxEnergy);
-chargeSpeedBtn.addEventListener('click', buyChargeSpeed);
-multiEarnBtn.addEventListener('click', buyMultiEarn);
+chargeSpeedBtn.addEventListener('click', function() {
+	buyConfirm(buyChargeSpeed);
+});
+
+multiEarnBtn.addEventListener('click', function() {
+	buyConfirm(buyMultiEarn);
+});
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -56,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	multiEarn = multiEarnValue[multiEarnLvl];
 
 	maxEnergyCountInfoText.textContent = maxEnergyCountLvl + " Lvl" + " • " + maxEnergyCount;
-	chargeSpeedInfoText.textContent = chargeSpeedLvl + " Lvl" + " • " + Math.floor(timeToReset/60);
+	chargeSpeedInfoText.textContent = chargeSpeedLvl + " Lvl" + " • " + Math.floor(timeToReset / 60);
 	multiEarnInfoText.textContent = multiEarnLvl + " Lvl" + " • " + multiEarn;
 });
 
@@ -88,7 +95,7 @@ function buyChargeSpeed() {
 		timeToReset = chargeSpeedValue[chargeSpeedLvl];
 
 		allPointerText.textContent = totalScore;
-		chargeSpeedInfoText.textContent = chargeSpeedLvl + " Lvl" + " • " + Math.floor(timeToReset/60);
+		chargeSpeedInfoText.textContent = chargeSpeedLvl + " Lvl" + " • " + Math.floor(timeToReset / 60);
 		hideAllTabs();
 		closeShop();
 		localStorage.setItem('totalScore', totalScore.toString());
@@ -112,4 +119,13 @@ function buyMultiEarn() {
 		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
+}
+
+function buyConfirm(buyFunction) {
+	console.log("Open");
+	Telegram.WebApp.showConfirm("Are you sure you want to buy this?", function (result) {
+		if (result) {
+			buyFunction();
+		}
+	});
 }
