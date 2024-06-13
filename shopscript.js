@@ -84,6 +84,9 @@ function buyMaxEnergy() {
 		localStorage.setItem('maxEnergyCountLvl', maxEnergyCountLvl);
 		localStorage.setItem('maxEnergyCount', maxEnergyCount);
 	}
+	else{
+		buyError(maxEnergyCountPrice - totalScore);
+	}
 }
 
 function buyChargeSpeed() {
@@ -102,6 +105,9 @@ function buyChargeSpeed() {
 		localStorage.setItem('chargeSpeedLvl', chargeSpeedLvl);
 		localStorage.setItem('timeToReset', timeToReset);
 	}
+	else{
+		buyError(chargeSpeedPrice - totalScore);
+	}
 }
 
 function buyMultiEarn() {
@@ -119,6 +125,9 @@ function buyMultiEarn() {
 		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
+	else{
+		buyError(multiEarnPrice - totalScore);
+	}
 }
 
 function buyConfirm(buyFunction) {
@@ -128,4 +137,14 @@ function buyConfirm(buyFunction) {
 			buyFunction();
 		}
 	});
+}
+
+function buyError(needMoney){
+	Telegram.WebApp.showPopup({
+		title: "Need more money!",
+		message: needMoney + " points aren't enough on your balance :(",
+		buttons: [
+			 {id: "yes", type: "default", text: "OK"},
+		]
+   });
 }
