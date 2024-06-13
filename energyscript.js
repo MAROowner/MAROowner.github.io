@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		updateLastActivity();
 	}
+	if(energyCount > maxEnergyCount){
+		energyCount = maxEnergyCount;
+	}
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	updateGame();
 });
