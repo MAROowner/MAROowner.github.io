@@ -85,7 +85,7 @@ function buyMaxEnergy() {
 		localStorage.setItem('maxEnergyCount', maxEnergyCount);
 	}
 	else{
-		buyError(maxEnergyCountPrice - totalScore);
+		buyError(maxEnergyCountPrice[maxEnergyCountLvl] - totalScore);
 	}
 }
 
@@ -106,7 +106,7 @@ function buyChargeSpeed() {
 		localStorage.setItem('timeToReset', timeToReset);
 	}
 	else{
-		buyError(chargeSpeedPrice - totalScore);
+		buyError(chargeSpeedPrice[chargeSpeedLvl] - totalScore);
 	}
 }
 
@@ -126,7 +126,7 @@ function buyMultiEarn() {
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 	else{
-		buyError(multiEarnPrice - totalScore);
+		buyError(multiEarnPrice[multiEarnLvl] - totalScore);
 	}
 }
 
