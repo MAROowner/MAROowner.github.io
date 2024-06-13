@@ -66,6 +66,10 @@ function updateGame() {
 		updateLastActivity();
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
 	}
+	if(energyCount > maxEnergyCount){
+		energyCount = maxEnergyCount;
+		energyText.textContent = energyCount + '/' + maxEnergyCount;
+	}
 
 	lastFrameTime = Date.now();
 	requestAnimationFrame(updateGame);
