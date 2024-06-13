@@ -213,6 +213,23 @@ body {
 	margin-bottom: 10px;
 	background: none;
 	border: none;
+	position: relative;
+}
+
+#earn-product{
+	margin-bottom: 0px;
+}
+
+.product:not(:last-child)::after{
+	position: absolute;
+	content: " ";
+	background-color: #fff;
+	width: 90%;
+	display: block;
+	height: 0.5px;
+	bottom: 5px;
+	z-index: 100;
+	opacity: 50%;
 }
 
 .product-icon {
@@ -229,6 +246,10 @@ body {
 	border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.product-icon:not(#last-product_icon){
+	margin-bottom: 20px;
+}
+
 .product-icon img {
 	height: calc((100vw - 120px)/4);
 	max-height: calc((50vh- 60px)/4);
@@ -236,14 +257,24 @@ body {
 	margin-top: calc((((100vw - 60px)/3) - ((100vw - 120px)/4))/2);
 }
 
+.buy-icon{
+	position: absolute;
+	width: 12px;
+	height: 20px;
+	opacity: 50%;
+	top: calc(50% - 10px);
+	right: 30px;
+	transform: translateY(-50%);
+}
+
+#last-buy_icon{
+	top: calc(50%);
+}
+
 @media (min-height: 1000px) {
 	.shop-block {
 		width: calc(95vw - 20px);
 		padding: 20px 20px 0px 20px;
-	}
-
-	.product-icon {
-		margin-bottom: 20px;
 	}
 
 	.product-icon img {
@@ -254,16 +285,18 @@ body {
 
 .product-name {
 	color: #fff;
-	font-size: 25px;
+	font-size: 22px;
 	margin-top: 10px;
 	padding-bottom: 10px;
 	opacity: 50%;
+	text-align: left;
 }
 
 .price-text {
 	color: #fff;
 	font-size: 25px;
 	opacity: 50%;
+	margin-right: 15px;
 }
 
 .product-desc {
