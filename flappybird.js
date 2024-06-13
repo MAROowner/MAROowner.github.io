@@ -14,7 +14,7 @@ let board = document.getElementById("board");
 let boardWidth = screenWidth;
 let boardHeight = screenHeight;
 let textValue;
-let context;
+//const context = board.getContext("2d");
 let gridSquareY = 1000;
 
 let birdWidth = 48;
@@ -56,10 +56,15 @@ var allPointerText = document.getElementById("all-point_text");
 let shop = document.querySelector('.shop');
 let backButton = Telegram.WebApp.BackButton;
 
+let bgImage = new Image();
+bgImage.src = 'Image/Image/flappybirdbg.png';
+let bgX = 0;
+let speed = 2;
 
 let name = 'Doy Johnson';
 let points = 123124;
 let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab");
+
 
 document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
@@ -67,7 +72,6 @@ document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndS
 
 window.onload = function () {
 	context = board.getContext("2d");
-
 	bottomBgImg = new Image();
 	bottomBgImg.src = "Image/Image/BottomBackground@4x.png";
 
@@ -77,12 +81,6 @@ window.onload = function () {
 	let mainButton = document.querySelector('.main-button');
 	mainButton.addEventListener('click', restartGame);
 
-	try {
-		tg.initDataUnsafe.user.id;
-		userName = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
-	} catch (_) {
-		userName = "";
-	}
 	textValue = userName;
 
 	birdX = boardWidth / 8;
@@ -110,9 +108,14 @@ window.onload = function () {
 	totalScore += score;
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
+	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
 	addRecord('Vesfix I Love You', 162);
 };
+
+/*bgImage.onload = function() {
+	drawBackground();
+};*/
 
 function gameLoop(currentTime) {
 	const deltaTime = currentTime - lastTime;
@@ -147,6 +150,7 @@ function update(deltaTime) {
 		totalScore += score;
 		allPointerText.textContent = totalScore;
 		pointerText.textContent = score;
+		pipeArray = [];
 		gameOver = true;
 		return;
 	}
@@ -220,10 +224,9 @@ backButton.onClick(function () {
 });
 
 function drawPlayInterface() {
-	context.fillStyle = "white";
-	context.font = "45px sans-serif";
-	context.fillText(score, 5, 45);
-	context.fillText(textValue, 5, 90);
+	context.fillStyle = "black";
+	context.font = "700 45px Gill Sans MT";
+	context.fillText(score, board.width/2.2, board.height/10);
 }
 
 function placePipes() {
@@ -277,7 +280,6 @@ function restartGame() {
 		pipeArray = [];
 		score = 0;
 		gameOver = false;
-		textValue = userName;
 		document.querySelector('.button-container').style.display = 'none';
 		document.querySelector('.start-screen').style.display = 'none';
 	}
@@ -304,8 +306,44 @@ function toggleStyleAndShop(event) {
 	}
 }
 
+function changeBalance(amount, decrementValue){
+	const interval = 10;
+	let startScore = totalScore;
+	price = amount;
+
+	if(decrementValue == 0){
+		decrementValue = 1;
+	}
+
+	const decrementInterval = setInterval(() => {
+		if (amount <= 0 || totalScore <= 0) {
+			clearInterval(decrementInterval);
+			totalScore = startScore - price;
+			allPointerText.textContent = totalScore;
+			localStorage.setItem('totalScore', totalScore.toString());
+			return;
+		}
+		totalScore -= decrementValue;
+		amount -= decrementValue;
+		allPointerText.textContent = totalScore;
+	}, interval);
+}
+
 function saveScore() {
 	localStorage.setItem('totalScore', totalScore.toString());
+}
+
+function drawBackground() {
+	context.clearRect(0, 0, boardWidth, boardHeight);
+   context.drawImage(bgImage, bgX, 0, boardWidth, boardHeight);
+   context.drawImage(bgImage, bgX + boardWidth, 0, boardWidth, boardHeight);
+   bgX -= speed;
+
+   if (bgX <= -boardWidth) {
+      bgX = 0;
+   }
+
+   requestAnimationFrame(drawBackground);
 }
 
 function addRecord(userName, points) {
