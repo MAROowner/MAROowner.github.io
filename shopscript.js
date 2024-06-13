@@ -69,18 +69,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function buyMaxEnergy() {
 	if (totalScore >= maxEnergyCountPrice[maxEnergyCountLvl] && maxEnergyCountLvl != 9) {
-		totalScore -= maxEnergyCountPrice[maxEnergyCountLvl];
+		changeBalance(maxEnergyCountPrice[maxEnergyCountLvl], Math.floor(maxEnergyCountPrice[maxEnergyCountLvl]/120));
 		maxEnergyCountLvl++;
 
 		maxEnergyCountText.textContent = maxEnergyCountPrice[maxEnergyCountLvl];
 		maxEnergyCount = maxEnergyCountValue[maxEnergyCountLvl];
 
-		allPointerText.textContent = totalScore;
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
 		maxEnergyCountInfoText.textContent = maxEnergyCountLvl + " Lvl" + " • " + maxEnergyCount;
 		hideAllTabs();
 		closeShop();
-		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('maxEnergyCountLvl', maxEnergyCountLvl);
 		localStorage.setItem('maxEnergyCount', maxEnergyCount);
 	}
@@ -91,17 +89,15 @@ function buyMaxEnergy() {
 
 function buyChargeSpeed() {
 	if (totalScore >= chargeSpeedPrice[chargeSpeedLvl] && chargeSpeedLvl != 9) {
-		totalScore -= chargeSpeedPrice[chargeSpeedLvl];
+		changeBalance(chargeSpeedPrice[chargeSpeedLvl], Math.floor(chargeSpeedPrice[chargeSpeedLvl]/120));
 		chargeSpeedLvl++;
 
 		chargeSpeedText.textContent = chargeSpeedPrice[chargeSpeedLvl];
 		timeToReset = chargeSpeedValue[chargeSpeedLvl];
 
-		allPointerText.textContent = totalScore;
 		chargeSpeedInfoText.textContent = chargeSpeedLvl + " Lvl" + " • " + Math.floor(timeToReset / 60);
 		hideAllTabs();
 		closeShop();
-		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('chargeSpeedLvl', chargeSpeedLvl);
 		localStorage.setItem('timeToReset', timeToReset);
 	}
@@ -112,17 +108,15 @@ function buyChargeSpeed() {
 
 function buyMultiEarn() {
 	if (totalScore >= multiEarnPrice[multiEarnLvl] && multiEarnLvl != 9) {
-		totalScore -= multiEarnPrice[multiEarnLvl];
+		changeBalance(multiEarnPrice[multiEarnLvl], Math.floor(multiEarnPrice[multiEarnLvl]/120));
 		multiEarnLvl++;
 
 		multiEarnText.textContent = multiEarnPrice[multiEarnLvl];
 		multiEarn = multiEarnValue[multiEarnLvl];
 
-		allPointerText.textContent = totalScore;
 		multiEarnInfoText.textContent = multiEarnLvl + " Lvl" + " • " + multiEarn;
 		hideAllTabs();
 		closeShop();
-		localStorage.setItem('totalScore', totalScore.toString());
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 	else{
