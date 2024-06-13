@@ -53,7 +53,7 @@ var totalScore = 0;
 let score = 0;
 let pointerText = document.getElementById("pointer-text");
 var allPointerText = document.getElementById("all-point_text");
-let shop = document.getElementById("shop");
+let shop = document.querySelector('.shop');
 let backButton = Telegram.WebApp.BackButton;
 
 
@@ -194,14 +194,18 @@ function loadScore() {
 
 function openShop() {
 	document.querySelector('.main-button').style.display = 'none';
-	document.querySelector('.shop').style.display = 'block';
+	shop.style.display = 'block';
+	shop.classList.add("open");
 	backButton.show();
 }
 
 function closeShop() {
-	document.querySelector('.main-button').style.display = 'flex';
-	document.querySelector('.shop').style.display = 'none';
 	backButton.hide();
+   shop.classList.remove('open');
+   setTimeout(() => {
+		document.querySelector('.main-button').style.display = 'flex';
+      shop.style.display = 'none';
+   }, 200);
 }
 
 function hideAllTabs(){
