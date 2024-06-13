@@ -8,16 +8,34 @@ let lastFrameTime = Date.now();
 var energyText = document.getElementById("energy-text");
 
 document.addEventListener('DOMContentLoaded', function () {
-	var storedValue = localStorage.getItem('energyCount');
-	energyCount = storedValue !== null ? parseInt(storedValue, 10) : maxEnergyCount;
+	energyCount =  localStorage.getItem('energyCount') || maxEnergyCount;
 	if (isNaN(energyCount)) {
 		energyCount = maxEnergyCount;
 	}
 
-
+	maxEnergyCount = localStorage.getItem('maxEnergyCount', maxEnergyCount);
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
 
 	timer += Date.now() - lastActiveTime;
+	if (Math.floor(timer / 1000) >= timeToReset) {
+		if (energyCount < maxEnergyCount) {
+			let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
+
+			if(energyCount + addingChargeCount < maxEnergyCount){
+				energyCount += addingChargeCount;
+				timer -= (addingChargeCount * timeToReset) * 1000;
+			}else{
+				energyCount = maxEnergyCount;
+				timer = 0;
+			}
+
+			localStorage.setItem('energyCount', energyCount);
+		}else{
+			timer = 0;
+		}
+
+		updateLastActivity();
+	}
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	updateGame();
 });
