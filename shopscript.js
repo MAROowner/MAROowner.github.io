@@ -114,7 +114,6 @@ function buyMultiEarn() {
 		multiEarnInfoText.textContent = multiEarnLvl + " Lvl" + " • " + multiEarn;
 		hideAllTabs();
 		closeShop();
-		localStorage.setItem('multiEarn', multiEarn);
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 	else {
