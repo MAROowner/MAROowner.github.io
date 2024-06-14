@@ -8,7 +8,7 @@ let lastFrameTime = Date.now();
 var energyText = document.getElementById("energy-text");
 
 document.addEventListener('DOMContentLoaded', function () {
-	energyCount =  localStorage.getItem('energyCount') || maxEnergyCount;
+	energyCount =  parseInt(localStorage.getItem('energyCount'), 10) || maxEnergyCount;
 	if (isNaN(energyCount)) {
 		energyCount = maxEnergyCount;
 	}
