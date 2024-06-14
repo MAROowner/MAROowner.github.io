@@ -19,25 +19,37 @@ document.addEventListener('DOMContentLoaded', function () {
 	console.log(energyCount);
 
 	timer += Date.now() - lastActiveTime;
+	console.log(timer);
+	
 	if (Math.floor(timer / 1000) >= timeToReset) {
 		if (energyCount < maxEnergyCount) {
+			console.log(">");
 			let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
+
+			console.log("Add: " + addingChargeCount);
 
 			if(energyCount + addingChargeCount < maxEnergyCount){
 				energyCount += addingChargeCount;
+				console.log("afterAdding " + energyCount)
 				timer -= (addingChargeCount * timeToReset) * 1000;
+				console.log("timer " + timer);
 			}else{
 				energyCount = maxEnergyCount;
+				console.log('Max');
 				timer = 0;
 			}
 
 			localStorage.setItem('energyCount', energyCount);
+			console.log("actual energy count: " + energyCount);
 		}else{
 			timer = 0;
+			console.log("<");
 		}
 
 		updateLastActivity();
+		energyText.textContent = energyCount + '/' + maxEnergyCount;
 	}
+
 	console.log(energyCount);
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	updateGame();
@@ -46,9 +58,19 @@ document.addEventListener('DOMContentLoaded', function () {
 function updateGame() {
 	timer += Date.now() - lastFrameTime;
 
+	addChargeCount()
+	
+	console.log(energyCount);
+
+	lastFrameTime = Date.now();
+	requestAnimationFrame(updateGame);
+}
+
+function addChargeCount(){
 	if (Math.floor(timer / 1000) >= timeToReset) {
 		if (energyCount < maxEnergyCount) {
 			let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
+
 
 			if(energyCount + addingChargeCount < maxEnergyCount){
 				energyCount += addingChargeCount;
@@ -59,19 +81,14 @@ function updateGame() {
 			}
 
 			localStorage.setItem('energyCount', energyCount);
+			console.log("actual energy count: " + energyCount);
 		}else{
 			timer = 0;
 		}
 
 		updateLastActivity();
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
-		console.log("OKKKKKK");
 	}
-	
-	console.log(energyCount);
-
-	lastFrameTime = Date.now();
-	requestAnimationFrame(updateGame);
 }
 
 function updateLastActivity() {
