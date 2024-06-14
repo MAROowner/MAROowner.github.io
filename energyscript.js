@@ -22,42 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	timer += Date.now() - lastActiveTime;
 	console.log(timer);
 	
-	if (Math.floor(timer / 1000) >= timeToReset) {
-		console.log("time:" + timeToReset);
-		console.log(Math.floor(timer / 1000));
-		if (energyCount < maxEnergyCount) {
-			console.log(">");
-			let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
-
-			console.log(Math.floor(timer / 1000))
-			console.log((Math.floor(timer / 1000) / timeToReset));
-			console.log(Math.floor(Math.floor(timer / 1000) / timeToReset));
-
-			console.log("Add: " + addingChargeCount);
-
-			if(energyCount + addingChargeCount < maxEnergyCount){
-				energyCount += addingChargeCount;
-				console.log("afterAdding " + energyCount)
-				timer -= (addingChargeCount * timeToReset) * 1000;
-				console.log("timer " + timer);
-			}else{
-				energyCount = maxEnergyCount;
-				console.log('Max');
-				timer = 0;
-			}
-
-			localStorage.setItem('energyCount', energyCount);
-			console.log("actual energy count: " + energyCount);
-		}else{
-			timer = 0;
-			console.log("<");
-		}
-
-		updateLastActivity();
-		energyText.textContent = energyCount + '/' + maxEnergyCount;
-	}
-
-	console.log(energyCount);
+	addChargeCount();
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	updateGame();
 });
