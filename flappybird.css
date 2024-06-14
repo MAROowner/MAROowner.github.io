@@ -52,15 +52,39 @@ body {
 	align-items: center;
 }
 
+.energy-more_info{
+	display: none;
+	position: absolute;
+	right: 5px;
+	top: 60px;
+	background-color: black;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	padding: 10px 20px;
+	font-size: 15px;
+	opacity: 0;
+	transition: opacity 0.3s ease-in, opacity 0.5s ease-out;
+
+}
+
 .balance-text {
 	height: 80%;
 	margin-left: 5px;
 }
 
+#more-info_button {
+	height: 100%;
+	width: 100%;
+	background: none !important;
+	border: none !important;
+	display: flex;
+	align-items: center; 
+	justify-content: center;
+}
+
 .more-info_button {
 	height: 50%;
-	margin-left: auto;
-	margin-right: 5px;
 }
 
 .point-text {
