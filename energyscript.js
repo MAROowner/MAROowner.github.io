@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	maxEnergyCount = localStorage.getItem('maxEnergyCount', maxEnergyCount);
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
 
+	console.log(energyCount);
+
 	timer += Date.now() - lastActiveTime;
 	if (Math.floor(timer / 1000) >= timeToReset) {
 		if (energyCount < maxEnergyCount) {
@@ -36,9 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		updateLastActivity();
 	}
-	if(energyCount > maxEnergyCount){
-		energyCount = maxEnergyCount;
-	}
+	console.log(energyCount);
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	updateGame();
 });
@@ -65,11 +65,10 @@ function updateGame() {
 
 		updateLastActivity();
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
+		console.log("OKKKKKK");
 	}
-	if(energyCount > maxEnergyCount){
-		energyCount = maxEnergyCount;
-		energyText.textContent = energyCount + '/' + maxEnergyCount;
-	}
+	
+	console.log(energyCount);
 
 	lastFrameTime = Date.now();
 	requestAnimationFrame(updateGame);
