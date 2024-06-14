@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		energyCount = maxEnergyCount;
 	}
 
-	maxEnergyCount = localStorage.getItem('maxEnergyCount', maxEnergyCount);
+	timeToReset = localStorage.getItem('timeToReset', timeToReset) || 1800;
+	maxEnergyCount = localStorage.getItem('maxEnergyCount', maxEnergyCount) || 10;
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
 
 	console.log(energyCount);
