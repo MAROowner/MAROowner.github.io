@@ -8,7 +8,7 @@ let lastFrameTime = Date.now();
 var energyText = document.getElementById("energy-text");
 
 document.addEventListener('DOMContentLoaded', function () {
-	energyCount =  parseInt(localStorage.getItem('energyCount'), 10) || maxEnergyCount;
+	energyCount =  parseInt(localStorage.getItem('energyCount'), 10);
 	if (isNaN(energyCount)) {
 		energyCount = maxEnergyCount;
 	}
@@ -16,12 +16,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	timeToReset = localStorage.getItem('timeToReset', timeToReset) || 1800;
 	maxEnergyCount = localStorage.getItem('maxEnergyCount', maxEnergyCount) || 10;
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
-
-	console.log(energyCount);
+	if(lastActiveTime == Date.now()){
+		updateLastActivity();
+	}
 
 	timer += Date.now() - lastActiveTime;
 	console.log(timer);
-	
+
 	addChargeCount();
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	updateGame();
