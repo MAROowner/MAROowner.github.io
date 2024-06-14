@@ -53,6 +53,7 @@ var totalScore = 0;
 let score = 0;
 let pointerText = document.getElementById("pointer-text");
 var allPointerText = document.getElementById("all-point_text");
+let timerText = document.querySelector(".more-info_timer");
 let shop = document.querySelector('.shop');
 let backButton = Telegram.WebApp.BackButton;
 
@@ -69,6 +70,7 @@ let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab"
 document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndShop);
+document.getElementById("more-info_button").addEventListener("click", openChargeInfo);
 
 window.onload = function () {
 	context = board.getContext("2d");
@@ -332,6 +334,35 @@ function changeBalance(amount, decrementValue){
 		amount -= decrementValue;
 		allPointerText.textContent = totalScore;
 	}, interval);
+}
+
+function openChargeInfo() {
+	let chargeBlocks = document.querySelectorAll(".energy-more_info");
+
+	let remainingTime = (timeToReset * 1000) - timer;
+
+	let minutes = Math.floor(remainingTime / 1000 / 60);
+	let seconds = Math.floor((remainingTime / 1000) % 60);
+
+	if (seconds < 10) {
+		timerText.textContent = minutes + ":0" + seconds;
+	} else {
+   	timerText.textContent = minutes + ":" + seconds;
+	}
+
+	chargeBlocks.forEach(function(chargeBlock) {
+		 chargeBlock.style.display = "block"; 
+		 setTimeout(function() {
+			  chargeBlock.style.opacity = "1";
+		 }, 10);
+
+		 setTimeout(function() {
+			  chargeBlock.style.opacity = "0";
+			  setTimeout(function() {
+					chargeBlock.style.display = "none";
+			  }, 500);
+		 }, 2010);
+	});
 }
 
 function saveScore() {
