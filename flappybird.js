@@ -307,7 +307,7 @@ function toggleStyleAndShop(event) {
 	}
 
 	if (event.currentTarget.id === "roadmap-tab"){
-		clearRect();
+		clearScore();
 	}
 }
 
