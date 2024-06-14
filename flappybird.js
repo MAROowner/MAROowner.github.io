@@ -108,7 +108,6 @@ window.onload = function () {
 	totalScore += score;
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
-	multiEarn = localStorage.getItem('multiEarn', multiEarn);
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
 	addRecord('Vesfix I Love You', 162);
