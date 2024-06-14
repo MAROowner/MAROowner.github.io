@@ -305,6 +305,10 @@ function toggleStyleAndShop(event) {
 	} else {
 		closeShop();
 	}
+
+	if (event.currentTarget.id === "roadmap-tab"){
+		clearRect();
+	}
 }
 
 function changeBalance(amount, decrementValue){
@@ -332,6 +336,10 @@ function changeBalance(amount, decrementValue){
 
 function saveScore() {
 	localStorage.setItem('totalScore', totalScore.toString());
+}
+
+function clearScore(){
+	localStorage.clear();
 }
 
 function drawBackground() {
