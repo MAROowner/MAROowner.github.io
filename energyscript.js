@@ -22,9 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	console.log(timer);
 	
 	if (Math.floor(timer / 1000) >= timeToReset) {
+		console.log("time:" + timeToReset);
+		console.log(Math.floor(timer / 1000));
 		if (energyCount < maxEnergyCount) {
 			console.log(">");
 			let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
+
+			console.log(Math.floor(timer / 1000))
+			console.log((Math.floor(timer / 1000) / timeToReset));
+			console.log(Math.floor(Math.floor(timer / 1000) / timeToReset));
 
 			console.log("Add: " + addingChargeCount);
 
@@ -58,9 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function updateGame() {
 	timer += Date.now() - lastFrameTime;
 
-	addChargeCount()
-	
-	console.log(energyCount);
+	addChargeCount();
 
 	lastFrameTime = Date.now();
 	requestAnimationFrame(updateGame);
