@@ -23,15 +23,15 @@ let chargeSpeedBtn = document.getElementById("charge-product");
 let multiEarnBtn = document.getElementById("earn-product");
 
 
-maxEnergyCountBtn.addEventListener('click', function() {
+maxEnergyCountBtn.addEventListener('click', function () {
 	buyConfirm(buyMaxEnergy);
 });
 
-chargeSpeedBtn.addEventListener('click', function() {
+chargeSpeedBtn.addEventListener('click', function () {
 	buyConfirm(buyChargeSpeed);
 });
 
-multiEarnBtn.addEventListener('click', function() {
+multiEarnBtn.addEventListener('click', function () {
 	buyConfirm(buyMultiEarn);
 });
 
@@ -55,9 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		multiEarnText.textContent = 'Max';
 	}
 
-	/*timeToReset = parseInt(localStorage.getItem('timeToReset'), 10) || 10;
-	maxEnergyCount = parseInt(localStorage.getItem('maxEnergyCount'), 10) || 10;*/
-
 	maxEnergyCount = maxEnergyCountValue[maxEnergyCountLvl];
 	timeToReset = chargeSpeedValue[chargeSpeedLvl];
 	multiEarn = multiEarnValue[multiEarnLvl];
@@ -69,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function buyMaxEnergy() {
 	if (totalScore >= maxEnergyCountPrice[maxEnergyCountLvl] && maxEnergyCountLvl != 9) {
-		changeBalance(maxEnergyCountPrice[maxEnergyCountLvl], Math.floor(maxEnergyCountPrice[maxEnergyCountLvl]/120));
+		changeBalance(maxEnergyCountPrice[maxEnergyCountLvl], Math.floor(maxEnergyCountPrice[maxEnergyCountLvl] / 120));
 		maxEnergyCountLvl++;
 
 		maxEnergyCountText.textContent = maxEnergyCountPrice[maxEnergyCountLvl];
@@ -82,14 +79,14 @@ function buyMaxEnergy() {
 		localStorage.setItem('maxEnergyCountLvl', maxEnergyCountLvl);
 		localStorage.setItem('maxEnergyCount', maxEnergyCount);
 	}
-	else{
+	else {
 		buyError(maxEnergyCountPrice[maxEnergyCountLvl] - totalScore);
 	}
 }
 
 function buyChargeSpeed() {
 	if (totalScore >= chargeSpeedPrice[chargeSpeedLvl] && chargeSpeedLvl != 9) {
-		changeBalance(chargeSpeedPrice[chargeSpeedLvl], Math.floor(chargeSpeedPrice[chargeSpeedLvl]/120));
+		changeBalance(chargeSpeedPrice[chargeSpeedLvl], Math.floor(chargeSpeedPrice[chargeSpeedLvl] / 120));
 		chargeSpeedLvl++;
 
 		chargeSpeedText.textContent = chargeSpeedPrice[chargeSpeedLvl];
@@ -101,14 +98,14 @@ function buyChargeSpeed() {
 		localStorage.setItem('chargeSpeedLvl', chargeSpeedLvl);
 		localStorage.setItem('timeToReset', timeToReset);
 	}
-	else{
+	else {
 		buyError(chargeSpeedPrice[chargeSpeedLvl] - totalScore);
 	}
 }
 
 function buyMultiEarn() {
 	if (totalScore >= multiEarnPrice[multiEarnLvl] && multiEarnLvl != 9) {
-		changeBalance(multiEarnPrice[multiEarnLvl], Math.floor(multiEarnPrice[multiEarnLvl]/120));
+		changeBalance(multiEarnPrice[multiEarnLvl], Math.floor(multiEarnPrice[multiEarnLvl] / 120));
 		multiEarnLvl++;
 
 		multiEarnText.textContent = multiEarnPrice[multiEarnLvl];
@@ -117,9 +114,10 @@ function buyMultiEarn() {
 		multiEarnInfoText.textContent = multiEarnLvl + " Lvl" + " • " + multiEarn;
 		hideAllTabs();
 		closeShop();
+		localStorage.setItem('multiEarn', multiEarn);
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
-	else{
+	else {
 		buyError(multiEarnPrice[multiEarnLvl] - totalScore);
 	}
 }
@@ -133,12 +131,12 @@ function buyConfirm(buyFunction) {
 	});
 }
 
-function buyError(needMoney){
+function buyError(needMoney) {
 	Telegram.WebApp.showPopup({
 		title: "Need more money!",
 		message: needMoney + " points aren't enough on your balance :(",
 		buttons: [
-			 {id: "yes", type: "default", text: "OK"},
+			{ id: "yes", type: "default", text: "OK" },
 		]
-   });
+	});
 }
