@@ -108,6 +108,7 @@ window.onload = function () {
 	totalScore += score;
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
+	multiEarn = localStorage.getItem('multiEarn', multiEarn);
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
 	addRecord('Vesfix I Love You', 162);
@@ -276,6 +277,7 @@ function restartGame() {
 		energyCount -= 1;
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
 		localStorage.setItem('energyCount', energyCount);
+		console.log("actual energy count: " + energyCount);
 		bird.y = birdY;
 		pipeArray = [];
 		score = 0;
