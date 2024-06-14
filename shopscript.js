@@ -71,11 +71,16 @@ function buyMaxEnergy() {
 
 		maxEnergyCountText.textContent = maxEnergyCountPrice[maxEnergyCountLvl];
 		maxEnergyCount = maxEnergyCountValue[maxEnergyCountLvl];
+		energyCount = maxEnergyCount;
 
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
 		maxEnergyCountInfoText.textContent = maxEnergyCountLvl + " Lvl" + " • " + maxEnergyCount;
 		hideAllTabs();
 		closeShop();
+		localStorage.setItem('energyCount', energyCount);
+		lastActiveTime = Date.now();
+		updateLastActivity();
+
 		localStorage.setItem('maxEnergyCountLvl', maxEnergyCountLvl);
 		localStorage.setItem('maxEnergyCount', maxEnergyCount);
 	}
@@ -133,7 +138,7 @@ function buyConfirm(buyFunction) {
 function buyError(needMoney) {
 	Telegram.WebApp.showPopup({
 		title: "Need more money!",
-		message: needMoney + " points aren't enough on your balance :(",
+		message: needMoney + " points aren't enough on your balance",
 		buttons: [
 			{ id: "yes", type: "default", text: "OK" },
 		]
