@@ -10,10 +10,10 @@ let lastTime = 0;
 let screenWidth = window.innerWidth;
 let screenHeight = window.innerHeight;
 
-let board = document.getElementById("board");
+var board = document.getElementById("board");
 let boardWidth = screenWidth;
-let boardHeight = screenHeight;
-let textValue;
+var boardHeight = screenHeight;
+var textValue;
 //const context = board.getContext("2d");
 let gridSquareY = 1000;
 
@@ -66,7 +66,6 @@ let name = 'Doy Johnson';
 let points = 123124;
 let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab");
 
-
 document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndShop);
@@ -102,7 +101,6 @@ window.onload = function () {
 	bottomPipeImg = new Image();
 	bottomPipeImg.src = "Image/Image/bottompipe.png";
 
-	requestAnimationFrame(gameLoop);
 	placePipes();
 
 	document.addEventListener("touchstart", moveBird);
@@ -112,12 +110,10 @@ window.onload = function () {
 	pointerText.textContent = score;
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
+	createBackground();
 	addRecord('Vesfix I Love You', 162);
+	requestAnimationFrame(gameLoop);
 };
-
-/*bgImage.onload = function() {
-	drawBackground();
-};*/
 
 function gameLoop(currentTime) {
 	const deltaTime = currentTime - lastTime;
@@ -134,12 +130,13 @@ function gameLoop(currentTime) {
 function update(deltaTime) {
 	if (gameOver) {
 		context.clearRect(0, 0, board.width, board.height);
+		updateBackground();
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 		return;
 	}
 
 	context.clearRect(0, 0, board.width, board.height);
-
+	updateBackground();
 	bird.velocityY += bird.gravity * deltaTime;
 	bird.y += bird.velocityY;
 	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
@@ -176,6 +173,7 @@ function update(deltaTime) {
 			allPointerText.textContent = totalScore;
 			saveScore();
 			pointerText.textContent = score;
+			stopMoving();
 			gameOver = true;
 			return;
 		}
@@ -278,7 +276,7 @@ function restartGame() {
 		energyCount -= 1;
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
 		localStorage.setItem('energyCount', energyCount);
-		console.log("actual energy count: " + energyCount);
+		startMoving();
 		bird.y = birdY;
 		pipeArray = [];
 		score = 0;
@@ -371,19 +369,6 @@ function saveScore() {
 
 function clearScore(){
 	localStorage.clear();
-}
-
-function drawBackground() {
-	context.clearRect(0, 0, boardWidth, boardHeight);
-   context.drawImage(bgImage, bgX, 0, boardWidth, boardHeight);
-   context.drawImage(bgImage, bgX + boardWidth, 0, boardWidth, boardHeight);
-   bgX -= speed;
-
-   if (bgX <= -boardWidth) {
-      bgX = 0;
-   }
-
-   requestAnimationFrame(drawBackground);
 }
 
 function addRecord(userName, points) {
