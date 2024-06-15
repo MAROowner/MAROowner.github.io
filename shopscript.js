@@ -1,6 +1,6 @@
-let maxEnergyCountPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
-let chargeSpeedPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
-let multiEarnPrice = [100, 250, 1250, 5500, 10000, 23000, 55500, 100500];
+let maxEnergyCountPrice = [100, 250, 550, 1250, 2500, 5500, 12500, 19555];
+let chargeSpeedPrice = [100, 250, 550, 1250, 2500, 5500, 12500, 19555];
+let multiEarnPrice = [100, 250, 550, 1250, 2500, 5500, 12500, 19555];
 
 let maxEnergyCountValue = [10, 12, 14, 16, 18, 20, 22, 24, 27, 30];
 let chargeSpeedValue = [1800, 1680, 1560, 1440, 1320, 1200, 1080, 960, 780, 600];
