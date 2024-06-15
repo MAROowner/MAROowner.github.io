@@ -1,6 +1,6 @@
 let layers = [];
-let speedsBeforeGame = [0, 0.2, 0.3, 0.1, 0.4, 0];
-let speedsAfterGame = [0.2, 0.6, 0.9, 0.3, 1.2, 0.5]
+let speedsBeforeGame = [0, 0.1, 0.6, 0, /*0.4,*/ 0.5];
+let speedsAfterGame = [0.2, 0.6, 1.2, 0.5, /*0.9,*/ 1];
 
 const cloudImg = new Image();
 const cloud1Img = new Image();
@@ -40,7 +40,7 @@ class Layer {
 }
 
 function createBackground() {
-	cloudImg.src = 'Image/Image/game_background_1/layers/clouds_2.png';
+	//cloudImg.src = 'Image/Image/game_background_1/layers/clouds_2.png';
 	cloud1Img.src = 'Image/Image/game_background_1/layers/clouds_1.png';
 	cloud2Img.src = 'Image/Image/game_background_1/layers/clouds_3.png';
 	cloud3Img.src = 'Image/Image/game_background_1/layers/clouds_4.png';
@@ -49,11 +49,11 @@ function createBackground() {
 
 	layers = [
 		new Layer(farImg, 0),
-		new Layer(cloudImg, 0.3),
 		new Layer(cloud1Img, 0.4),
 		new Layer(cloud2Img, 0.2),
-		new Layer(cloud3Img, 0.5),
-		new Layer(nearImg, 0)
+		new Layer(nearImg, 0),
+		//new Layer(cloudImg, 0.3),
+		new Layer(cloud3Img, 0.5)
 	];
 }
 
