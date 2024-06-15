@@ -66,6 +66,8 @@ let name = 'Doy Johnson';
 let points = 123124;
 let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab");
 
+let index = 0;
+
 document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndShop);
@@ -307,7 +309,10 @@ function toggleStyleAndShop(event) {
 	}
 
 	if (event.currentTarget.id === "roadmap-tab"){
-		clearScore();
+		index++;
+		if(index == 10){
+			clearScore();
+		}
 	}
 }
 
