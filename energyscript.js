@@ -54,7 +54,8 @@ function addChargeCount(){
 			localStorage.setItem('energyCount', energyCount);
 			console.log("actual energy count: " + energyCount);
 		}else{
-			timer = 0;
+			let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
+			timer -= (addingChargeCount * timeToReset) * 1000;
 		}
 
 		updateLastActivity();
