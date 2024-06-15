@@ -16,7 +16,7 @@ body {
 
 #board {
 	flex-shrink: 0;
-	background-image: url("Image/Image/flappybirdbg.png");
+	background-image: url("Image/Image/sky.png");
 	background-position-y: center;
 	background-size: cover;
 	position: absolute;
