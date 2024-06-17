@@ -14,7 +14,6 @@ var board = document.getElementById("board");
 let boardWidth = screenWidth;
 var boardHeight = screenHeight;
 var textValue;
-//const context = board.getContext("2d");
 let gridSquareY = 1000;
 
 let birdWidth = 48;
@@ -56,6 +55,9 @@ var allPointerText = document.getElementById("all-point_text");
 let timerText = document.querySelector(".more-info_timer");
 let shop = document.querySelector('.shop');
 let backButton = Telegram.WebApp.BackButton;
+let dropdownBtn = document.querySelector('.regim-btn');
+let dropdown = document.querySelector('.dropdown-list');
+let activeRegim = document.querySelector('.options.active');
 
 let bgImage = new Image();
 bgImage.src = 'Image/Image/flappybirdbg.png';
@@ -72,6 +74,13 @@ document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop
 document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndShop);
 document.getElementById("more-info_button").addEventListener("click", openChargeInfo);
+activeRegim.addEventListener("click", function(){
+	dropdown.classList.toggle('hidden');
+});
+
+dropdownBtn.addEventListener('click', function() {
+	dropdown.classList.toggle('hidden');
+});
 
 window.onload = function () {
 	context = board.getContext("2d");
