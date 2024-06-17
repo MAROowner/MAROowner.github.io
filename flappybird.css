@@ -23,11 +23,10 @@ body {
 }
 
 .start-header {
-	z-index: 1;
+	z-index: 11;
 	width: 100vw;
 	height: 5vh;
 	display: flex;
-	align-items: center;
 	justify-content: space-around;
 	padding-top: 3vh;
 	position: relative;
@@ -37,25 +36,53 @@ body {
 	width: calc(95vw/2.5);
 }
 
-.regim select {
-	display: block;
+.regim-btn {
+	display: flex;
+	justify-content: space-between;
 	width: 100%;
-	font-size: 20px;
-	padding: 8px 5px;
+	font-size: 15px;
+	padding: 8px 10px 8px 20px;
 	border-radius: 10px;
 	color: #fff;
 	background-color: #000;
-	border: none;
+	border: 1px solid #fff;
+	text-align: center;
+	margin-bottom: 5px;
 	text-align: center;
 }
 
-.regim select option:disabled {
-	background-color: #1a1a1a;
-	color: #999; 
+.regim-btn img{
+	width: 15%;
+	margin: auto 0;
 }
 
-.regim select::-ms-expand{
+.dropdown-list{
+	display: block;
+	background-color: #000;
 	border-radius: 10px;
+	text-align: center;
+}
+
+.dropdown-list.hidden {
+	display: none;
+}
+
+.options{
+	color: #fff;
+	padding: 8px;
+	width: 100%;
+	margin: auto;
+	border: none;
+	background: none;
+}
+
+.options:not(:first-child){
+	border-top: 1px solid #fff;
+}
+
+.options.disabled{
+	background-color: gray;
+	opacity: 50%;
 }
 
 .total-balance,
