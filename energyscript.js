@@ -48,11 +48,11 @@ function addChargeCount(){
 				timer -= (addingChargeCount * timeToReset) * 1000;
 			}else{
 				energyCount = maxEnergyCount;
-				timer = 0;
+				let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
+				timer -= (addingChargeCount * timeToReset) * 1000;
 			}
 
 			localStorage.setItem('energyCount', energyCount);
-			console.log("actual energy count: " + energyCount);
 		}else{
 			let addingChargeCount = Math.floor(Math.floor(timer / 1000) / timeToReset);
 			timer -= (addingChargeCount * timeToReset) * 1000;
@@ -63,6 +63,10 @@ function addChargeCount(){
 	}
 }
 
+function updateLastActivity() {
+	lastActiveTime = Date.now();
+	localStorage.setItem('lastActiveTime', lastActiveTime);
+}
 function updateLastActivity() {
 	lastActiveTime = Date.now();
 	localStorage.setItem('lastActiveTime', lastActiveTime);
