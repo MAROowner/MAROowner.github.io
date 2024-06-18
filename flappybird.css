@@ -40,14 +40,13 @@ body {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	font-size: 15px;
-	padding: 8px 10px 8px 20px;
+	font-size: 18px;
+	padding: 8px 10px 8px 15px;
 	border: none;
 	border-radius: 10px;
+	margin-bottom: 10px;
 	color: #fff;
 	background-color: #000;
-	text-align: center;
-	margin-bottom: 5px;
 	text-align: center;
 }
 
@@ -61,6 +60,8 @@ body {
 	background-color: #000;
 	border-radius: 10px;
 	text-align: center;
+	width: 50vw;
+	transform: translateX(-12.5%);
 }
 
 .dropdown-list.hidden {
@@ -69,7 +70,8 @@ body {
 
 .options{
 	color: #fff;
-	padding: 8px;
+	font-size: 18px;
+	padding: 15px 8px;
 	width: 100%;
 	margin: auto;
 	border: none;
@@ -83,6 +85,10 @@ body {
 .options.disabled{
 	background-color: gray;
 	opacity: 50%;
+}
+
+.options:last-child{
+	border-radius: 0px 0px 10px 10px;
 }
 
 .total-balance,
@@ -400,7 +406,6 @@ body {
 	height: 75vh;
 	width: 100vw;
 	bottom: 15vh;
-	z-index: 12;
 }
 
 .referral-block{
@@ -442,6 +447,9 @@ body {
 	padding: 10px;
 	display: grid;
 	align-content: space-around;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .info-block_text{
@@ -478,6 +486,9 @@ body {
 	border-radius: 20px;
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	overflow-y: auto;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .referral-account{
