@@ -54,6 +54,7 @@ let pointerText = document.getElementById("pointer-text");
 var allPointerText = document.getElementById("all-point_text");
 let timerText = document.querySelector(".more-info_timer");
 let shop = document.querySelector('.shop');
+let referralPage = document.querySelector('.referral');
 let backButton = Telegram.WebApp.BackButton;
 let dropdownBtn = document.querySelector('.regim-btn');
 let dropdown = document.querySelector('.dropdown-list');
@@ -218,8 +219,8 @@ function closeShop() {
 	backButton.hide();
    shop.classList.remove('open');
    setTimeout(() => {
-		document.querySelector('.main-button').style.display = 'flex';
       shop.style.display = 'none';
+		turnOnButton();
    }, 200);
 }
 
@@ -317,11 +318,32 @@ function toggleStyleAndShop(event) {
 		closeShop();
 	}
 
+
+	if (event.currentTarget.id === "referral-tab") {
+		if (referralPage.style.display == "none") {
+			referralPage.style.display = "block";
+			document.querySelector('.main-button').style.display = 'none';
+		} else {
+			referralPage.style.display = "none";
+			turnOnButton();
+		}
+	} else {
+		referralPage.style.display = "none";
+		turnOnButton();
+	}
+
+
 	if (event.currentTarget.id === "roadmap-tab"){
 		index++;
 		if(index == 10){
 			clearScore();
 		}
+	}
+}
+
+function turnOnButton(){
+	if(shop.style.display === "none" && referralPage.style.display == "none"){
+		document.querySelector('.main-button').style.display = 'flex';
 	}
 }
 
