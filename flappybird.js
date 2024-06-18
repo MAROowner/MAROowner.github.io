@@ -55,7 +55,6 @@ var allPointerText = document.getElementById("all-point_text");
 let timerText = document.querySelector(".more-info_timer");
 let shop = document.querySelector('.shop');
 let referralPage = document.querySelector('.referral');
-let backButton = Telegram.WebApp.BackButton;
 let dropdownBtn = document.querySelector('.regim-btn');
 let dropdown = document.querySelector('.dropdown-list');
 let activeRegim = document.querySelector('.options.active');
@@ -210,13 +209,12 @@ function loadScore() {
 
 function openShop() {
 	document.querySelector('.main-button').style.display = 'none';
+	pointerText.style.display = 'none';
 	shop.style.display = 'block';
 	shop.classList.add("open");
-	backButton.show();
 }
 
 function closeShop() {
-	backButton.hide();
    shop.classList.remove('open');
    setTimeout(() => {
       shop.style.display = 'none';
@@ -229,11 +227,6 @@ function hideAllTabs(){
 		button.classList.remove("toggled-style");
 	});
 }
-
-backButton.onClick(function () {
-	closeShop();
-	hideAllTabs();
-});
 
 function drawPlayInterface() {
 	context.fillStyle = "black";
@@ -323,6 +316,7 @@ function toggleStyleAndShop(event) {
 		if (referralPage.style.display == "none") {
 			referralPage.style.display = "block";
 			document.querySelector('.main-button').style.display = 'none';
+			pointerText.style.display = 'none';
 		} else {
 			referralPage.style.display = "none";
 			turnOnButton();
@@ -344,6 +338,7 @@ function toggleStyleAndShop(event) {
 function turnOnButton(){
 	if(shop.style.display === "none" && referralPage.style.display == "none"){
 		document.querySelector('.main-button').style.display = 'flex';
+		pointerText.style.display = 'block';
 	}
 }
 
