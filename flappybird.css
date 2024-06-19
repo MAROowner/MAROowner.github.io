@@ -445,7 +445,7 @@ body {
 .invite-block_btn img{
 	align-items: center;
 	width: 15px;
-	opacity: 50%;
+	opacity: 70%;
 }
 
 .info-blocks{
@@ -491,7 +491,7 @@ body {
 
 .my-referral_name{
 	color: #fff;
-	opacity: 50%;
+	opacity: 70%;
 	font-size: 25px;
 	margin: 15px 10px 15px 5vw;
 }
@@ -505,7 +505,7 @@ body {
 .my-referral_btn img{
 	align-items: center;
 	width: 15px;
-	opacity: 50%;
+	opacity: 70%;
 }
 
 .my-referrals{
@@ -536,14 +536,14 @@ body {
 
 .referral-icon{
 	height: 8vh;
-	opacity: 50%;
+	opacity: 70%;
 	margin-left: 15px;
 }
 
 .referral-desc{
 	margin-left: 20px;
 	color: #fff;
-	opacity: 50%;
+	opacity: 70%;
 	display: grid;
 	align-content: space-around;
 }
