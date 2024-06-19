@@ -418,6 +418,10 @@ body {
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
+.invite-info{
+	display: none;
+}
+
 .invite-block{
 	display: flex;
 	margin: 10px auto;
@@ -481,10 +485,6 @@ body {
 	font-size: 15px;
 }
 
-.referral-info{
-	display: none;
-}
-
 .my-referral_text{
 	display: flex;
 }
@@ -493,7 +493,7 @@ body {
 	color: #fff;
 	opacity: 50%;
 	font-size: 25px;
-	margin: 10px 10px 10px 2.5vw;
+	margin: 15px 10px 15px 5vw;
 }
 
 .my-referral_btn{
@@ -513,19 +513,19 @@ body {
 	margin-bottom: 20px;
 	display: grid;
 	gap: 5vw;
-	width: 90vw;
+	width: 85vw;
 	height: calc(22.3vh + 5vw);
-	padding: 2.5vw 0;
+	padding: 4vw 0;
 	border-radius: 20px;
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	overflow-y: auto;
-	background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
 	border-radius: 20px;
 	border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .referral-account{
-	width: 85vw;
+	width: 80vw;
 	height: 8vh;
 	padding: 1.5vh 0;
 	display: flex;
@@ -569,7 +569,7 @@ body {
 }
 
 .btn-block{
-	width: 90vw;
+	width: 85vw;
 	display: flex;
 	justify-content: space-between;
 	margin: 0 auto;
@@ -577,7 +577,7 @@ body {
 }
 
 .send-link{
-	width: calc(90vw - 10vh);
+	width: calc(85vw - 10vh);
 	height: 8vh;
 	background: none;
 	border: 1px solid #fff;
