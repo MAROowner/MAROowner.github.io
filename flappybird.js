@@ -68,19 +68,16 @@ let name = 'Doy Johnson';
 let points = 123124;
 let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab");
 
+let referralBlock = document.querySelector('.referral-info');
+let inviteBlock = document.querySelector('.invite-info');
+let referralReverseBtn = document.querySelector('.my-referral_btn');
+let inviteReverseBtn = document.querySelector('.invite-block_btn');
+
 let index = 0;
 
-document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
-document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
-document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndShop);
-document.getElementById("more-info_button").addEventListener("click", openChargeInfo);
-activeRegim.addEventListener("click", function(){
-	dropdown.classList.toggle('hidden');
-});
 
-dropdownBtn.addEventListener('click', function() {
-	dropdown.classList.toggle('hidden');
-});
+clicks();
+
 
 window.onload = function () {
 	context = board.getContext("2d");
@@ -400,6 +397,30 @@ function saveScore() {
 
 function clearScore(){
 	localStorage.clear();
+}
+
+function clicks(){
+	document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
+	document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
+	document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndShop);
+	document.getElementById("more-info_button").addEventListener("click", openChargeInfo);
+
+	activeRegim.addEventListener("click", function(){
+		dropdown.classList.toggle('hidden');
+	});
+
+	dropdownBtn.addEventListener('click', function() {
+		dropdown.classList.toggle('hidden');
+	});
+
+	referralReverseBtn.addEventListener("click", function(){
+		inviteBlock.style.display = 'block';
+		referralBlock.style.display = 'none';
+	});
+	inviteReverseBtn.addEventListener("click", function(){
+		referralBlock.style.display = 'block';
+		inviteBlock.style.display = 'none';
+	});
 }
 
 function addRecord(userName, points) {
