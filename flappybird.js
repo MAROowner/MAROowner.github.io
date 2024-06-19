@@ -399,15 +399,15 @@ function clearScore(){
 	localStorage.clear();
 }
 
-function referralInfo() {
+/*function referralInfo() {
 	Telegram.WebApp.showPopup({
 		title: "Referral program",
-		message: "You and your referral will receive: \n \n+200 points for inviting a friend \n+1000 points for inviting a friend with Telegram Premium",
+		message: "You and your referral will receive: \n \n+   200 points for inviting a friend \n   +1000 points for inviting a friend with Telegram Premium",
 		buttons: [
 			{ id: "yes", type: "default", text: "OK" },
 		]
 	});
-}
+}*/
 
 function clicks(){
 	document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
@@ -424,7 +424,8 @@ function clicks(){
 	});
 
 	referralReverseBtn.addEventListener("click", function(){
-		referralInfo();
+		referralBlock.style.display = 'none';
+		inviteBlock.style.display = 'block';
 	});
 	inviteReverseBtn.addEventListener("click", function(){
 		referralBlock.style.display = 'block';
