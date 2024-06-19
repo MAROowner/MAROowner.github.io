@@ -422,12 +422,12 @@ body {
 }
 
 .invite-info{
-	display: none;
+	display: block;
 }
 
 .invite-block{
 	display: flex;
-	margin: 10px auto;
+	margin: 15px auto;
 	justify-content: center;
 }
 
@@ -436,24 +436,26 @@ body {
 	color: #fff;
 	opacity: 50%;
 	font-size: 25px;
-	margin-right: 10px;
+	margin-left: 5vw;
 }
 
 .invite-block_btn{
 	margin: auto 0;
 	background: none;
 	border: none;
+	margin-right: 5vw;
+	padding: 0;
+	margin-left: auto;
 }
 
 .invite-block_btn img{
-	align-items: center;
-	width: 15px;
+	height: 28px;
 	opacity: 50%;
 }
 
 .info-blocks{
 	display: flex;
-	width: 90vw;
+	width: 85vw;
 	margin: auto;
 	margin-bottom: 25px;
 	justify-content: space-between;
@@ -486,6 +488,10 @@ body {
 
 .info-reward span{
 	font-size: 15px;
+}
+
+.referral-info{
+	display: none;
 }
 
 .my-referral_text{
