@@ -402,7 +402,7 @@ function clearScore(){
 function referralInfo() {
 	Telegram.WebApp.showPopup({
 		title: "Referral program",
-		message: "+200 points you and your referral will receive for inviting player without Telegram Premium.<br>+1000 points you and your referral will receive for inviting player with Telegram Premium.",
+		message: "+200 points you and your referral will receive for inviting player without Telegram Premium.\n+1000 points you and your referral will receive for inviting player with Telegram Premium.",
 		buttons: [
 			{ id: "yes", type: "default", text: "OK" },
 		]
