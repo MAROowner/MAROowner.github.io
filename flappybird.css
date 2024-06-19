@@ -403,14 +403,12 @@ body {
 
 .referral{
 	position: absolute;
-	height: 75vh;
 	width: 100vw;
 	bottom: 15vh;
 }
 
 .referral-block{
 	width: 95vw;
-	height: 100%;
 	margin: auto;
 	background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
 	backdrop-filter: blur(20px);
@@ -420,25 +418,42 @@ body {
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
+.invite-block{
+	display: flex;
+	margin: 10px auto;
+	justify-content: center;
+}
+
 .invite-block_name{
 	text-align: center;
-	margin-top: 10px;
 	color: #fff;
 	opacity: 50%;
 	font-size: 25px;
-	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+.invite-block_btn{
+	margin: auto 0;
+	background: none;
+	border: none;
+}
+
+.invite-block_btn img{
+	align-items: center;
+	width: 15px;
+	opacity: 50%;
 }
 
 .info-blocks{
 	display: flex;
 	width: 90vw;
 	margin: auto;
+	margin-bottom: 25px;
 	justify-content: space-between;
 }
 
 .info-block{
 	width: calc(40vw - 20px);
-	height: calc(17vh - 20px);
 	border: 1px solid #fff;
 	border-radius: 20px;
 	color: #fff;
@@ -454,6 +469,7 @@ body {
 
 .info-block_text{
 	font-size: 17px;
+	margin-bottom: 15px;
 }
 
 .info-reward{
@@ -465,24 +481,41 @@ body {
 	font-size: 15px;
 }
 
+.referral-info{
+	display: none;
+}
+
 .my-referral_text{
-	position: absolute;
-	bottom: 44vh;
-	left: 2.5vw;
+	display: flex;
+}
+
+.my-referral_name{
 	color: #fff;
 	opacity: 50%;
 	font-size: 25px;
+	margin: 10px 10px 10px 2.5vw;
+}
+
+.my-referral_btn{
+	margin: auto 0;
+	background: none;
+	border: none;
+}
+
+.my-referral_btn img{
+	align-items: center;
+	width: 15px;
+	opacity: 50%;
 }
 
 .my-referrals{
-	position: absolute;
+	margin: auto;
+	margin-bottom: 20px;
 	display: grid;
 	gap: 5vw;
 	width: 90vw;
-	height: calc(30vh - 5vw);
+	height: calc(22.3vh + 5vw);
 	padding: 2.5vw 0;
-	bottom: 12vh;
-	left: 2.5vw;
 	border-radius: 20px;
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	overflow-y: auto;
@@ -536,12 +569,11 @@ body {
 }
 
 .btn-block{
-	position: absolute;
-	bottom: 10px;
-	left: 2.5vw;
 	width: 90vw;
 	display: flex;
 	justify-content: space-between;
+	margin: 0 auto;
+	margin-bottom: 25px;
 }
 
 .send-link{
