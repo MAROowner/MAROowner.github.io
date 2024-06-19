@@ -410,12 +410,15 @@ body {
 .referral-block{
 	width: 95vw;
 	margin: auto;
-	background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	border-radius: 20px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+	/*background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(20px);
+	border-radius: 20px;*/
 }
 
 .invite-info{
@@ -445,7 +448,7 @@ body {
 .invite-block_btn img{
 	align-items: center;
 	width: 15px;
-	opacity: 70%;
+	opacity: 50%;
 }
 
 .info-blocks{
@@ -491,7 +494,7 @@ body {
 
 .my-referral_name{
 	color: #fff;
-	opacity: 70%;
+	opacity: 50%;
 	font-size: 25px;
 	margin: 15px 10px 15px 5vw;
 }
@@ -505,7 +508,7 @@ body {
 .my-referral_btn img{
 	align-items: center;
 	width: 15px;
-	opacity: 70%;
+	opacity: 50%;
 }
 
 .my-referrals{
@@ -517,11 +520,13 @@ body {
 	height: calc(22.3vh + 5vw);
 	padding: 4vw 0;
 	border-radius: 20px;
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	background-color: rgba(0, 0, 0, 0.3);
+	overflow-y: auto;
+	/*border: 1px solid rgba(255, 255, 255, 0.3);
 	overflow-y: auto;
 	background: linear-gradient(135deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
 	border-radius: 20px;
-	border: 1px solid rgba(255, 255, 255, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.5);*/
 }
 
 .referral-account{
@@ -536,14 +541,14 @@ body {
 
 .referral-icon{
 	height: 8vh;
-	opacity: 70%;
+	opacity: 50%;
 	margin-left: 15px;
 }
 
 .referral-desc{
 	margin-left: 20px;
 	color: #fff;
-	opacity: 70%;
+	opacity: 50%;
 	display: grid;
 	align-content: space-around;
 }
