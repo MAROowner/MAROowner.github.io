@@ -490,6 +490,7 @@ body {
 
 .my-referral_text{
 	display: flex;
+	justify-content: space-between;
 }
 
 .my-referral_name{
@@ -503,11 +504,13 @@ body {
 	margin: auto 0;
 	background: none;
 	border: none;
+	margin-right: 5vw;
+	padding: 0;
 }
 
 .my-referral_btn img{
-	align-items: center;
-	width: 15px;
+	height: 28px;
+	margin-top: 6px;
 	opacity: 50%;
 }
 
