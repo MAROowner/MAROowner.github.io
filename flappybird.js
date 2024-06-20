@@ -55,6 +55,7 @@ var allPointerText = document.getElementById("all-point_text");
 let timerText = document.querySelector(".more-info_timer");
 let shop = document.querySelector('.shop');
 let referralPage = document.querySelector('.referral');
+let roadmapPage = document.querySelector('.roadmap');
 let dropdownBtn = document.querySelector('.regim-btn');
 let dropdown = document.querySelector('.dropdown-list');
 let activeRegim = document.querySelector('.options.active');
@@ -325,15 +326,22 @@ function toggleStyleAndShop(event) {
 
 
 	if (event.currentTarget.id === "roadmap-tab"){
-		index++;
-		if(index == 10){
-			clearScore();
+		if (roadmapPage.style.display == "none") {
+			roadmapPage.style.display = "block";
+			document.querySelector('.main-button').style.display = 'none';
+			pointerText.style.display = 'none';
+		} else {
+			roadmapPage.style.display = "none";
+			turnOnButton();
 		}
+	} else {
+		roadmapPage.style.display = "none";
+		turnOnButton();
 	}
 }
 
 function turnOnButton(){
-	if(shop.style.display === "none" && referralPage.style.display == "none"){
+	if(shop.style.display === "none" && referralPage.style.display == "none" && roadmapPage.style.display == "none"){
 		document.querySelector('.main-button').style.display = 'flex';
 		pointerText.style.display = 'block';
 	}
