@@ -616,3 +616,28 @@ body {
 	opacity: 70%;
 	margin-top: 3px;
 }
+
+.roadmap{
+	position: absolute;
+	left: 2.5vw;
+	bottom: 15vh;
+	display: none;
+	z-index: 2;
+}
+
+.roadmap-block{
+	padding: 15px;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.roadmap-block img {
+	width: calc(95vw - 30px);
+	max-height: 70vh;
+	opacity: 50%;
+	object-fit: contain;
+}
