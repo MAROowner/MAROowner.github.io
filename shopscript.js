@@ -76,7 +76,7 @@ function buyMaxEnergy() {
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
 		maxEnergyCountInfoText.textContent = maxEnergyCountLvl + " Lvl" + " • " + maxEnergyCount;
 		hideAllTabs();
-		closeShop();
+		closePage(shop);
 		localStorage.setItem('energyCount', energyCount);
 		lastActiveTime = Date.now();
 		updateLastActivity();
@@ -99,7 +99,7 @@ function buyChargeSpeed() {
 
 		chargeSpeedInfoText.textContent = chargeSpeedLvl + " Lvl" + " • " + Math.floor(timeToReset / 60);
 		hideAllTabs();
-		closeShop();
+		closePage(shop);
 		localStorage.setItem('chargeSpeedLvl', chargeSpeedLvl);
 		localStorage.setItem('timeToReset', timeToReset);
 	}
@@ -118,7 +118,7 @@ function buyMultiEarn() {
 
 		multiEarnInfoText.textContent = multiEarnLvl + " Lvl" + " • " + multiEarn;
 		hideAllTabs();
-		closeShop();
+		closePage(shop);
 		localStorage.setItem('multiEarnLvl', multiEarnLvl);
 	}
 	else {
