@@ -158,7 +158,8 @@ function update(deltaTime) {
 		totalScore += score;
 		allPointerText.textContent = totalScore;
 		pointerText.textContent = score;
-		pipeArray = [];
+		bird.y = birdY;
+		stopMoving();
 		gameOver = true;
 		return;
 	}
@@ -183,6 +184,7 @@ function update(deltaTime) {
 			saveScore();
 			pointerText.textContent = score;
 			stopMoving();
+		   bird.y = birdY;
 			gameOver = true;
 			return;
 		}
@@ -205,18 +207,20 @@ function loadScore() {
 	allPointerText.textContent = totalScore;
 }
 
-function openShop() {
+function openPage(page) {
 	document.querySelector('.main-button').style.display = 'none';
 	pointerText.style.display = 'none';
-	shop.style.display = 'block';
-	shop.classList.add("open");
+	page.style.display = 'block';
+	page.classList.add("open");
 }
 
-function closeShop() {
-   shop.classList.remove('open');
+function closePage(page) {
+   page.classList.remove('open');
+	page.style.zIndex = 0;
    setTimeout(() => {
-      shop.style.display = 'none';
+      page.style.display = 'none';
 		turnOnButton();
+		page.style.zIndex = 1;
    }, 200);
 }
 
@@ -301,42 +305,34 @@ function toggleStyleAndShop(event) {
 
 	if (event.currentTarget.id === "shop-tab") {
 		if (shop.style.display === "none") {
-			openShop();
+			openPage(shop);
 		} else {
-			closeShop();
+			closePage(shop);
 		}
 	} else {
-		closeShop();
+		closePage(shop);
 	}
 
 
 	if (event.currentTarget.id === "referral-tab") {
 		if (referralPage.style.display == "none") {
-			referralPage.style.display = "block";
-			document.querySelector('.main-button').style.display = 'none';
-			pointerText.style.display = 'none';
+			openPage(referralPage);
 		} else {
-			referralPage.style.display = "none";
-			turnOnButton();
+			closePage(referralPage);
 		}
 	} else {
-		referralPage.style.display = "none";
-		turnOnButton();
+		closePage(referralPage);
 	}
 
 
 	if (event.currentTarget.id === "roadmap-tab"){
 		if (roadmapPage.style.display == "none") {
-			roadmapPage.style.display = "block";
-			document.querySelector('.main-button').style.display = 'none';
-			pointerText.style.display = 'none';
+			openPage(roadmapPage);
 		} else {
-			roadmapPage.style.display = "none";
-			turnOnButton();
+			closePage(roadmapPage);
 		}
 	} else {
-		roadmapPage.style.display = "none";
-		turnOnButton();
+		closePage(roadmapPage);
 	}
 }
 
@@ -406,16 +402,6 @@ function saveScore() {
 function clearScore(){
 	localStorage.clear();
 }
-
-/*function referralInfo() {
-	Telegram.WebApp.showPopup({
-		title: "Referral program",
-		message: "You and your referral will receive: \n \n+   200 points for inviting a friend \n   +1000 points for inviting a friend with Telegram Premium",
-		buttons: [
-			{ id: "yes", type: "default", text: "OK" },
-		]
-	});
-}*/
 
 function clicks(){
 	document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
