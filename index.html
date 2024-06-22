@@ -9,6 +9,7 @@
 	<script src="shopscript.js" defer></script>
 	<script src="flappybird.js" defer></script>
 	<script src="backgroundmanager.js" defer></script>
+	<script src="dailyrewards.js" defer></script>
 	<title>Flappy Bird</title>
 </head>
 
@@ -17,7 +18,9 @@
 		<canvas id="board"></canvas>
 		<div class="button-container">
 			<button class="main-button">
-				<img src="Image/Image/PlayButton.png" alt="Play">
+				<div class="big-button">
+					<img src="Image/Image/PlayButton.png" alt="Play">
+				</div>
 			</button>
 			<div class="other-buttons">
 				<button id="shop-tab" class="shop-tab">
@@ -192,6 +195,53 @@
 				<div class="roadmap-name">Roadmap</div>
 				<img src="Image/Image/Roadmap.png" alt="">
 			</div>
+		</div>
+
+		<div class="reward-block" style="display: none;">
+			<div class="reward-title">Congratulations!</div>
+			<div class="rewards-block">
+				<div class="day-reward">
+					<div class="day-number">Day 1</div>
+					<div class="reward-count">100</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 2</div>
+					<div class="reward-count">200</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 3</div>
+					<div class="reward-count">250</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 4</div>
+					<div class="reward-count">500</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 5</div>
+					<div class="reward-count">900</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 6</div>
+					<div class="reward-count">1500</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 7</div>
+					<div class="reward-count">3000</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 8</div>
+					<div class="reward-count">5000</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 9</div>
+					<div class="reward-count">10000</div>
+				</div>
+				<div class="day-reward">
+					<div class="day-number">Day 10</div>
+					<div class="reward-count">20000</div>
+				</div>
+			</div>
+			<button class="reward-btn">Take it!</button>
 		</div>
 	</div>
 
