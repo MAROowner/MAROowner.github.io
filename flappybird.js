@@ -47,6 +47,7 @@ let velocityX = -8 / FPS;
 let velocityY = 0;
 
 let gameOver = true;
+let isReward = false;
 var multiEarn;
 var totalScore = 0;
 let score = 0;
@@ -88,7 +89,7 @@ window.onload = function () {
 	board.height = boardHeight;
 	board.width = boardWidth;
 
-	let mainButton = document.querySelector('.main-button');
+	let mainButton = document.querySelector('.big-button');
 	mainButton.addEventListener('click', restartGame);
 
 	textValue = userName;
@@ -294,45 +295,46 @@ function restartGame() {
 }
 
 function toggleStyleAndShop(event) {
-
-	buttons.forEach(button => {
-		if (button !== event.currentTarget) {
-			button.classList.remove("toggled-style");
-		}
-	});
-
-	event.currentTarget.classList.toggle("toggled-style");
-
-	if (event.currentTarget.id === "shop-tab") {
-		if (shop.style.display === "none") {
-			openPage(shop);
+	if(!isReward){
+		buttons.forEach(button => {
+			if (button !== event.currentTarget) {
+				button.classList.remove("toggled-style");
+			}
+		});
+	
+		event.currentTarget.classList.toggle("toggled-style");
+	
+		if (event.currentTarget.id === "shop-tab") {
+			if (shop.style.display === "none") {
+				openPage(shop);
+			} else {
+				closePage(shop);
+			}
 		} else {
 			closePage(shop);
 		}
-	} else {
-		closePage(shop);
-	}
-
-
-	if (event.currentTarget.id === "referral-tab") {
-		if (referralPage.style.display == "none") {
-			openPage(referralPage);
+	
+	
+		if (event.currentTarget.id === "referral-tab") {
+			if (referralPage.style.display == "none") {
+				openPage(referralPage);
+			} else {
+				closePage(referralPage);
+			}
 		} else {
 			closePage(referralPage);
 		}
-	} else {
-		closePage(referralPage);
-	}
-
-
-	if (event.currentTarget.id === "roadmap-tab"){
-		if (roadmapPage.style.display == "none") {
-			openPage(roadmapPage);
+	
+	
+		if (event.currentTarget.id === "roadmap-tab"){
+			if (roadmapPage.style.display == "none") {
+				openPage(roadmapPage);
+			} else {
+				closePage(roadmapPage);
+			}
 		} else {
 			closePage(roadmapPage);
 		}
-	} else {
-		closePage(roadmapPage);
 	}
 }
 
@@ -343,26 +345,31 @@ function turnOnButton(){
 	}
 }
 
-function changeBalance(amount, decrementValue){
+function changeBalance(amount, incrementDecrementValue, operation) {
 	const interval = 10;
 	let startScore = totalScore;
 	price = amount;
 
-	if(decrementValue == 0){
-		decrementValue = 1;
+	if (incrementDecrementValue == 0) {
+		 incrementDecrementValue = 1;
 	}
 
-	const decrementInterval = setInterval(() => {
-		if (amount <= 0 || totalScore <= 0) {
-			clearInterval(decrementInterval);
-			totalScore = startScore - price;
-			allPointerText.textContent = totalScore;
-			localStorage.setItem('totalScore', totalScore.toString());
-			return;
-		}
-		totalScore -= decrementValue;
-		amount -= decrementValue;
-		allPointerText.textContent = totalScore;
+	const incrementDecrementInterval = setInterval(() => {
+		 if ((operation === 'decrement' && (amount <= 0 || totalScore <= 0)) || (operation === 'increment' && amount <= 0)) {
+			  clearInterval(incrementDecrementInterval);
+			  totalScore = operation === 'decrement' ? startScore - price : startScore + price;
+			  allPointerText.textContent = totalScore;
+			  localStorage.setItem('totalScore', totalScore.toString());
+			  return;
+		 }
+		 if (operation === 'decrement') {
+			  totalScore -= incrementDecrementValue;
+			  amount -= incrementDecrementValue;
+		 } else if (operation === 'increment') {
+			  totalScore += incrementDecrementValue;
+			  amount -= incrementDecrementValue;
+		 }
+		 allPointerText.textContent = totalScore;
 	}, interval);
 }
 
