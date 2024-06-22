@@ -176,11 +176,18 @@ body {
 .main-button{
 	position: relative;
 	z-index: 1;
+	width: 95vw;
 }
 
-.main-button img {
+.big-button {
 	width: 150px;
 	height: 75px;
+	margin: auto;
+}
+
+.big-button img {
+	width: 100%;
+	height: 100%;
 }
 
 .other-buttons {
@@ -668,4 +675,90 @@ body {
 	max-height: 70vh;
 	opacity: 50%;
 	object-fit: contain;
+}
+
+
+
+
+.reward-block{
+	position: absolute;
+	bottom: 15vh;
+	width: 85vw;
+	padding: 15px 5vw 25px 5vw;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+	margin-left: 2.5vw;
+	transform: translateY(100%);
+	transition: transform 0.4s ease-out;
+}
+
+.reward-block.show{
+	transform: translateY(0);
+}
+
+.reward-title{
+	color: #fff;
+	font-size: 30px;
+	opacity: 50%;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.rewards-block{
+	width: 85vw;
+	display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 5vw;
+}
+
+.day-reward{
+	width: 17.5vw;
+	height: calc(20vw - 20px);
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 1);
+	padding: 10px 0px;
+	opacity: 50%;
+	text-align: center;
+	display: grid;
+	align-content: space-between;
+	color: #fff;
+}
+
+.day-reward.taked{
+	color: #fff;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5));
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	opacity: 30%;
+}
+
+.day-reward.today{
+	color: #fff;
+	transform: translateX(-3px) translateY(-3px);
+	border: 3px solid rgba(255, 255, 255, 1);
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+}
+
+.reward-count{
+	font-weight: 700;
+	font-size: 20px;
+}
+
+.reward-btn{
+	margin-left: 50%;
+	transform: translateX(-50%);
+	margin-top: 30px;
+	background: none;
+	border: 1px solid #fff;
+	border-radius: 20px;
+	padding: 15px 40px;
+	color: #fff;font-size: 23px;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2));
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+	opacity: 50%;
 }
