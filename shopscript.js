@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function buyMaxEnergy() {
 	if (totalScore >= maxEnergyCountPrice[maxEnergyCountLvl] && maxEnergyCountLvl != 9) {
-		changeBalance(maxEnergyCountPrice[maxEnergyCountLvl], Math.floor(maxEnergyCountPrice[maxEnergyCountLvl] / 120));
+		changeBalance(maxEnergyCountPrice[maxEnergyCountLvl], Math.floor(maxEnergyCountPrice[maxEnergyCountLvl] / 120), "decrement");
 		maxEnergyCountLvl++;
 
 		maxEnergyCountText.textContent = maxEnergyCountPrice[maxEnergyCountLvl];
@@ -91,7 +91,7 @@ function buyMaxEnergy() {
 
 function buyChargeSpeed() {
 	if (totalScore >= chargeSpeedPrice[chargeSpeedLvl] && chargeSpeedLvl != 9) {
-		changeBalance(chargeSpeedPrice[chargeSpeedLvl], Math.floor(chargeSpeedPrice[chargeSpeedLvl] / 120));
+		changeBalance(chargeSpeedPrice[chargeSpeedLvl], Math.floor(chargeSpeedPrice[chargeSpeedLvl] / 120), "decrement");
 		chargeSpeedLvl++;
 
 		chargeSpeedText.textContent = chargeSpeedPrice[chargeSpeedLvl];
@@ -110,7 +110,7 @@ function buyChargeSpeed() {
 
 function buyMultiEarn() {
 	if (totalScore >= multiEarnPrice[multiEarnLvl] && multiEarnLvl != 9) {
-		changeBalance(multiEarnPrice[multiEarnLvl], Math.floor(multiEarnPrice[multiEarnLvl] / 120));
+		changeBalance(multiEarnPrice[multiEarnLvl], Math.floor(multiEarnPrice[multiEarnLvl] / 120), "decrement");
 		multiEarnLvl++;
 
 		multiEarnText.textContent = multiEarnPrice[multiEarnLvl];
