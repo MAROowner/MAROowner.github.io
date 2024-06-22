@@ -16,8 +16,8 @@ var boardHeight = screenHeight;
 var textValue;
 let gridSquareY = 1000;
 
-let birdWidth = 48;
-let birdHeight = 38;
+let birdWidth = 50;
+let birdHeight = 40;
 
 let birdX;
 let birdY;
@@ -28,13 +28,13 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: gridSquareY / (FPS * 2),
-	gravity: gridSquareY / (FPS / 1.3)
+	jumpForce: gridSquareY / (FPS * 1.7),
+	gravity: gridSquareY / (FPS / 1.7)
 };
 
 let pipeArray = [];
-let pipeWidth = 64;
-let pipeHeight = 512;
+let pipeWidth = 80;
+let pipeHeight = 633;
 let pipeX = boardWidth;
 let pipeY = 0;
 
@@ -43,7 +43,7 @@ let bottomPipeImg;
 let topBgImg;
 let bottomBgImg;
 
-let velocityX = -8 / FPS;
+let velocityX = -12 / FPS;
 let velocityY = 0;
 
 let gameOver = true;
@@ -51,6 +51,7 @@ let isReward = false;
 var multiEarn;
 var totalScore = 0;
 let score = 0;
+
 let pointerText = document.getElementById("pointer-text");
 var allPointerText = document.getElementById("all-point_text");
 let timerText = document.querySelector(".more-info_timer");
@@ -242,7 +243,7 @@ function placePipes() {
 		return;
 	}
 
-	let randomPipeY = pipeY - pipeHeight / 4 - Math.random() * (pipeHeight / 2);
+	let randomPipeY = pipeY - pipeHeight / 2.5 - Math.random() * (pipeHeight / 2);
 	let openingSpace = 170;
 
 	let topPipe = {
