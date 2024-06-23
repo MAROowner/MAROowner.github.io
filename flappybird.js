@@ -118,7 +118,7 @@ window.onload = function () {
 
 	totalScore += score;
 	allPointerText.textContent = totalScore;
-	pointerText.textContent = 1;
+	pointerText.textContent = score;
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
 	createBackground();
