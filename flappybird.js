@@ -21,6 +21,7 @@ let birdHeight = 40;
 
 let birdX;
 let birdY;
+let speed = -10;
 
 let bird = {
 	x: 0,
@@ -37,13 +38,15 @@ let pipeWidth = 80;
 let pipeHeight = 633;
 let pipeX = boardWidth;
 let pipeY = 0;
+let openingSpace = 170;
+let spaceBetweenPipes =250;
 
 let topPipeImg;
 let bottomPipeImg;
 let topBgImg;
 let bottomBgImg;
 
-let velocityX = -12 / FPS;
+let velocityX = speed / FPS;
 let velocityY = 0;
 
 let gameOver = true;
@@ -65,7 +68,6 @@ let activeRegim = document.querySelector('.options.active');
 let bgImage = new Image();
 bgImage.src = 'Image/Image/flappybirdbg.png';
 let bgX = 0;
-let speed = 2;
 
 let name = 'Doy Johnson';
 let points = 123124;
@@ -77,6 +79,21 @@ let referralReverseBtn = document.querySelector('.my-referral_btn');
 let inviteReverseBtn = document.querySelector('.invite-block_btn');
 
 let index = 0;
+
+let changes = {
+	10: { speed: -11 },
+	20: { openingSpace: 160 },
+	30: { speed: -12, spaceBetweenPipes: 260 },
+	40: { speed: -13, spaceBetweenPipes: 270 },
+	50: { openingSpace: 150 },
+	60: { speed: -14, spaceBetweenPipes: 280 },
+	70: { speed: -15, spaceBetweenPipes: 290 },
+	80: { speed: -16, spaceBetweenPipes: 300 },
+	90: { speed: -17, spaceBetweenPipes: 310 },
+	100: { speed: -18, spaceBetweenPipes: 320 },
+	110: { speed: -19, spaceBetweenPipes: 330 },
+	120: { speed: -20, spaceBetweenPipes: 340 }
+};
 
 
 clicks();
@@ -173,6 +190,24 @@ function update(deltaTime) {
 
 		if (!pipe.passed && bird.x > pipe.x + pipe.width) {
 			score += multiEarn / 2;
+
+			const currentChange = changes[score / multiEarn];
+
+			if (currentChange) {
+    			if (currentChange.speed !== undefined) {
+        			speed = currentChange.speed;
+					console.log(speed);
+    			}
+    			if (currentChange.openingSpace !== undefined) {
+        			openingSpace = currentChange.openingSpace;
+					  console.log(openingSpace);
+    			}
+    			if (currentChange.spaceBetweenPipes !== undefined) {
+      		  spaceBetweenPipes = currentChange.spaceBetweenPipes;
+				  console.log(spaceBetweenPipes);
+    			}	
+			}
+
 			pipe.passed = true;
 		}
 
@@ -192,7 +227,7 @@ function update(deltaTime) {
 		}
 	}
 
-	if (pipeArray.length == 0 || pipeArray[pipeArray.length - 1].x <= pipeX - 250) {
+	if (pipeArray.length == 0 || pipeArray[pipeArray.length - 1].x <= pipeX - spaceBetweenPipes) {
 		placePipes();
 	}
 
@@ -244,7 +279,6 @@ function placePipes() {
 	}
 
 	let randomPipeY = pipeY - pipeHeight / 2.5 - Math.random() * (pipeHeight / 2);
-	let openingSpace = 170;
 
 	let topPipe = {
 		img: topPipeImg,
