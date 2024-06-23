@@ -16,7 +16,7 @@ var boardHeight = screenHeight;
 var textValue;
 let gridSquareY = 1000;
 
-let birdWidth = 50;
+let birdWidth = 65;
 let birdHeight = 40;
 
 let birdX;
