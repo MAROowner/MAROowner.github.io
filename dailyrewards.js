@@ -25,6 +25,7 @@ getCurrentTime().then(dateTime => {
 		let dayOfWeek = dateTime.getDay();
 		lastRewardedDay = localStorage.getItem("lastRewardedDay", lastRewardedDay) || dayOfWeek;
 		totalActiveDays = localStorage.getItem("totalActiveDays", totalActiveDays) || 0;
+		openReward();
 
 		if(dayOfWeek - lastRewardedDay == 1 || dayOfWeek - lastRewardedDay == -6 || dayOfWeek - lastRewardedDay == 0 && totalActiveDays == 0){
 			console.log('Вам зачислено: ' + rewards[totalActiveDays]);
