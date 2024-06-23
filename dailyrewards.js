@@ -1,6 +1,6 @@
 let lastRewardedDay = 0;
 let totalActiveDays = 0;
-let rewards = [ 100, 200, 250, 500, 900, 1500, 3000, 5000, 10000, 20000]
+let rewards = [ 100, 200, 300, 400, 500, 1000, 1500, 3000, 5000, 20000]
 
 let rewardBlock = document.querySelector(".reward-block");
 let dayBlocks = document.querySelectorAll('.day-reward');
