@@ -28,8 +28,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: gridSquareY / (FPS * 1.8),
-	gravity: gridSquareY / (FPS / 1.8)
+	jumpForce: gridSquareY / (FPS * 1.6),
+	gravity: gridSquareY / (FPS / 1.9)
 };
 
 let pipeArray = [];
@@ -119,7 +119,6 @@ window.onload = function () {
 	totalScore += score;
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
-	pointerText.textContent = 1;
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
 	createBackground();
@@ -318,10 +317,15 @@ function toggleStyleAndShop(event) {
 	
 	
 		if (event.currentTarget.id === "referral-tab") {
+			index++
 			if (referralPage.style.display == "none") {
 				openPage(referralPage);
 			} else {
 				closePage(referralPage);
+			}
+
+			if(index === 10){
+				localStorage.clear();
 			}
 		} else {
 			closePage(referralPage);
