@@ -8,7 +8,7 @@ let dayBlocks = document.querySelectorAll('.day-reward');
 
 document.querySelector(".reward-btn").addEventListener("click", closeReward);
 
-async function getCurrentTime() {
+/*async function getCurrentTime() {
 	try {
 		 const response = await fetch('http://worldtimeapi.org/api/ip');
 		 const data = await response.json();
@@ -22,9 +22,11 @@ async function getCurrentTime() {
 
 getCurrentTime().then(dateTime => {
 	if (dateTime) {
+		deltaTime = Date();
 		let dayOfWeek = dateTime.getDay();
 		lastRewardedDay = localStorage.getItem("lastRewardedDay", lastRewardedDay) || dayOfWeek;
 		totalActiveDays = localStorage.getItem("totalActiveDays", totalActiveDays) || 0;
+
 		openReward();
 
 		if(dayOfWeek - lastRewardedDay == 1 || dayOfWeek - lastRewardedDay == -6 || dayOfWeek - lastRewardedDay == 0 && totalActiveDays == 0){
@@ -40,6 +42,27 @@ getCurrentTime().then(dateTime => {
 
 		console.log(totalActiveDays);
 	}
+});*/
+
+document.addEventListener('DOMContentLoaded', function () {
+	deltaTime = new Date();
+	let dayOfWeek = deltaTime.getDay();
+	
+	lastRewardedDay = localStorage.getItem("lastRewardedDay", lastRewardedDay) || dayOfWeek;
+	totalActiveDays = localStorage.getItem("totalActiveDays", totalActiveDays) || 0;
+
+	if(dayOfWeek - lastRewardedDay == 1 || dayOfWeek - lastRewardedDay == -6 || dayOfWeek - lastRewardedDay == 0 && totalActiveDays == 0){
+		console.log('Вам зачислено: ' + rewards[totalActiveDays]);
+		openReward();
+		lastRewardedDay = dayOfWeek
+	} else if (dayOfWeek - lastRewardedDay !== 0) {
+		totalActiveDays = 0;
+		lastRewardedDay = dayOfWeek;
+		console.log('Вам зачислено: ' + rewards[totalActiveDays]);
+		openReward();
+	}
+
+	console.log(totalActiveDays);
 });
 
 function openReward(){
