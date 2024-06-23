@@ -28,8 +28,8 @@ let bird = {
 	width: birdWidth,
 	height: birdHeight,
 	velocityY: 0,
-	jumpForce: gridSquareY / (FPS * 1.7),
-	gravity: gridSquareY / (FPS / 1.7)
+	jumpForce: gridSquareY / (FPS * 1.8),
+	gravity: gridSquareY / (FPS / 1.8)
 };
 
 let pipeArray = [];
@@ -119,6 +119,7 @@ window.onload = function () {
 	totalScore += score;
 	allPointerText.textContent = totalScore;
 	pointerText.textContent = score;
+	pointerText.textContent = 1;
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
 	createBackground();
