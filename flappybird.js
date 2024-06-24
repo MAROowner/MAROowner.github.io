@@ -130,12 +130,12 @@ window.onload = function () {
 	birdImg.onload = function () {
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 	};
-
+	
 	topPipeImg = new Image();
-	topPipeImg.src = "Image/Image/TopPipe.png";
+	topPipeImg.src = "Image/Image/toppipe.png";
 
 	bottomPipeImg = new Image();
-	bottomPipeImg.src = "Image/Image/BottomPipe.png";
+	bottomPipeImg.src = "Image/Image/bottompipe.png";
 
 	placePipes();
 
