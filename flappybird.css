@@ -33,6 +33,17 @@ body {
 	}
 }
 
+.game-score{
+	position: absolute;
+	color: #000;
+	font-family: 'Gill Sans';
+	font-size: 45px;
+	font-weight: 700;
+ 	top: 5vh;
+	left: 46%;
+	transform: translateX(-100%);
+}
+
 .game-container {
 	width: 420px;
 	height: 750px;
@@ -130,16 +141,25 @@ body {
 	align-items: center;
 }
 
+.energy-balance{
+	display: block;
+}
+
+.energy-info_balance{
+	width: calc((95vw/3) - 7vw);
+	height: calc(((95vw/3) - 5vw) * 0.3);
+	display: flex;
+	align-items: center;
+}
+
 .energy-more_info{
 	display: none;
-	position: absolute;
-	right: 5px;
-	top: 60px;
+	margin-top: 10px;
 	background-color: black;
 	border-radius: 10px;
 	color: white;
 	text-align: center;
-	padding: 10px 20px;
+	padding: 10px 10px;
 	font-size: 15px;
 	opacity: 0;
 	transition: opacity 0.3s ease-in, opacity 0.5s ease-out;
