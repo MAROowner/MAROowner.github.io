@@ -9,7 +9,29 @@ body {
 	position: relative;
 	font-family: 'Gill Sans';
 }
+	
+.rotate {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	z-index: 200;
+	overflow: hidden;
+	background-color: #000;
+}
 
+.video-rotate {
+	max-width: 200%;
+	max-height: 200%;
+}
+
+@media screen and (orientation: landscape) {
+	.rotate {
+	  display: flex;
+	}
+}
 
 .game-container {
 	width: 420px;
