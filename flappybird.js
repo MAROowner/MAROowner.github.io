@@ -148,7 +148,6 @@ window.onload = function () {
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
 	createBackground();
-	lockOrientation();
 
 	requestAnimationFrame(gameLoop);
 };
@@ -498,24 +497,6 @@ function changeBalance(amount, incrementDecrementValue, operation) {
 		 }
 		 allPointerText.textContent = totalScore;
 	}, interval);
-}
-
-
-
-function lockOrientation(){
-	if (screen.orientation && screen.orientation.lock) {
-		screen.orientation.lock('portrait').catch(function(error) {
-		  console.log("Orientation lock failed: " + error);
-		});
-	} else if (window.screen.lockOrientation) {
-		window.screen.lockOrientation('portrait');
-	} else if (window.screen.mozLockOrientation) {
-		window.screen.mozLockOrientation('portrait');
-	} else if (window.screen.msLockOrientation) {
-		window.screen.msLockOrientation('portrait');
-	} else {
-		console.log("Orientation lock API is not supported by this browser.");
-	}
 }
 
 
