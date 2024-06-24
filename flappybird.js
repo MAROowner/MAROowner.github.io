@@ -110,6 +110,7 @@ let changes = {
 clicks();
 
 
+
 window.onload = function () {
 	context = board.getContext("2d");
 	bottomBgImg = new Image();
@@ -130,7 +131,7 @@ window.onload = function () {
 	birdImg.onload = function () {
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 	};
-	
+
 	topPipeImg = new Image();
 	topPipeImg.src = "Image/Image/toppipe.png";
 
@@ -147,9 +148,12 @@ window.onload = function () {
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
 	createBackground();
-	addRecord('Vesfix I Love You', 162);
+	lockOrientation();
+
 	requestAnimationFrame(gameLoop);
 };
+
+
 
 function gameLoop(currentTime) {
 	const deltaTime = currentTime - lastTime;
@@ -162,6 +166,8 @@ function gameLoop(currentTime) {
 
 	requestAnimationFrame(gameLoop);
 }
+
+
 
 function update(deltaTime) {
 	if (gameOver) {
@@ -253,11 +259,15 @@ function update(deltaTime) {
 	drawPlayInterface();
 }
 
+
+
 function loadScore() {
 	const savedScore = localStorage.getItem('totalScore');
 	totalScore = savedScore ? parseInt(savedScore, 10) : 0;
 	allPointerText.textContent = totalScore;
 }
+
+
 
 function loadImages(sources, callback) {
 	let loadedImages = 0;
@@ -274,6 +284,8 @@ function loadImages(sources, callback) {
 	}
 }
 
+
+
 loadImages(birdImages, function(images) {
 	birdImg.src = images[currentFrame].src;
 	birdImg.onload = function() {
@@ -287,6 +299,8 @@ loadImages(birdImages, function(images) {
 	}, frameInterval);
 });
 
+
+
 function calculateRotationAngle(velocityY) {
 	if (velocityY > 0) {
 		return Math.min(velocityY * 0.1, bird.maxUpAngle);
@@ -295,12 +309,16 @@ function calculateRotationAngle(velocityY) {
 	}
 }
 
+
+
 function openPage(page) {
 	document.querySelector('.main-button').style.display = 'none';
 	pointerText.style.display = 'none';
 	page.style.display = 'block';
 	page.classList.add("open");
 }
+
+
 
 function closePage(page) {
    page.classList.remove('open');
@@ -312,17 +330,23 @@ function closePage(page) {
    }, 200);
 }
 
+
+
 function hideAllTabs(){
 	buttons.forEach(button => {
 		button.classList.remove("toggled-style");
 	});
 }
 
+
+
 function drawPlayInterface() {
 	context.fillStyle = "black";
 	context.font = "700 45px Gill Sans MT";
 	context.fillText(score, board.width/2.2, board.height/10);
 }
+
+
 
 function placePipes() {
 	if (gameOver) {
@@ -352,11 +376,15 @@ function placePipes() {
 	pipeArray.push(bottomPipe);
 }
 
+
+
 function moveBird() {
 	if (!gameOver) {
 		bird.velocityY = -bird.jumpForce;
 	}
 }
+
+
 
 function detectCollision(a, b) {
 	return a.x < b.x + b.width &&
@@ -364,6 +392,8 @@ function detectCollision(a, b) {
 		a.y < b.y + b.height &&
 		a.y + a.height > b.y;
 }
+
+
 
 function restartGame() {
 	if (typeof energyCount !== 'undefined' && energyCount > 0) {
@@ -379,6 +409,8 @@ function restartGame() {
 		document.querySelector('.start-screen').style.display = 'none';
 	}
 }
+
+
 
 function toggleStyleAndShop(event) {
 	if(!isReward){
@@ -429,12 +461,16 @@ function toggleStyleAndShop(event) {
 	}
 }
 
+
+
 function turnOnButton(){
 	if(shop.style.display === "none" && referralPage.style.display == "none" && roadmapPage.style.display == "none"){
 		document.querySelector('.main-button').style.display = 'flex';
 		pointerText.style.display = 'block';
 	}
 }
+
+
 
 function changeBalance(amount, incrementDecrementValue, operation) {
 	const interval = 10;
@@ -463,6 +499,26 @@ function changeBalance(amount, incrementDecrementValue, operation) {
 		 allPointerText.textContent = totalScore;
 	}, interval);
 }
+
+
+
+function lockOrientation(){
+	if (screen.orientation && screen.orientation.lock) {
+		screen.orientation.lock('portrait').catch(function(error) {
+		  console.log("Orientation lock failed: " + error);
+		});
+	} else if (window.screen.lockOrientation) {
+		window.screen.lockOrientation('portrait');
+	} else if (window.screen.mozLockOrientation) {
+		window.screen.mozLockOrientation('portrait');
+	} else if (window.screen.msLockOrientation) {
+		window.screen.msLockOrientation('portrait');
+	} else {
+		console.log("Orientation lock API is not supported by this browser.");
+	}
+}
+
+
 
 function openChargeInfo() {
 	let chargeBlocks = document.querySelectorAll(".energy-more_info");
@@ -493,13 +549,19 @@ function openChargeInfo() {
 	});
 }
 
+
+
 function saveScore() {
 	localStorage.setItem('totalScore', totalScore.toString());
 }
 
+
+
 function clearScore(){
 	localStorage.clear();
 }
+
+
 
 function clicks(){
 	document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
@@ -524,6 +586,8 @@ function clicks(){
 		inviteBlock.style.display = 'none';
 	});
 }
+
+
 
 function addRecord(userName, points) {
 	console.log(userName);
