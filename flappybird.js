@@ -16,6 +16,15 @@ var boardHeight = screenHeight;
 var textValue;
 let gridSquareY = 1000;
 
+const birdImages = [
+	"Image/Image/flappybird1.png",
+	"Image/Image/flappybird2.png",
+	"Image/Image/flappybird3.png"
+];
+const birdImg = new Image();
+let currentFrame = 0;
+const frameInterval = 200;
+
 let birdWidth = 65;
 let birdHeight = 40;
 
@@ -30,7 +39,9 @@ let bird = {
 	height: birdHeight,
 	velocityY: 0,
 	jumpForce: gridSquareY / (FPS * 1.6),
-	gravity: gridSquareY / (FPS / 1.9)
+	gravity: gridSquareY / (FPS / 1.9),
+	maxUpAngle: 10 * (Math.PI / 180),
+   maxDownAngle: 20 * (Math.PI / 180)
 };
 
 let pipeArray = [];
@@ -116,18 +127,15 @@ window.onload = function () {
 	birdY = boardHeight / 3;
 	bird.x = birdX;
 	bird.y = birdY;
-
-	birdImg = new Image();
-	birdImg.src = "Image/Image/flappybird.png";
 	birdImg.onload = function () {
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 	};
 
 	topPipeImg = new Image();
-	topPipeImg.src = "Image/Image/toppipe.png";
+	topPipeImg.src = "Image/Image/TopPipe.png";
 
 	bottomPipeImg = new Image();
-	bottomPipeImg.src = "Image/Image/bottompipe.png";
+	bottomPipeImg.src = "Image/Image/BottomPipe.png";
 
 	placePipes();
 
@@ -167,7 +175,14 @@ function update(deltaTime) {
 	updateBackground();
 	bird.velocityY += bird.gravity * deltaTime;
 	bird.y += bird.velocityY;
-	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+
+	/*context.rotate(calculateRotationAngle(bird.velocityY));
+	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);*/
+	context.save();
+   context.translate(bird.x + bird.width / 2, bird.y + bird.height / 2);
+   context.rotate(calculateRotationAngle(bird.velocityY));
+   context.drawImage(birdImg, -bird.width / 2, -bird.height / 2, bird.width, bird.height);
+   context.restore();
 
 	if (bird.y > board.height) {
 		bird.velocityY = 0;
@@ -242,6 +257,42 @@ function loadScore() {
 	const savedScore = localStorage.getItem('totalScore');
 	totalScore = savedScore ? parseInt(savedScore, 10) : 0;
 	allPointerText.textContent = totalScore;
+}
+
+function loadImages(sources, callback) {
+	let loadedImages = 0;
+	let numImages = sources.length;
+	let images = [];
+	for (let i = 0; i < numImages; i++) {
+		 images[i] = new Image();
+		 images[i].src = sources[i];
+		 images[i].onload = function() {
+			  if (++loadedImages >= numImages) {
+					callback(images);
+			  }
+		 };
+	}
+}
+
+loadImages(birdImages, function(images) {
+	birdImg.src = images[currentFrame].src;
+	birdImg.onload = function() {
+		context.rotate(calculateRotationAngle(bird.velocityY));
+		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
+	};
+	
+	setInterval(() => {
+		currentFrame = (currentFrame + 1) % birdImages.length;
+		birdImg.src = images[currentFrame].src;
+	}, frameInterval);
+});
+
+function calculateRotationAngle(velocityY) {
+	if (velocityY > 0) {
+		return Math.min(velocityY * 0.1, bird.maxUpAngle);
+	} else {
+		return Math.max(velocityY * 0.1, -bird.maxDownAngle);
+	}
 }
 
 function openPage(page) {
