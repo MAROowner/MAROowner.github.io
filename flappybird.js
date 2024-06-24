@@ -75,6 +75,7 @@ let roadmapPage = document.querySelector('.roadmap');
 let dropdownBtn = document.querySelector('.regim-btn');
 let dropdown = document.querySelector('.dropdown-list');
 let activeRegim = document.querySelector('.options.active');
+let gameScoreText = document.querySelector('.game-score');
 
 let bgImage = new Image();
 bgImage.src = 'Image/Image/flappybirdbg.png';
@@ -141,6 +142,7 @@ window.onload = function () {
 	placePipes();
 
 	document.addEventListener("touchstart", moveBird);
+	//document.addEventListener("mousedown", moveBird);
 
 	totalScore += score;
 	allPointerText.textContent = totalScore;
@@ -193,6 +195,7 @@ function update(deltaTime) {
 		bird.velocityY = 0;
 		document.querySelector('.button-container').style.display = 'flex';
 		document.querySelector('.start-screen').style.display = 'block';
+		gameScoreText.style.display = 'none';
 		saveScore();
 		totalScore += score;
 		allPointerText.textContent = totalScore;
@@ -229,6 +232,7 @@ function update(deltaTime) {
 			}
 
 			pipe.passed = true;
+			gameScoreText.textContent = score;
 		}
 
 
@@ -236,6 +240,7 @@ function update(deltaTime) {
 			bird.velocityY = 0;
 			document.querySelector('.button-container').style.display = 'flex';
 			document.querySelector('.start-screen').style.display = 'block';
+			gameScoreText.style.display = 'none';
 			totalScore += score;
 			allPointerText.textContent = totalScore;
 			saveScore();
@@ -254,8 +259,6 @@ function update(deltaTime) {
 	while (pipeArray.length > 0 && pipeArray[0].x < -pipeWidth) {
 		pipeArray.shift();
 	}
-
-	drawPlayInterface();
 }
 
 
@@ -339,14 +342,6 @@ function hideAllTabs(){
 
 
 
-function drawPlayInterface() {
-	context.fillStyle = "black";
-	context.font = "700 45px Gill Sans MT";
-	context.fillText(score, board.width/2.2, board.height/10);
-}
-
-
-
 function placePipes() {
 	if (gameOver) {
 		return;
@@ -406,6 +401,9 @@ function restartGame() {
 		gameOver = false;
 		document.querySelector('.button-container').style.display = 'none';
 		document.querySelector('.start-screen').style.display = 'none';
+		gameScoreText.style.display = 'block';
+	}else if( energyCount == 0){
+		openChargeInfo();
 	}
 }
 
