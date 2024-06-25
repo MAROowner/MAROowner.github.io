@@ -245,6 +245,7 @@ function update(deltaTime) {
 			allPointerText.textContent = totalScore;
 			saveScore();
 			pointerText.textContent = score;
+			gameScoreText.textContent = 0;
 			stopMoving();
 		   bird.y = birdY;
 			gameOver = true;
