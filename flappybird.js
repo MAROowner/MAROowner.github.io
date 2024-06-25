@@ -49,8 +49,12 @@ let pipeWidth = 80;
 let pipeHeight = 633;
 let pipeX = boardWidth;
 let pipeY = 0;
-let openingSpace = 170;
-let spaceBetweenPipes =250;
+let openingSpace = 190;
+let spaceBetweenPipes = 250;
+let addingPipe = new Image();
+addingPipe.src = "Image/Image/AddingPipe.png";
+addingPipeWidth = pipeWidth / 1.0917;
+aaddingPipeHeight = pipeHeight;
 
 let topPipeImg;
 let bottomPipeImg;
@@ -61,7 +65,8 @@ let velocityX = speed / FPS;
 let velocityY = 0;
 
 let gameOver = true;
-let isReward = false;
+let isPause = false;
+let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 var multiEarn;
 var totalScore = 0;
 let score = 0;
@@ -93,18 +98,19 @@ let inviteReverseBtn = document.querySelector('.invite-block_btn');
 let index = 0;
 
 let changes = {
-	10: { speed: -11 },
-	20: { openingSpace: 160 },
-	30: { speed: -12, spaceBetweenPipes: 260 },
-	40: { speed: -13, spaceBetweenPipes: 270 },
-	50: { openingSpace: 150 },
-	60: { speed: -14, spaceBetweenPipes: 280 },
-	70: { speed: -15, spaceBetweenPipes: 290 },
-	80: { speed: -16, spaceBetweenPipes: 300 },
-	90: { speed: -17, spaceBetweenPipes: 310 },
-	100: { speed: -18, spaceBetweenPipes: 320 },
-	110: { speed: -19, spaceBetweenPipes: 330 },
-	120: { speed: -20, spaceBetweenPipes: 340 }
+	10: { speed: -11, bgSpeed: 1.1 },
+	20: { openingSpace: 180 },
+	30: { speed: -12, spaceBetweenPipes: 260, bgSpeed: 1.2 },
+	40: { speed: -13, spaceBetweenPipes: 270, bgSpeed: 1.3 },
+	50: { openingSpace: 170 },
+	60: { speed: -14, spaceBetweenPipes: 280, bgSpeed: 1.4 },
+	70: { speed: -15, spaceBetweenPipes: 290, bgSpeed: 1.5 },
+	80: { speed: -16, spaceBetweenPipes: 300, bgSpeed: 1.6 },
+	90: { speed: -17, spaceBetweenPipes: 310, bgSpeed: 1.7 },
+	100: {openingSpace: 160 },
+	110: { speed: -18, spaceBetweenPipes: 320, bgSpeed: 1.8 },
+	120: { speed: -19, spaceBetweenPipes: 330, bgSpeed: 1.9 },
+	130: { speed: -20, spaceBetweenPipes: 340, bgSpeed: 2 }
 };
 
 
@@ -141,11 +147,14 @@ window.onload = function () {
 
 	placePipes();
 
-	document.addEventListener("touchstart", moveBird);
-	//document.addEventListener("mousedown", moveBird);
+	if (isMobile) {
+		document.addEventListener("touchstart", moveBird, { passive: true });
+	} else {
+		document.addEventListener("mousedown", moveBird, { passive: true });
+	}
 
 	totalScore += score;
-	allPointerText.textContent = totalScore;
+	allPointerText.textContent = convertibleBalance(totalScore);
 	pointerText.textContent = score;
 	energyText.textContent = energyCount + '/' + maxEnergyCount;
 	loadScore();
@@ -183,8 +192,6 @@ function update(deltaTime) {
 	bird.velocityY += bird.gravity * deltaTime;
 	bird.y += bird.velocityY;
 
-	/*context.rotate(calculateRotationAngle(bird.velocityY));
-	context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);*/
 	context.save();
    context.translate(bird.x + bird.width / 2, bird.y + bird.height / 2);
    context.rotate(calculateRotationAngle(bird.velocityY));
@@ -192,18 +199,10 @@ function update(deltaTime) {
    context.restore();
 
 	if (bird.y > board.height) {
+		died();
+	}else if(bird.y < 0){
 		bird.velocityY = 0;
-		document.querySelector('.button-container').style.display = 'flex';
-		document.querySelector('.start-screen').style.display = 'block';
-		gameScoreText.style.display = 'none';
-		saveScore();
-		totalScore += score;
-		allPointerText.textContent = totalScore;
-		pointerText.textContent = score;
-		bird.y = birdY;
-		stopMoving();
-		gameOver = true;
-		return;
+		bird.y = 5;
 	}
 
 	for (let i = 0; i < pipeArray.length; i++) {
@@ -211,7 +210,7 @@ function update(deltaTime) {
 		pipe.x += velocityX * deltaTime * 1000;
 		context.drawImage(pipe.img, pipe.x, pipe.y, pipe.width, pipe.height);
 
-		if (!pipe.passed && bird.x > pipe.x + pipe.width) {
+		if (!pipe.passed && bird.x > pipe.x + pipe.width && !pipe.isAdding) {
 			score += multiEarn / 2;
 
 			const currentChange = changes[score / multiEarn];
@@ -235,21 +234,8 @@ function update(deltaTime) {
 			gameScoreText.textContent = score;
 		}
 
-
 		if (detectCollision(bird, pipe)) {
-			bird.velocityY = 0;
-			document.querySelector('.button-container').style.display = 'flex';
-			document.querySelector('.start-screen').style.display = 'block';
-			gameScoreText.style.display = 'none';
-			totalScore += score;
-			allPointerText.textContent = totalScore;
-			saveScore();
-			pointerText.textContent = score;
-			gameScoreText.textContent = 0;
-			stopMoving();
-		   bird.y = birdY;
-			gameOver = true;
-			return;
+			died();
 		}
 	}
 
@@ -264,10 +250,36 @@ function update(deltaTime) {
 
 
 
+function died(){
+	bird.velocityY = 0;
+
+	document.querySelector('.button-container').style.display = 'flex';
+	document.querySelector('.start-screen').style.display = 'block';
+	gameScoreText.style.display = 'none';
+
+	saveScore();
+	bird.y = birdY;
+	changeBalance(score, Math.floor(score / 60), "increment");
+	allPointerText.textContent = convertibleBalance(totalScore);
+	pointerText.textContent = score;
+	gameScoreText.textContent = 0;
+	stopMoving();
+	gameOver = true;
+	isPause = true;
+
+	setTimeout(() => {
+		isPause = false;
+	}, 500);
+
+	return;
+}
+
+
+
 function loadScore() {
 	const savedScore = localStorage.getItem('totalScore');
 	totalScore = savedScore ? parseInt(savedScore, 10) : 0;
-	allPointerText.textContent = totalScore;
+	allPointerText.textContent = convertibleBalance(totalScore);
 }
 
 
@@ -286,8 +298,6 @@ function loadImages(sources, callback) {
 		 };
 	}
 }
-
-
 
 loadImages(birdImages, function(images) {
 	birdImg.src = images[currentFrame].src;
@@ -350,15 +360,28 @@ function placePipes() {
 
 	let randomPipeY = pipeY - pipeHeight / 2.5 - Math.random() * (pipeHeight / 2);
 
+
 	let topPipe = {
 		img: topPipeImg,
 		x: pipeX,
 		y: randomPipeY,
 		width: pipeWidth,
 		height: pipeHeight,
-		passed: false
+		passed: false,
+		isAdding: false
 	};
 	pipeArray.push(topPipe);
+
+	let addingBottomPipe = {
+		img: addingPipe,
+		x: pipeX + 3.36,
+		y: randomPipeY + pipeHeight + openingSpace + pipeHeight - 20,
+		width: addingPipeWidth,
+		height: aaddingPipeHeight,
+		passed: false,
+		isAdding: true
+	};
+	pipeArray.push(addingBottomPipe);
 
 	let bottomPipe = {
 		img: bottomPipeImg,
@@ -366,9 +389,12 @@ function placePipes() {
 		y: randomPipeY + pipeHeight + openingSpace,
 		width: pipeWidth,
 		height: pipeHeight,
-		passed: false
+		passed: false,
+		isAdding: false
 	};
 	pipeArray.push(bottomPipe);
+
+	
 }
 
 
@@ -391,7 +417,7 @@ function detectCollision(a, b) {
 
 
 function restartGame() {
-	if (typeof energyCount !== 'undefined' && energyCount > 0) {
+	if (typeof energyCount !== 'undefined' && energyCount > 0 && !isPause) {
 		energyCount -= 1;
 		energyText.textContent = energyCount + '/' + maxEnergyCount;
 		localStorage.setItem('energyCount', energyCount);
@@ -411,7 +437,7 @@ function restartGame() {
 
 
 function toggleStyleAndShop(event) {
-	if(!isReward){
+	if(!isPause){
 		buttons.forEach(button => {
 			if (button !== event.currentTarget) {
 				button.classList.remove("toggled-style");
@@ -483,7 +509,7 @@ function changeBalance(amount, incrementDecrementValue, operation) {
 		 if ((operation === 'decrement' && (amount <= 0 || totalScore <= 0)) || (operation === 'increment' && amount <= 0)) {
 			  clearInterval(incrementDecrementInterval);
 			  totalScore = operation === 'decrement' ? startScore - price : startScore + price;
-			  allPointerText.textContent = totalScore;
+			  allPointerText.textContent = convertibleBalance(totalScore);
 			  localStorage.setItem('totalScore', totalScore.toString());
 			  return;
 		 }
@@ -494,7 +520,7 @@ function changeBalance(amount, incrementDecrementValue, operation) {
 			  totalScore += incrementDecrementValue;
 			  amount -= incrementDecrementValue;
 		 }
-		 allPointerText.textContent = totalScore;
+		 allPointerText.textContent = convertibleBalance(totalScore);
 	}, interval);
 }
 
@@ -527,6 +553,20 @@ function openChargeInfo() {
 			  }, 500);
 		 }, 2010);
 	});
+}
+
+
+
+function convertibleBalance(count){
+	if (count < 10000) {
+		 return count.toString();
+	} else if (count >= 10000 && count < 1000000) {
+		 let newCount = Math.floor(count / 100) / 10;
+		 return `${newCount.toFixed(1).replace('.0', '')}K`;
+	} else if (count >= 1000000) {
+		 let newCount = Math.floor(count / 100000) / 10;
+		 return `${newCount.toFixed(1).replace('.0', '')}M`;
+	}
 }
 
 
