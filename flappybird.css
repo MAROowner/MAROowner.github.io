@@ -40,8 +40,8 @@ body {
 	font-size: 45px;
 	font-weight: 700;
  	top: 5vh;
-	left: 46%;
-	transform: translateX(-100%);
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .game-container {
