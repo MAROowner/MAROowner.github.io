@@ -1,6 +1,6 @@
 var telegram = window.Telegram.WebApp;
-var energyCount = 10;
-var maxEnergyCount = 10;
+var energyCount = 5;
+var maxEnergyCount = 5;
 var timeToReset = 10;
 let lastActiveTime;
 let timer = 0;
@@ -8,13 +8,15 @@ let lastFrameTime = Date.now();
 var energyText = document.getElementById("energy-text");
 
 document.addEventListener('DOMContentLoaded', function () {
-	energyCount =  parseInt(localStorage.getItem('energyCount'), 10);
+	energyCount =  parseInt(localStorage.getItem('energyCount'), 5);
 	if (isNaN(energyCount)) {
 		energyCount = maxEnergyCount;
 	}
 
+	console.log(energyCount);
+
 	timeToReset = localStorage.getItem('timeToReset', timeToReset) || 1800;
-	maxEnergyCount = localStorage.getItem('maxEnergyCount', maxEnergyCount) || 10;
+	maxEnergyCount = localStorage.getItem('maxEnergyCount', maxEnergyCount) || 5;
 	lastActiveTime = parseInt(localStorage.getItem('lastActiveTime'), 10) || Date.now();
 	if(lastActiveTime == Date.now()){
 		updateLastActivity();
@@ -63,10 +65,6 @@ function addChargeCount(){
 	}
 }
 
-function updateLastActivity() {
-	lastActiveTime = Date.now();
-	localStorage.setItem('lastActiveTime', lastActiveTime);
-}
 function updateLastActivity() {
 	lastActiveTime = Date.now();
 	localStorage.setItem('lastActiveTime', lastActiveTime);
