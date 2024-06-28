@@ -160,6 +160,13 @@ window.onload = function () {
 	loadScore();
 	createBackground();
 
+
+	window.addEventListener('online', updateNetworkStatus);
+	window.addEventListener('offline', updateNetworkStatus);
+	updateNetworkStatus();
+	setInterval(checkNetworkLatency, 5000);
+
+
 	requestAnimationFrame(gameLoop);
 };
 
@@ -609,38 +616,32 @@ function clicks(){
 
 
 
-function addRecord(userName, points) {
-	console.log(userName);
-	console.log(points);
-	const data = new FormData();
-	data.append('name', userName);
-	data.append('points', points);
-
-	fetch('https://flappybirdproject-fb32e033fcc0.herokuapp.com/db_connect.php', {
-		method: 'POST',
-		body: data
-	})
-		.then(response => {
-			if (!response.ok) {
-				throw new Error('Network response was not ok ' + response.statusText);
-			}
-			return response.text();
-		})
-		.then(text => {
-			try {
-				const result = JSON.parse(text);
-				console.log(result.message);
-				if (result.success) {
-					console.log('Новий запис успішно додано до бази даних');
-				} else {
-					console.log('Помилка:', result.message);
-				}
-			} catch (error) {
-				console.error('JSON parse error:', error);
-				console.log('Response text was:', text);
-			}
-		})
-		.catch(error => console.error('Fetch error:', error));
+function updateNetworkStatus() {
+	const networkStatus = document.getElementById("network-status");
+	if (navigator.onLine) {
+		 networkStatus.classList.add("hidden");
+	} else {
+		 networkStatus.classList.remove("hidden");
+	}
 }
+
+function checkNetworkLatency() {
+	const startTime = Date.now();
+	fetch('https://example.com/ping')
+		 .then(response => response.text())
+		 .then(() => {
+			  const latency = Date.now() - startTime;
+			  if (latency > 3000) {
+					document.getElementById("network-status").classList.remove("hidden");
+			  } else {
+					document.getElementById("network-status").classList.add("hidden");
+			  }
+		 })
+		 .catch(() => {
+			  document.getElementById("network-status").classList.remove("hidden");
+		 });
+}
+
+
 
 requestAnimationFrame(gameLoop);
