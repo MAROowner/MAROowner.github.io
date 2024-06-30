@@ -10,6 +10,55 @@ body {
 	font-family: 'Gill Sans';
 }
 
+.privacy-policy_block{
+	position: absolute;
+	left: 2.5vw;
+	top: 30vh;
+	width: 95vw;
+	height: 40vh;
+	border-radius: 10px;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+	z-index: 2000;
+	text-align: center;
+}
+
+.policy-text{
+	margin-top: 15px !important;
+	color: #fff;
+	opacity: 50%;
+	width: 90vw;
+	height: 28vh;
+	margin: auto;
+	overflow-y: auto;
+}
+
+.policy-text p2{
+	font-size: 25px;
+}
+
+.policy-text p3{
+	font-size: 20px;
+}
+
+.policy-btn{
+	color: #fff;
+	opacity: 50%;
+	font-size: 20px;
+	padding: 10px 20px;
+	margin-top: 10px;
+	background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
 #network-status {
 	position: fixed;
 	top: 10px;
@@ -27,7 +76,7 @@ body {
 	transition: transform 0.4s ease-out;
 }
 
-.hidden {
+#network-status.hidden {
 	display: none;
 	transform: translateY(-200%);
 }
