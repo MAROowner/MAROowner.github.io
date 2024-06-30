@@ -45,6 +45,13 @@ getCurrentTime().then(dateTime => {
 });*/
 
 document.addEventListener('DOMContentLoaded', function () {
+	let isAgree = JSON.parse(localStorage.getItem("isAgree")) || false;
+	if(isAgree){
+		start();
+	}
+});
+
+function start(){
 	deltaTime = new Date();
 	let dayOfWeek = deltaTime.getDay();
 	
@@ -63,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	console.log(totalActiveDays);
-});
+}
 
 function openReward(){
 	for (let i = 0; i <= totalActiveDays; i++) {
@@ -74,7 +81,7 @@ function openReward(){
 		}
    }
 
-	isReward = true;
+	isPause = true;
 	rewardBlock.style.display = 'block';
 	rewardBlock.classList.add('show');
 	document.querySelector('.main-button').style.display = 'none';
@@ -96,7 +103,7 @@ function closeReward(){
       rewardBlock.style.display = 'none';
 		document.querySelector('.main-button').style.display = 'flex';
 		pointerText.style.display = 'block';
-		isReward = false;
+		isPause = false;
    }, 200);
 	
 	localStorage.setItem("lastRewardedDay", lastRewardedDay);
