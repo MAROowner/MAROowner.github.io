@@ -65,7 +65,7 @@ let velocityX = speed / FPS;
 let velocityY = 0;
 
 let gameOver = true;
-let isPause = false;
+var isPause = false;
 let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 var multiEarn;
 var totalScore = 0;
@@ -81,6 +81,7 @@ let dropdownBtn = document.querySelector('.regim-btn');
 let dropdown = document.querySelector('.dropdown-list');
 let activeRegim = document.querySelector('.options.active');
 let gameScoreText = document.querySelector('.game-score');
+let privacyPolicy = document.querySelector('.privacy-policy_block');
 
 let bgImage = new Image();
 bgImage.src = 'Image/Image/flappybirdbg.png';
@@ -94,6 +95,7 @@ let referralBlock = document.querySelector('.referral-info');
 let inviteBlock = document.querySelector('.invite-info');
 let referralReverseBtn = document.querySelector('.my-referral_btn');
 let inviteReverseBtn = document.querySelector('.invite-block_btn');
+let privacyBtn = document.querySelector('.policy-btn');
 
 let index = 0;
 
@@ -612,6 +614,19 @@ function clicks(){
 		referralBlock.style.display = 'block';
 		inviteBlock.style.display = 'none';
 	});
+
+	let isAgree = JSON.parse(localStorage.getItem("isAgree")) || false;
+
+	if(!isAgree){
+		privacyPolicy.addEventListener("click", function(){
+			privacyPolicy.style.display = 'none';
+			isAgree = true;
+			localStorage.setItem("isAgree", JSON.stringify(isAgree));
+			start();
+		});
+	}else{
+		privacyPolicy.style.display = 'none';
+	}
 }
 
 
@@ -627,7 +642,7 @@ function updateNetworkStatus() {
 
 function checkNetworkLatency() {
 	const startTime = Date.now();
-	fetch('https://example.com/ping')
+	fetch('https://maroowner.github.io/ping')
 		 .then(response => response.text())
 		 .then(() => {
 			  const latency = Date.now() - startTime;
