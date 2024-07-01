@@ -15,280 +15,296 @@
 
 <body>
 	<div class="game-container">
-		<canvas id="board"></canvas>
-		<div id="network-status" class="hidden">
-			Unstable internet connection. Check your connection.
-		</div>
-		<div class="privacy-policy_block" style="display: block;">
-			<div class="policy-text"><p2>Privacy Policy</p2><br> <br>
-				<p3>1. Introduction</p3><br>
-				This privacy policy describes how we collect, use and protect the information you provide when you use our Telegram mini app for crypto game. We take your privacy seriously and are committed to protecting your personal information.<br> <br>
-				
-				<p3>2. Collection and use of data</p3><br>
-				We collect user data through the Telegram API to provide functionality only when necessary and after receiving your explicit consent. We inform users about the purposes of data collection and processing methods. All actions with data are possible only after receiving your consent.<br> <br>
-				
-				<p3>3. Purposes of data collection</p3><br>
-				We collect and process the following user data:<br> <br>
-				
-				Nick in Telegram<br>
-				Number of earned points<br>
-				Time spent in game<br>
-				Information about purchases in the domestic store<br>
-				Game progress<br>
-				Who have you invited to the game<br>
-				Leader board<br>
-				The number of your referrals<br> <br>
-				This data is used to:<br> <br>
-				
-				Synchronization of progress between different devices<br>
-				Improving the gaming experience and ensuring the correct operation of the game<br>
-				Providing the opportunity to participate in future competitions for cryptocurrency<br> <br>
-				<p3>4. Data protection</p3><br>
-				We take all reasonable steps to protect your personal information from unauthorized access, alteration, disclosure or destruction. We use modern data protection methods and regularly review our security practices.<br> <br>
-				
-				<p3>5. User consent</p3><br>
-				By using our Telegram mini app, you agree to the terms of this privacy policy. We collect and process your data only after receiving your explicit consent.<br> <br>
-				
-				<p3>6. Changes to the privacy policy</p3><br>
-				We reserve the right to update this privacy policy at any time. We will notify you of any changes by posting a new version of the policy on this page.<br> <br>
-				
-				<p3>7. Contacts</p3><br>
-				If you have any questions or concerns about this privacy policy, please contact us via our manager @FLAP_Support.</div>
-			<button class="policy-btn">I agree!</button>
-		</div>
-		<div class="rotate">
-			<video src="Image/videos/videoplayback (1).mp4" class="video-rotate" autoplay loop muted></video>
-		</div>
-		<div class="game-score" style="display: none;">0</div>
-		<div class="button-container">
-			<button class="main-button">
-				<div class="big-button">
-					<img src="Image/Image/PlayButton.png" alt="Play">
-				</div>
-			</button>
-			<div class="other-buttons">
-				<button id="shop-tab" class="shop-tab">
-					<img src="Image/Image/ShopTabIcon.png" alt="">
-					<div class="tab-text">Shop</div>
-				</button>
-				<button id="referral-tab" class="referral-tab">
-					<img src="Image/Image/ReferralTabIcon.png" alt="">
-					<div class="tab-text">Referrals</div>
-				</button>
-				<button id="roadmap-tab" class="roadmap-tab">
-					<img src="Image/Image/RoadmapTabIcon.png" alt="">
-					<div class="tab-text">Roadmap</div>
-				</button>
+		<div class="preloader" style="display: block;">
+			<img src="Image/Image/preloaderImage.jpg" alt="Preloader Image" id="preloader-image">
+			<div class="age-restrictions">
+				<img src="Image/Image/AgeRestrictions.png" alt="">
+			</div>
+			<div class="preloading-logo">
+				<img src="Image/Image/LogoText.png" alt="">
+			</div>
+			<div class="spinner-block">
+				<div class="spinner"></div>
+				<div class="loading-progress"></div>
 			</div>
 		</div>
-
-
-		<div class="start-screen">
-			<div class="start-header">
-				<div class="total-balance">
-					<img class="balance-text" src="Image/Image/CoinIcon.png" alt="">
-					<div class="all-point_text" id="all-point_text">0</div>
-				</div>
-				<div class="regim">
-					<button class="regim-btn">
-						<div class="regim-select">Basic game</div>
-						<img src="Image/Image/dropdownImage.png" alt="">
+		<div class="game" style="display: none;">
+			<canvas id="board"></canvas>
+			<div id="network-status" class="hidden">
+				Unstable internet connection. Check your connection.
+			</div>
+			<div class="privacy-policy_block" style="display: none;">
+				<div class="policy-text"><p2>Privacy Policy</p2><br> <br>
+					<p3>1. Introduction</p3><br>
+					This privacy policy describes how we collect, use and protect the information you provide when you use our Telegram mini app for crypto game. We take your privacy seriously and are committed to protecting your personal information.<br> <br>
+					
+					<p3>2. Collection and use of data</p3><br>
+					We collect user data through the Telegram API to provide functionality only when necessary and after receiving your explicit consent. We inform users about the purposes of data collection and processing methods. All actions with data are possible only after receiving your consent.<br> <br>
+					
+					<p3>3. Purposes of data collection</p3><br>
+					We collect and process the following user data:<br> <br>
+					
+					Nick in Telegram<br>
+					Number of earned points<br>
+					Time spent in game<br>
+					Information about purchases in the domestic store<br>
+					Game progress<br>
+					Who have you invited to the game<br>
+					Leader board<br>
+					The number of your referrals<br> <br>
+					This data is used to:<br> <br>
+					
+					Synchronization of progress between different devices<br>
+					Improving the gaming experience and ensuring the correct operation of the game<br>
+					Providing the opportunity to participate in future competitions for cryptocurrency<br> <br>
+					<p3>4. Data protection</p3><br>
+					We take all reasonable steps to protect your personal information from unauthorized access, alteration, disclosure or destruction. We use modern data protection methods and regularly review our security practices.<br> <br>
+					
+					<p3>5. User consent</p3><br>
+					By using our Telegram mini app, you agree to the terms of this privacy policy. We collect and process your data only after receiving your explicit consent.<br> <br>
+					
+					<p3>6. Changes to the privacy policy</p3><br>
+					We reserve the right to update this privacy policy at any time. We will notify you of any changes by posting a new version of the policy on this page.<br> <br>
+					
+					<p3>7. Contacts</p3><br>
+					If you have any questions or concerns about this privacy policy, please contact us via our manager @FLAP_Support.</div>
+				<button class="policy-btn">I agree!</button>
+			</div>
+			<div class="rotate">
+				<video src="Image/videos/videoplayback (1).mp4" class="video-rotate" autoplay loop muted></video>
+			</div>
+			<div class="game-score" style="display: none;">0</div>
+			<div class="button-container">
+				<button class="main-button">
+					<div class="big-button">
+						<img src="Image/Image/PlayButton.png" alt="Play">
+					</div>
+				</button>
+				<div class="other-buttons">
+					<button id="shop-tab" class="shop-tab">
+						<img src="Image/Image/ShopTabIcon.png" alt="">
+						<div class="tab-text">Shop</div>
 					</button>
-					<div class="dropdown-list hidden">
-						<button class="options active">Basic game</button>
-						<button class="options disabled" type="button" disabled>PVP battles</button>
-						<button class="options disabled" type="button" disabled>Tournaments</button>
-						<button class="options disabled" type="button" disabled>Championships</button>
-					</div>
-				</div>
-				<div class="energy-balance">
-					<div class="energy-info_balance">
-						<img class="balance-text" src="Image/Image/FlashIcon.png" alt="">
-						<div class="energy-text" id="energy-text">0</div>
-						<button id="more-info_button">
-							<img class="more-info_button" src="Image/Image/MoreInfoButton.png" alt="">
-						</button>
-					</div>
-					<div class="energy-more_info">
-						<div class="more-info_text">Time left:</div>
-						<div class="more-info_timer"></div>
-					</div>
-				</div>
-			</div>
-			<div class="point-text" id="pointer-text">100</div>
-		</div>
-
-
-		<div id="shop" class="shop" style="display: none;">
-			<div class="shop-block">
-				<button id="energy-product" class="product">
-					<div class="product-icon">
-						<img src="Image/Image/ShopFlashIcon.png" alt="">
-					</div>
-					<div class="product-desc">
-						<div class="product-name">Max energy</div>
-						<div class="product-info">
-							<div class="product-info_text" id="energy-info_text">0 Lvl • 10</div>
-							<div class="price-text" id="energy-price_text"></div>
-						</div>
-					</div>
-					<img class="buy-icon" src="Image/Image/BuyIcon.png" alt="">
-				</button>
-				<button id="charge-product" class="product">
-					<div class="product-icon">
-						<img src="Image/Image/ShipTimerIcon.png" alt="">
-					</div>
-					<div class="product-desc">
-						<div class="product-name">Charge speed</div>
-						<div class="product-info">
-							<div class="product-info_text" id="charge-info_text">0 Lvl • 30</div>
-							<div class="price-text" id="charge-price_text"></div>
-						</div>
-					</div>
-					<img class="buy-icon" src="Image/Image/BuyIcon.png" alt="">
-				</button>
-				<button id="earn-product" class="product">
-					<div id="last-product_icon" class="product-icon">
-						<img src="Image/Image/ShopCoinIcon.png" alt="">
-					</div>
-					<div class="product-desc">
-						<div class="product-name">Multi earn</div>
-						<div class="product-info">
-							<div class="product-info_text" id="earn-info_text">0 Lvl • 1</div>
-							<div class="price-text" id="earn-price_text"></div>
-						</div>
-					</div>
-					<img id="last-buy_icon" class="buy-icon" src="Image/Image/BuyIcon.png" alt="">
-				</button>
-			</div>
-		</div>
-
-		<div class="referral" style="display: none;">
-			<div class="referral-block">
-				<div class="invite-info">
-					<div class="invite-block">
-						<div class="invite-block_name">Invite friends!</div>
-						<button class="invite-block_btn">
-							<img src="Image/Image/referralInfoBtn.png" alt="">
-						</button>
-					</div>
-					<div class="info-blocks">
-						<div class="info-block">
-							<div class="info-block_text">Friend without Telegram Premium</div>
-							<div class="info-reward">+100 <span>points</span></div>
-						</div>
-						<div class="info-block">
-							<div class="info-block_text">Friend with Telegram Premium</div>
-							<div class="info-reward">+500 <span>points</span></div>
-						</div>
-					</div>
-				</div>
-				<div class="referral-info">
-					<div class="my-referral_text">
-						<div class="my-referral_name">My referrals (3):</div>
-						<button class="my-referral_btn">
-							<img src="Image/Image/referralInfoBtn.png" alt="">
-						</button>
-					</div>
-					<div class="my-referrals">
-						<div class="referral-account">
-							<img src="Image/Image/PersonIcon.png" alt="" class="referral-icon">
-							<div class="referral-desc">
-								<div class="referral-name">Name</div>
-								<div class="referral-consequence">
-									<div class="referral-reward">+100</div>
-									<div class="referral-telegram_state"> • without Telegram Premium</div>
-								</div>
-							</div>
-						</div>
-	
-						<div class="referral-account">
-							<img src="Image/Image/PersonIcon.png" alt="" class="referral-icon">
-							<div class="referral-desc">
-								<div class="referral-name">Name</div>
-								<div class="referral-consequence">
-									<div class="referral-reward">+500</div>
-									<div class="referral-telegram_state"> • with Telegram Premium</div>
-								</div>
-							</div>
-						</div>
-	
-						<div class="referral-account">
-							<img src="Image/Image/PersonIcon.png" alt="" class="referral-icon">
-							<div class="referral-desc">
-								<div class="referral-name">Name</div>
-								<div class="referral-consequence">
-									<div class="referral-reward">+500</div>
-									<div class="referral-telegram_state"> • with Telegram Premium</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-
-				<div class="btn-block">
-					<button class="send-link">Invite a friend</button>
-					<button class="copy-link">
-						<img src="Image/Image/CopyIcon.png" alt="">
+					<button id="referral-tab" class="referral-tab">
+						<img src="Image/Image/ReferralTabIcon.png" alt="">
+						<div class="tab-text">Referrals</div>
+					</button>
+					<button id="roadmap-tab" class="roadmap-tab">
+						<img src="Image/Image/RoadmapTabIcon.png" alt="">
+						<div class="tab-text">Roadmap</div>
 					</button>
 				</div>
 			</div>
-		</div>
-
-		<div class="roadmap" style="display: none;">
-			<div class="roadmap-block">
-				<div class="roadmap-name">Roadmap</div>
-				<img src="Image/Image/Roadmap.png" alt="">
+	
+	
+			<div class="start-screen">
+				<div class="start-header">
+					<div class="total-balance">
+						<img class="balance-text" src="Image/Image/CoinIcon.png" alt="">
+						<div class="all-point_text" id="all-point_text">0</div>
+					</div>
+					<div class="regim">
+						<button class="regim-btn">
+							<div class="regim-select">Basic game</div>
+							<img src="Image/Image/dropdownImage.png" alt="">
+						</button>
+						<div class="dropdown-list hidden">
+							<button class="options active">Basic game</button>
+							<button class="options disabled" type="button" disabled>PVP battles</button>
+							<button class="options disabled" type="button" disabled>Tournaments</button>
+							<button class="options disabled" type="button" disabled>Championships</button>
+						</div>
+					</div>
+					<div class="energy-balance">
+						<div class="energy-info_balance">
+							<img class="balance-text" src="Image/Image/FlashIcon.png" alt="">
+							<div class="energy-text" id="energy-text">0</div>
+							<button id="more-info_button">
+								<img class="more-info_button" src="Image/Image/MoreInfoButton.png" alt="">
+							</button>
+						</div>
+						<div class="energy-more_info">
+							<div class="more-info_text">Time left:</div>
+							<div class="more-info_timer"></div>
+						</div>
+					</div>
+				</div>
+				<div class="point-text" id="pointer-text">100</div>
+			</div>
+	
+	
+			<div id="shop" class="shop" style="display: none;">
+				<div class="shop-block">
+					<button id="energy-product" class="product">
+						<div class="product-icon">
+							<img src="Image/Image/ShopFlashIcon.png" alt="">
+						</div>
+						<div class="product-desc">
+							<div class="product-name">Max energy</div>
+							<div class="product-info">
+								<div class="product-info_text" id="energy-info_text">0 Lvl • 10</div>
+								<div class="price-text" id="energy-price_text"></div>
+							</div>
+						</div>
+						<img class="buy-icon" src="Image/Image/BuyIcon.png" alt="">
+					</button>
+					<button id="charge-product" class="product">
+						<div class="product-icon">
+							<img src="Image/Image/ShipTimerIcon.png" alt="">
+						</div>
+						<div class="product-desc">
+							<div class="product-name">Charge speed</div>
+							<div class="product-info">
+								<div class="product-info_text" id="charge-info_text">0 Lvl • 30</div>
+								<div class="price-text" id="charge-price_text"></div>
+							</div>
+						</div>
+						<img class="buy-icon" src="Image/Image/BuyIcon.png" alt="">
+					</button>
+					<button id="earn-product" class="product">
+						<div id="last-product_icon" class="product-icon">
+							<img src="Image/Image/ShopCoinIcon.png" alt="">
+						</div>
+						<div class="product-desc">
+							<div class="product-name">Multi earn</div>
+							<div class="product-info">
+								<div class="product-info_text" id="earn-info_text">0 Lvl • 1</div>
+								<div class="price-text" id="earn-price_text"></div>
+							</div>
+						</div>
+						<img id="last-buy_icon" class="buy-icon" src="Image/Image/BuyIcon.png" alt="">
+					</button>
+				</div>
+			</div>
+	
+			<div class="referral" style="display: none;">
+				<div class="referral-block">
+					<div class="invite-info">
+						<div class="invite-block">
+							<div class="invite-block_name">Invite friends!</div>
+							<button class="invite-block_btn">
+								<img src="Image/Image/referralInfoBtn.png" alt="">
+							</button>
+						</div>
+						<div class="info-blocks">
+							<div class="info-block">
+								<div class="info-block_text">Friend without Telegram Premium</div>
+								<div class="info-reward">+100 <span>points</span></div>
+							</div>
+							<div class="info-block">
+								<div class="info-block_text">Friend with Telegram Premium</div>
+								<div class="info-reward">+500 <span>points</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="referral-info">
+						<div class="my-referral_text">
+							<div class="my-referral_name">My referrals (3):</div>
+							<button class="my-referral_btn">
+								<img src="Image/Image/referralInfoBtn.png" alt="">
+							</button>
+						</div>
+						<div class="my-referrals">
+							<div class="referral-account">
+								<img src="Image/Image/PersonIcon.png" alt="" class="referral-icon">
+								<div class="referral-desc">
+									<div class="referral-name">Name</div>
+									<div class="referral-consequence">
+										<div class="referral-reward">+100</div>
+										<div class="referral-telegram_state"> • without Telegram Premium</div>
+									</div>
+								</div>
+							</div>
+		
+							<div class="referral-account">
+								<img src="Image/Image/PersonIcon.png" alt="" class="referral-icon">
+								<div class="referral-desc">
+									<div class="referral-name">Name</div>
+									<div class="referral-consequence">
+										<div class="referral-reward">+500</div>
+										<div class="referral-telegram_state"> • with Telegram Premium</div>
+									</div>
+								</div>
+							</div>
+		
+							<div class="referral-account">
+								<img src="Image/Image/PersonIcon.png" alt="" class="referral-icon">
+								<div class="referral-desc">
+									<div class="referral-name">Name</div>
+									<div class="referral-consequence">
+										<div class="referral-reward">+500</div>
+										<div class="referral-telegram_state"> • with Telegram Premium</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+	
+					<div class="btn-block">
+						<button class="send-link">Invite a friend</button>
+						<button class="copy-link">
+							<img src="Image/Image/CopyIcon.png" alt="">
+						</button>
+					</div>
+				</div>
+			</div>
+	
+			<div class="roadmap" style="display: none;">
+				<div class="roadmap-block">
+					<div class="roadmap-name">Roadmap</div>
+					<img src="Image/Image/Roadmap.png" alt="">
+				</div>
+			</div>
+	
+			<div class="reward-block show" style="display: none;">
+				<div class="reward-title">Congratulations!</div>
+				<div class="rewards-block">
+					<div class="day-reward">
+						<div class="day-number">Day 1</div>
+						<div class="reward-count">100</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 2</div>
+						<div class="reward-count">200</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 3</div>
+						<div class="reward-count">300</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 4</div>
+						<div class="reward-count">400</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 5</div>
+						<div class="reward-count">500</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 6</div>
+						<div class="reward-count">1000</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 7</div>
+						<div class="reward-count">1500</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 8</div>
+						<div class="reward-count">3000</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 9</div>
+						<div class="reward-count">5000</div>
+					</div>
+					<div class="day-reward">
+						<div class="day-number">Day 10</div>
+						<div class="reward-count">20000</div>
+					</div>
+				</div>
+				<button class="reward-btn">Take it!</button>
 			</div>
 		</div>
-
-		<div class="reward-block show" style="display: none;">
-			<div class="reward-title">Congratulations!</div>
-			<div class="rewards-block">
-				<div class="day-reward">
-					<div class="day-number">Day 1</div>
-					<div class="reward-count">100</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 2</div>
-					<div class="reward-count">200</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 3</div>
-					<div class="reward-count">300</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 4</div>
-					<div class="reward-count">400</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 5</div>
-					<div class="reward-count">500</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 6</div>
-					<div class="reward-count">1000</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 7</div>
-					<div class="reward-count">1500</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 8</div>
-					<div class="reward-count">3000</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 9</div>
-					<div class="reward-count">5000</div>
-				</div>
-				<div class="day-reward">
-					<div class="day-number">Day 10</div>
-					<div class="reward-count">20000</div>
-				</div>
-			</div>
-			<button class="reward-btn">Take it!</button>
-		</div>
+		
 	</div>
 
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
