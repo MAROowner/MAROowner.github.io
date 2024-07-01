@@ -30,6 +30,7 @@ let birdHeight = 40;
 
 let birdX;
 let birdY;
+let bgX = 0;
 let speed = -10;
 
 let bird = {
@@ -41,7 +42,7 @@ let bird = {
 	jumpForce: gridSquareY / (FPS * 1.6),
 	gravity: gridSquareY / (FPS / 1.9),
 	maxUpAngle: 10 * (Math.PI / 180),
-   maxDownAngle: 20 * (Math.PI / 180)
+	maxDownAngle: 20 * (Math.PI / 180)
 };
 
 let pipeArray = [];
@@ -58,14 +59,13 @@ aaddingPipeHeight = pipeHeight;
 
 let topPipeImg;
 let bottomPipeImg;
-let topBgImg;
-let bottomBgImg;
 
 let velocityX = speed / FPS;
 let velocityY = 0;
 
 let gameOver = true;
 var isPause = false;
+let isAgree = JSON.parse(localStorage.getItem("isAgree")) || false;
 let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 var multiEarn;
 var totalScore = 0;
@@ -82,15 +82,7 @@ let dropdown = document.querySelector('.dropdown-list');
 let activeRegim = document.querySelector('.options.active');
 let gameScoreText = document.querySelector('.game-score');
 let privacyPolicy = document.querySelector('.privacy-policy_block');
-
-let bgImage = new Image();
-bgImage.src = 'Image/Image/flappybirdbg.png';
-let bgX = 0;
-
-let name = 'Doy Johnson';
-let points = 123124;
 let buttons = document.querySelectorAll(".shop-tab, .referral-tab, .roadmap-tab");
-
 let referralBlock = document.querySelector('.referral-info');
 let inviteBlock = document.querySelector('.invite-info');
 let referralReverseBtn = document.querySelector('.my-referral_btn');
@@ -109,7 +101,7 @@ let changes = {
 	70: { speed: -15, spaceBetweenPipes: 290, bgSpeed: 1.5 },
 	80: { speed: -16, spaceBetweenPipes: 300, bgSpeed: 1.6 },
 	90: { speed: -17, spaceBetweenPipes: 310, bgSpeed: 1.7 },
-	100: {openingSpace: 160 },
+	100: { openingSpace: 160 },
 	110: { speed: -18, spaceBetweenPipes: 320, bgSpeed: 1.8 },
 	120: { speed: -19, spaceBetweenPipes: 330, bgSpeed: 1.9 },
 	130: { speed: -20, spaceBetweenPipes: 340, bgSpeed: 2 }
@@ -121,10 +113,10 @@ clicks();
 
 
 window.onload = function () {
-	context = board.getContext("2d");
-	bottomBgImg = new Image();
-	bottomBgImg.src = "Image/Image/BottomBackground@4x.png";
+	preloader();
 
+
+	context = board.getContext("2d");
 	board.height = boardHeight;
 	board.width = boardWidth;
 
@@ -153,6 +145,11 @@ window.onload = function () {
 		document.addEventListener("touchstart", moveBird, { passive: true });
 	} else {
 		document.addEventListener("mousedown", moveBird, { passive: true });
+	}
+
+	if (!isAgree) {
+		isPause = true;
+		privacyPolicy.style.display = 'block';
 	}
 
 	totalScore += score;
@@ -202,14 +199,14 @@ function update(deltaTime) {
 	bird.y += bird.velocityY;
 
 	context.save();
-   context.translate(bird.x + bird.width / 2, bird.y + bird.height / 2);
-   context.rotate(calculateRotationAngle(bird.velocityY));
-   context.drawImage(birdImg, -bird.width / 2, -bird.height / 2, bird.width, bird.height);
-   context.restore();
+	context.translate(bird.x + bird.width / 2, bird.y + bird.height / 2);
+	context.rotate(calculateRotationAngle(bird.velocityY));
+	context.drawImage(birdImg, -bird.width / 2, -bird.height / 2, bird.width, bird.height);
+	context.restore();
 
 	if (bird.y > board.height) {
 		died();
-	}else if(bird.y < 0){
+	} else if (bird.y < 0) {
 		bird.velocityY = 0;
 		bird.y = 5;
 	}
@@ -225,18 +222,18 @@ function update(deltaTime) {
 			const currentChange = changes[score / multiEarn];
 
 			if (currentChange) {
-    			if (currentChange.speed !== undefined) {
-        			speed = currentChange.speed;
+				if (currentChange.speed !== undefined) {
+					speed = currentChange.speed;
 					console.log(speed);
-    			}
-    			if (currentChange.openingSpace !== undefined) {
-        			openingSpace = currentChange.openingSpace;
-					  console.log(openingSpace);
-    			}
-    			if (currentChange.spaceBetweenPipes !== undefined) {
-      		  spaceBetweenPipes = currentChange.spaceBetweenPipes;
-				  console.log(spaceBetweenPipes);
-    			}	
+				}
+				if (currentChange.openingSpace !== undefined) {
+					openingSpace = currentChange.openingSpace;
+					console.log(openingSpace);
+				}
+				if (currentChange.spaceBetweenPipes !== undefined) {
+					spaceBetweenPipes = currentChange.spaceBetweenPipes;
+					console.log(spaceBetweenPipes);
+				}
 			}
 
 			pipe.passed = true;
@@ -259,7 +256,49 @@ function update(deltaTime) {
 
 
 
-function died(){
+function preloader() {
+
+	console.log("OK");
+	const images = document.images;
+	const totalImages = images.length;
+	let imagesLoaded = 0;
+	let progressText = document.querySelector(".loading-progress");
+	let addingNumber = 100 / totalImages;
+	let progress = 0;
+
+	progressText.textContent = progress + "%";
+
+	function imageLoaded() {
+		imagesLoaded++;
+		if (imagesLoaded === totalImages) {
+			setTimeout(() => {
+				document.querySelector(".preloader").style.display = "none";
+				document.querySelector(".game").style.display = "block";
+			}, 1000);
+		}
+	}
+
+	for (let i = 0; i < totalImages; i++) {
+		if (images[i].complete) {
+			imageLoaded();
+			console.log("OK");
+			progress += addingNumber;
+			progressText.textContent = Math.floor(progress) + "%";
+		} else {
+			images[i].addEventListener("load", imageLoaded);
+			images[i].addEventListener("error", imageLoaded);
+		}
+	}
+
+	if (totalImages === 0) {
+		document.getElementById("preloader").style.display = "none";
+		document.getElementById("app").style.display = "block";
+	}
+};
+
+
+
+function died() {
 	bird.velocityY = 0;
 
 	document.querySelector('.button-container').style.display = 'flex';
@@ -298,23 +337,23 @@ function loadImages(sources, callback) {
 	let numImages = sources.length;
 	let images = [];
 	for (let i = 0; i < numImages; i++) {
-		 images[i] = new Image();
-		 images[i].src = sources[i];
-		 images[i].onload = function() {
-			  if (++loadedImages >= numImages) {
-					callback(images);
-			  }
-		 };
+		images[i] = new Image();
+		images[i].src = sources[i];
+		images[i].onload = function () {
+			if (++loadedImages >= numImages) {
+				callback(images);
+			}
+		};
 	}
 }
 
-loadImages(birdImages, function(images) {
+loadImages(birdImages, function (images) {
 	birdImg.src = images[currentFrame].src;
-	birdImg.onload = function() {
+	birdImg.onload = function () {
 		context.rotate(calculateRotationAngle(bird.velocityY));
 		context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
 	};
-	
+
 	setInterval(() => {
 		currentFrame = (currentFrame + 1) % birdImages.length;
 		birdImg.src = images[currentFrame].src;
@@ -343,18 +382,18 @@ function openPage(page) {
 
 
 function closePage(page) {
-   page.classList.remove('open');
+	page.classList.remove('open');
 	page.style.zIndex = 0;
-   setTimeout(() => {
-      page.style.display = 'none';
+	setTimeout(() => {
+		page.style.display = 'none';
 		turnOnButton();
 		page.style.zIndex = 1;
-   }, 200);
+	}, 200);
 }
 
 
 
-function hideAllTabs(){
+function hideAllTabs() {
 	buttons.forEach(button => {
 		button.classList.remove("toggled-style");
 	});
@@ -403,7 +442,7 @@ function placePipes() {
 	};
 	pipeArray.push(bottomPipe);
 
-	
+
 }
 
 
@@ -438,7 +477,7 @@ function restartGame() {
 		document.querySelector('.button-container').style.display = 'none';
 		document.querySelector('.start-screen').style.display = 'none';
 		gameScoreText.style.display = 'block';
-	}else if( energyCount == 0){
+	} else if (energyCount == 0) {
 		openChargeInfo();
 	}
 }
@@ -446,15 +485,15 @@ function restartGame() {
 
 
 function toggleStyleAndShop(event) {
-	if(!isPause){
+	if (!isPause) {
 		buttons.forEach(button => {
 			if (button !== event.currentTarget) {
 				button.classList.remove("toggled-style");
 			}
 		});
-	
+
 		event.currentTarget.classList.toggle("toggled-style");
-	
+
 		if (event.currentTarget.id === "shop-tab") {
 			if (shop.style.display === "none") {
 				openPage(shop);
@@ -464,8 +503,8 @@ function toggleStyleAndShop(event) {
 		} else {
 			closePage(shop);
 		}
-	
-	
+
+
 		if (event.currentTarget.id === "referral-tab") {
 			index++
 			if (referralPage.style.display == "none") {
@@ -474,15 +513,15 @@ function toggleStyleAndShop(event) {
 				closePage(referralPage);
 			}
 
-			if(index === 10){
+			if (index === 10) {
 				localStorage.clear();
 			}
 		} else {
 			closePage(referralPage);
 		}
-	
-	
-		if (event.currentTarget.id === "roadmap-tab"){
+
+
+		if (event.currentTarget.id === "roadmap-tab") {
 			if (roadmapPage.style.display == "none") {
 				openPage(roadmapPage);
 			} else {
@@ -496,8 +535,8 @@ function toggleStyleAndShop(event) {
 
 
 
-function turnOnButton(){
-	if(shop.style.display === "none" && referralPage.style.display == "none" && roadmapPage.style.display == "none"){
+function turnOnButton() {
+	if (shop.style.display === "none" && referralPage.style.display == "none" && roadmapPage.style.display == "none") {
 		document.querySelector('.main-button').style.display = 'flex';
 		pointerText.style.display = 'block';
 	}
@@ -511,25 +550,25 @@ function changeBalance(amount, incrementDecrementValue, operation) {
 	price = amount;
 
 	if (incrementDecrementValue == 0) {
-		 incrementDecrementValue = 1;
+		incrementDecrementValue = 1;
 	}
 
 	const incrementDecrementInterval = setInterval(() => {
-		 if ((operation === 'decrement' && (amount <= 0 || totalScore <= 0)) || (operation === 'increment' && amount <= 0)) {
-			  clearInterval(incrementDecrementInterval);
-			  totalScore = operation === 'decrement' ? startScore - price : startScore + price;
-			  allPointerText.textContent = convertibleBalance(totalScore);
-			  localStorage.setItem('totalScore', totalScore.toString());
-			  return;
-		 }
-		 if (operation === 'decrement') {
-			  totalScore -= incrementDecrementValue;
-			  amount -= incrementDecrementValue;
-		 } else if (operation === 'increment') {
-			  totalScore += incrementDecrementValue;
-			  amount -= incrementDecrementValue;
-		 }
-		 allPointerText.textContent = convertibleBalance(totalScore);
+		if ((operation === 'decrement' && (amount <= 0 || totalScore <= 0)) || (operation === 'increment' && amount <= 0)) {
+			clearInterval(incrementDecrementInterval);
+			totalScore = operation === 'decrement' ? startScore - price : startScore + price;
+			allPointerText.textContent = convertibleBalance(totalScore);
+			localStorage.setItem('totalScore', totalScore.toString());
+			return;
+		}
+		if (operation === 'decrement') {
+			totalScore -= incrementDecrementValue;
+			amount -= incrementDecrementValue;
+		} else if (operation === 'increment') {
+			totalScore += incrementDecrementValue;
+			amount -= incrementDecrementValue;
+		}
+		allPointerText.textContent = convertibleBalance(totalScore);
 	}, interval);
 }
 
@@ -546,35 +585,35 @@ function openChargeInfo() {
 	if (seconds < 10) {
 		timerText.textContent = minutes + ":0" + seconds;
 	} else {
-   	timerText.textContent = minutes + ":" + seconds;
+		timerText.textContent = minutes + ":" + seconds;
 	}
 
-	chargeBlocks.forEach(function(chargeBlock) {
-		 chargeBlock.style.display = "block"; 
-		 setTimeout(function() {
-			  chargeBlock.style.opacity = "1";
-		 }, 10);
+	chargeBlocks.forEach(function (chargeBlock) {
+		chargeBlock.style.display = "block";
+		setTimeout(function () {
+			chargeBlock.style.opacity = "1";
+		}, 10);
 
-		 setTimeout(function() {
-			  chargeBlock.style.opacity = "0";
-			  setTimeout(function() {
-					chargeBlock.style.display = "none";
-			  }, 500);
-		 }, 2010);
+		setTimeout(function () {
+			chargeBlock.style.opacity = "0";
+			setTimeout(function () {
+				chargeBlock.style.display = "none";
+			}, 500);
+		}, 2010);
 	});
 }
 
 
 
-function convertibleBalance(count){
+function convertibleBalance(count) {
 	if (count < 10000) {
-		 return count.toString();
+		return count.toString();
 	} else if (count >= 10000 && count < 1000000) {
-		 let newCount = Math.floor(count / 100) / 10;
-		 return `${newCount.toFixed(1).replace('.0', '')}K`;
+		let newCount = Math.floor(count / 100) / 10;
+		return `${newCount.toFixed(1).replace('.0', '')}K`;
 	} else if (count >= 1000000) {
-		 let newCount = Math.floor(count / 100000) / 10;
-		 return `${newCount.toFixed(1).replace('.0', '')}M`;
+		let newCount = Math.floor(count / 100000) / 10;
+		return `${newCount.toFixed(1).replace('.0', '')}M`;
 	}
 }
 
@@ -586,46 +625,43 @@ function saveScore() {
 
 
 
-function clearScore(){
+function clearScore() {
 	localStorage.clear();
 }
 
 
 
-function clicks(){
+function clicks() {
 	document.getElementById("shop-tab").addEventListener("click", toggleStyleAndShop);
 	document.getElementById("referral-tab").addEventListener("click", toggleStyleAndShop);
 	document.getElementById("roadmap-tab").addEventListener("click", toggleStyleAndShop);
 	document.getElementById("more-info_button").addEventListener("click", openChargeInfo);
 
-	activeRegim.addEventListener("click", function(){
+	activeRegim.addEventListener("click", function () {
 		dropdown.classList.toggle('hidden');
 	});
 
-	dropdownBtn.addEventListener('click', function() {
+	dropdownBtn.addEventListener('click', function () {
 		dropdown.classList.toggle('hidden');
 	});
 
-	referralReverseBtn.addEventListener("click", function(){
+	referralReverseBtn.addEventListener("click", function () {
 		referralBlock.style.display = 'none';
 		inviteBlock.style.display = 'block';
 	});
-	inviteReverseBtn.addEventListener("click", function(){
+	inviteReverseBtn.addEventListener("click", function () {
 		referralBlock.style.display = 'block';
 		inviteBlock.style.display = 'none';
 	});
 
-	let isAgree = JSON.parse(localStorage.getItem("isAgree")) || false;
-
-	if(!isAgree){
-		privacyPolicy.addEventListener("click", function(){
+	if (!isAgree) {
+		privacyPolicy.addEventListener("click", function () {
 			privacyPolicy.style.display = 'none';
 			isAgree = true;
+			isPause = false;
 			localStorage.setItem("isAgree", JSON.stringify(isAgree));
 			start();
 		});
-	}else{
-		privacyPolicy.style.display = 'none';
 	}
 }
 
@@ -634,27 +670,27 @@ function clicks(){
 function updateNetworkStatus() {
 	const networkStatus = document.getElementById("network-status");
 	if (navigator.onLine) {
-		 networkStatus.classList.add("hidden");
+		networkStatus.classList.add("hidden");
 	} else {
-		 networkStatus.classList.remove("hidden");
+		networkStatus.classList.remove("hidden");
 	}
 }
 
 function checkNetworkLatency() {
 	const startTime = Date.now();
 	fetch('https://maroowner.github.io/ping')
-		 .then(response => response.text())
-		 .then(() => {
-			  const latency = Date.now() - startTime;
-			  if (latency > 3000) {
-					document.getElementById("network-status").classList.remove("hidden");
-			  } else {
-					document.getElementById("network-status").classList.add("hidden");
-			  }
-		 })
-		 .catch(() => {
-			  document.getElementById("network-status").classList.remove("hidden");
-		 });
+		.then(response => response.text())
+		.then(() => {
+			const latency = Date.now() - startTime;
+			if (latency > 3000) {
+				document.getElementById("network-status").classList.remove("hidden");
+			} else {
+				document.getElementById("network-status").classList.add("hidden");
+			}
+		})
+		.catch(() => {
+			document.getElementById("network-status").classList.remove("hidden");
+		});
 }
 
 
